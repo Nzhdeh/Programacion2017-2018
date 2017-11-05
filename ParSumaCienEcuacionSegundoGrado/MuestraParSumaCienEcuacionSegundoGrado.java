@@ -79,12 +79,12 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 			System.out.println("Pulsar 0 para salir");
 			System.out.println("Pulsar 1 para sumar cien numeros");
 			System.out.println("Pulsar 2 para calcular numeros pares");
-			System.out.println("Pulsar 3 para calcular una ecuacion de segundo grado");
+			System.out.print("Pulsar 3 para calcular una ecuacion de segundo grado: ");
 			opcion=sc.nextInt();
 			if(opcion<0 || opcion>3)
 			{
-				System.out.println("No,Noo,Nooo. Lee bieeen");
 				System.out.println("-------------------------------------------------------------------------");
+				System.out.println("No,Noo,Nooo. Lee bieeen");
 			}
 		}while(opcion<0 || opcion>3);
 		
@@ -189,16 +189,15 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 					{
 						//leer a,b,c
 						System.out.println("-------------------------------------------------------------------------");
-						System.out.println("Introduce a: ");
-						System.out.println("-------------------------------------------------------------------------");
+						System.out.print("Introduce a: ");
 						a=sc.nextDouble();
+						
 						System.out.println("-------------------------------------------------------------------------");
-						System.out.println("Introduce b: ");
-						System.out.println("-------------------------------------------------------------------------");
+						System.out.print("Introduce b: ");
 						b=sc.nextDouble();
+						
 						System.out.println("-------------------------------------------------------------------------");
-						System.out.println("Introduce c: ");
-						System.out.println("-------------------------------------------------------------------------");
+						System.out.print("Introduce c: ");
 						c=sc.nextDouble();
 						
 						//calcular la ecuacion de segundo grado y mostrar resultado
@@ -207,7 +206,6 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 							System.out.println("-------------------------------------------------------------------------");
 							System.out.println("Te crees muy listo eee?");
 							System.out.println("No es una ecuacion");
-							System.out.println("-------------------------------------------------------------------------");
 						}
 						else if(a==0)
 						{
@@ -216,13 +214,11 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 							
 							x=(-c)/b;
 							System.out.println("Pero soy buena gente y te dare la solucion: "+"x="+x);
-							System.out.println("-------------------------------------------------------------------------");
 						}
 						else if((4*a*c)>(b*b))
 						{
 							System.out.println("-------------------------------------------------------------------------");
 							System.out.println("No tiene solucion, porque la raiz cuarada de b^2 - 4ac<0");
-							System.out.println("-------------------------------------------------------------------------");
 						}
 						else if((b*b-4*a*c)==0)
 						{
@@ -230,7 +226,6 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 							System.out.println("-------------------------------------------------------------------------");
 							System.out.println("Tiene una solucion, porque la raiz cuarada de b^2 - 4ac=0");
 							System.out.println("x="+x);
-							System.out.println("-------------------------------------------------------------------------");
 						}
 						else if(a<0)
 						{
@@ -245,7 +240,6 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 							System.out.println("-------------------------------------------------------------------------");
 							System.out.println("x="+x);
 							System.out.println("x="+y);
-							System.out.println("-------------------------------------------------------------------------");
 							
 						}
 						else
@@ -257,7 +251,6 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 							System.out.println("-------------------------------------------------------------------------");
 							System.out.println("x="+x);
 							System.out.println("x="+y);
-							System.out.println("-------------------------------------------------------------------------");
 						}
 							
 						//volver a preguntar si desea resolver una ecuacion de segundo grado y leer y validar la respuesta
@@ -280,12 +273,12 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 				System.out.println("Pulsar 0 para salir");
 				System.out.println("Pulsar 1 para sumar cien numeros");
 				System.out.println("Pulsar 2 para calcular numeros pares");
-				System.out.println("Pulsar 3 para calcular una ecuacion de segundo grado");
+				System.out.print("Pulsar 3 para calcular una ecuacion de segundo grado: ");
 				opcion=sc.nextInt();
 				if(opcion<0 || opcion>3)
 				{
-					System.out.println("No,Noo,Nooo. Lee bieeen");
 					System.out.println("-------------------------------------------------------------------------");
+					System.out.println("No,Noo,Nooo. Lee bieeen");
 				}
 			}while(opcion<0 || opcion>3);
 		}//fin segun
