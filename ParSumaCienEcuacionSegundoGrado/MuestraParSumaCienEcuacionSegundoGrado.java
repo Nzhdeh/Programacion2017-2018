@@ -284,7 +284,7 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 				opcion=sc.nextInt();
 				if(opcion<0 || opcion>3)
 				{
-					System.out.println("No,Noo,Nooo. Lee bien");
+					System.out.println("No,Noo,Nooo. Lee bieeen");
 					System.out.println("-------------------------------------------------------------------------");
 				}
 			}while(opcion<0 || opcion>3);
