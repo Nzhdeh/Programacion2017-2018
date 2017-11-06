@@ -67,7 +67,7 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 		
 		//variables
 		double a=0, b=0, c=0, x=0, y=0;
-		int numero=0,suma=0,cont,opcion=0;
+		int numero=0,suma,cont,opcion=0;
 		char desea=' ';
 		
 		
@@ -110,16 +110,15 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 						numero=sc.nextInt();
 						
 						//calcular la suma
-						for(cont=0;cont<=100;cont++)
+						for(cont=0,suma=0;cont<=100;cont++)
 						{
-							//numero++;
 							suma+=numero++;
 						}
 						
 						//mostrar resultado
 						System.out.println("-------------------------------------------------------------------------");
 						System.out.println("La sume es: "+suma);
-						suma=0;//vuelvo a poner la variable suma en 0 para que no se vaya acumulando por si vuelvo a sumar numeros 
+						//suma=0;//vuelvo a poner la variable suma en 0 para que no se vaya acumulando por si vuelvo a sumar numeros 
 						
 						//volver a preguntar si desea seguir y leer y validar respuesta
 						do
