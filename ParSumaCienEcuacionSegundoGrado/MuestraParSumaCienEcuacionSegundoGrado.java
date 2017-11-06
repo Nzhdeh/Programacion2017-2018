@@ -4,7 +4,10 @@
  * analisis:este programa segun la opcion que elija el usuario
  * 								-recibe un numero entero y calcula la suma de los siguentes cien numeros
  * 								-recibe un numero entero y positivo y calcula todos los numeros pares anteriores
- * 								-recibe tres numeros y calcula la ecuacion de segundo grado
+ * 								-recibe tres numeros y calcula la ecuacion de segundo grado segun:
+ * 												ax2 + bx +c = 0
+ * 												x=(-b+Raiz b2-4ac)/2a
+ * 												x=(-b-Raiz b2-4ac)/2a 
  * 												
  * 
  * entradas: double a,double b,double c,int numero,int opcion,char desea
@@ -55,7 +58,8 @@
  * 		fin_mientras
  * 
  * 
- * restricciones: en el segundo caso el numero tiene que ser entero y mayor que 1
+ * restricciones: 	la opcion del menu esta entrwe el 0 y 4 ambos inclusive
+ * 					en el segundo caso el numero tiene que ser entero y mayor que 1
  */
 import java.util.*;
 
