@@ -4,7 +4,10 @@
  * analisis:este programa segun la opcion que elija el usuario
  * 								-recibe un numero entero y calcula la suma de los siguentes cien numeros
  * 								-recibe un numero entero y positivo y calcula todos los numeros pares anteriores
- * 								-recibe tres numeros y calcula la ecuacion de segundo grado
+ * 								-recibe tres numeros y calcula la ecuacion de segundo grado segun:
+ * 												ax2 + bx +c = 0
+ * 												x=(-b+Raiz b2-4ac)/2a
+ * 												x=(-b-Raiz b2-4ac)/2a 
  * 												
  * 
  * entradas: double a,double b,double c,int numero,int opcion,char desea
@@ -55,7 +58,8 @@
  * 		fin_mientras
  * 
  * 
- * restricciones: en el segundo caso el numero tiene que ser entero y mayor que 1
+ * restricciones: 	la opcion del menu esta entrwe el 0 y 4 ambos inclusive
+ * 					en el segundo caso el numero tiene que ser entero y mayor que 1
  */
 import java.util.*;
 
@@ -67,7 +71,7 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 		
 		//variables
 		double a=0, b=0, c=0, x=0, y=0;
-		int numero=0,suma=0,cont,opcion=0;
+		int numero=0,suma,cont,opcion=0;
 		char desea=' ';
 		
 		
@@ -110,16 +114,15 @@ public class MuestraParSumaCienEcuacionSegundoGrado
 						numero=sc.nextInt();
 						
 						//calcular la suma
-						for(cont=0;cont<=100;cont++)
+						for(cont=0,suma=0;cont<=100;cont++)
 						{
-							//numero++;
 							suma+=numero++;
 						}
 						
 						//mostrar resultado
 						System.out.println("-------------------------------------------------------------------------");
 						System.out.println("La sume es: "+suma);
-						suma=0;//vuelvo a poner la variable suma en 0 para que no se vaya acumulando por si vuelvo a sumar numeros 
+						//suma=0;//vuelvo a poner la variable suma en 0 para que no se vaya acumulando por si vuelvo a sumar numeros 
 						
 						//volver a preguntar si desea seguir y leer y validar respuesta
 						do
