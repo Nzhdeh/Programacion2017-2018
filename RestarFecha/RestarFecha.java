@@ -28,11 +28,21 @@ public class RestarFecha
 		anio2=sc.nextInt();
 		
 		
-		if((anio1>=anio2 && mes1>=mes2 && dia1>=dia2))
+		if(anio1>=anio2 && mes1>=mes2 && dia1>=dia2)
 		{
 			anioR=anio1-anio2;
 			mesR=mes1-mes2;
 			diaR=dia1-dia2;
+		}else if(anio1>=anio2 && mes1>=mes2 && dia1<dia2)
+		{
+			anioR=anio1-anio2;
+			mesR=mes1-mes2;
+			diaR=dia2-dia1;
+		}else if(anio1>=anio2 && mes1<mes2 && dia1<dia2)
+		{
+			anioR=anio1-anio2;
+			mesR=mes2-mes1;
+			diaR=dia2-dia1;
 		}else
 		{
 			anioR=anio2-anio1;
