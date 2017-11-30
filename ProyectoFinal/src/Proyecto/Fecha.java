@@ -149,7 +149,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	@Override
 	public int compareTo(Fecha f)
 	{
-		int comparar=0;
+		int comparar;
 		
 		if((this.getAnio()>f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()>f.getMes()) || 
 		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())) 
@@ -235,15 +235,10 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 								}
 							}
 						}
-						
-						else
+						else if (this.getDia () > 0 && this.getDia () < 29)
 						{
-							if (this.getDia () > 0 && this.getDia () < 29)
-							{
-								res = true;
-							}
+							res = true;
 						}
-						
 					}
 			}
 		}

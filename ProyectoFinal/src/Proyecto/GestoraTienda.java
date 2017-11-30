@@ -187,7 +187,6 @@ public class GestoraTienda
 	
 	public static double CalculaVenta(Producto[] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	{
-		//Fecha fechaVenta= new Fecha();
 		int i;
 		double venta=0.;
 		
@@ -196,7 +195,9 @@ public class GestoraTienda
 				Producto producto = productosVendidos[i];
 				Fecha fechaVenta = producto.getFechaVenta();
 				
-				if(fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) 
+				if((fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) ||
+				   (fechaVenta.compareTo(fechaIni)==(-1) && fechaVenta.compareTo(fechaFin)==1) ||
+				   (fechaVenta.compareTo(fechaIni)==0 || fechaVenta.compareTo(fechaFin)==0)) 
 				{
 					venta+=productosVendidos[i].getPrecio();
 				}

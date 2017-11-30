@@ -8,12 +8,12 @@ public class ConductorGestoraTienda{
 		{
 			//Fecha fechaVenta=new Fecha(20,1,2017);
 			//Fecha fecha=new Fecha(16,1,2017);
-			Fecha fecha1=new Fecha(2,1,2017);
+			Fecha fecha1=new Fecha(31,1,2017);
 			Fecha fecha2=new Fecha(5,1,2017);
 			Fecha fecha3=new Fecha(25,1,2017);
 			Fecha fecha4=new Fecha(16,5,2017);
 			Fecha fecha5=new Fecha(7,5,2016);
-			Fecha fecha6=new Fecha(15,1,2017);
+			Fecha fecha6=new Fecha(1,1,2017);
 			
 			Fecha fechaIni=new Fecha(1,1,2017);
 			Fecha fechaFin=new Fecha(31,1,2017);
@@ -38,7 +38,7 @@ public class ConductorGestoraTienda{
 			//GestoraTienda.MenuEncargado();
 			//GestoraTienda.MenuTrabajador();
 			//GestoraTienda.pintaProductos(producto);
-			System.out.println(GestoraTienda.CalculaVenta(productosVendidos, fechaIni, fechaFin));
+			//System.out.println(GestoraTienda.CalculaVenta(productosVendidos, fechaIni, fechaFin));
 			//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
 			//nombre="usb 3.0";
 			//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
