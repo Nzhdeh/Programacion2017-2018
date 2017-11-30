@@ -151,15 +151,19 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	{
 		int comparar=0;
 		
-		if((this.getAnio()>f.getAnio()) || (this.getAnio()>f.getAnio() && this.getMes()>f.getMes()) || 
-			(this.getAnio()==f.getAnio() && this.getMes()>f.getMes()) || (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())) 
+		if((this.getAnio()>f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()>f.getMes()) || 
+		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())) 
 		{
 			comparar=1; //el primero es mayor que el segundo
 		}
-		else if((this.getAnio()<f.getAnio()) || (this.getAnio()<f.getAnio() && this.getMes()<f.getMes()) || (this.getAnio()==f.getAnio() && this.getMes()<f.getMes()) ||
-				(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia()))
+		else if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()==f.getDia())
 		{
-			comparar=(-1);//son iguales
+			comparar=0;//son iguales
+		}
+		else /*if((this.getAnio()<f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()<f.getMes()) || 
+		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia()))*/
+		{
+			comparar=(-1);
 		}
 		
 		return comparar;

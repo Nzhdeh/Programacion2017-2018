@@ -185,21 +185,20 @@ public class GestoraTienda
 		return 1;
 	}*/
 	
-	public static double CalculaVenta(Producto [] productoVendido,Fecha fechaIni,Fecha fechaFin)
+	public static double CalculaVenta(Producto[] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	{
-		Fecha fechaVenta=new Fecha();
+		//Fecha fechaVenta= new Fecha();
 		int i;
 		double venta=0.;
 		
-			for(i=0;i<productoVendido.length;i++) 
+			for(i=0;i<productosVendidos.length;i++) 
 			{
-				if(fechaIni.compareTo(fechaVenta)<=1 && fechaFin.compareTo(fechaVenta)>=(-1)) 
+				Producto producto = productosVendidos[i];
+				Fecha fechaVenta = producto.getFechaVenta();
+				
+				if(fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) 
 				{
-					venta+=productoVendido[i].getPrecio();
-				}
-				else 					//error en ejecucion
-				{
-					venta=(-1);//la fecha de venta no esta entre fechaIni y fechaFin
+					venta+=productosVendidos[i].getPrecio();
 				}
 				
 			}
