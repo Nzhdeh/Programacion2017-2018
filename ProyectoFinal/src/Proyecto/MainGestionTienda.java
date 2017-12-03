@@ -89,7 +89,7 @@ public class MainGestionTienda {
 		int opcion=0,cantidadTrab=0;
 		//char seguir=' ';
 		double venta=0;
-		int cont=0,exito=0;
+		int cont=0,exito=0,tamanio=0;
 		//int cantidad=0;
 		String nombre=" ";
 		//boolean existe=false;
@@ -145,7 +145,7 @@ public class MainGestionTienda {
 											
 								case 2:
 								//contratar un trabajador
-									exito=GestoraTienda.ContrataTrabajador(trabajador);
+									exito=GestoraTienda.ContrataTrabajador(trabajador, tamanio);
 									break;
 											
 								case 3:

@@ -64,7 +64,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		{
 			throw new ExcepcionTrabajador("El DNI no puede estar vac\\u00edo");
 		}
-		else if(sexo!='V' && sexo!='M') 
+		else if((sexo!='V' && sexo!='M') && (sexo!='v' && sexo!='m')) 
 		{
 			throw new ExcepcionTrabajador("El sexo se representa con las letras 'V' o 'M'");
 		}

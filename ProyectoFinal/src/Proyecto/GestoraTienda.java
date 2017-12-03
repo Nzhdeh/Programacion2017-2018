@@ -109,7 +109,7 @@ public class GestoraTienda
 
 	/*
 	 Interfaz
-	 prototipo: public int pintaProductos(Producto [] producto)
+	 prototipo: public int PintaProductos(Producto [] producto)
 	 Precondiciones: nada
 	 Entradas: un array de productos
 	 Salidas: int contador
@@ -119,7 +119,7 @@ public class GestoraTienda
 	
 	//resguardo
 	/*
-	public static int pintaProductos(Producto [] producto)
+	public static int PintaProductos(Producto [] producto)
 	{
 		int cont=0;
 		System.out.println("En construccion");
@@ -127,7 +127,7 @@ public class GestoraTienda
 		
 	}*/
 	
-	public static void pintaProductos(Producto [] producto)
+	public static void PintaProductos(Producto [] producto)
 	{
 		for(int i=0;i<producto.length;i++)
 		{
@@ -169,13 +169,13 @@ public class GestoraTienda
 	
 	/*
 	//interfaz
-	prototipo: public static double CalculaVenta(Producto producto,Fecha fechaIni,Fecha fechaFin)
+	prototipo: public static double CalculaVenta(Producto [] producto,Fecha fechaIni,Fecha fechaFin)
 	comentario:sirve para calcular los gastos diarios de una tienda
-	precondiciones: no hay
-	entradas:objeto Producto
-	salidas:double dastos
+	precondiciones: la fecha introducida es correcta
+	entradas: Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin
+	salidas:double ventas
 	entr/sal:no hay
-	postcondiciones:AN devolvera el gasto diario,o -1 si la entrada no es correcta.
+	postcondiciones:AN devolvera las ventas de un periodo de fechas.
 	*/
 	/*
 	//resguardo
@@ -185,12 +185,12 @@ public class GestoraTienda
 		return 1;
 	}*/
 	
-	public static double CalculaVenta(Producto[] productosVendidos,Fecha fechaIni,Fecha fechaFin)
+	public static double CalculaVenta(Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	{
-		int i;
+		int i=0;
 		double venta=0.;
 		
-			for(i=0;i<productosVendidos.length;i++) 
+			for(;i<productosVendidos.length;i++) 
 			{
 				Producto producto = productosVendidos[i];
 				Fecha fechaVenta = producto.getFechaVenta();
@@ -201,7 +201,6 @@ public class GestoraTienda
 				{
 					venta+=productosVendidos[i].getPrecio();
 				}
-				
 			}
 		//System.out.println("Total venta: "+venta+" €");
 		return venta;
@@ -209,8 +208,8 @@ public class GestoraTienda
 	
 	/*
 	//interfaz
-	prototipo: public static int ContrataTrabajador(Trabajador [] trabajador)
-	comentario:este metodo sirve para simular a contratar un trabajador
+	prototipo: public static int ContrataTrabajador(Trabajador trabajador)
+	comentario: este metodo sirve para simular a contratar un trabajador
 	precondiciones: no hay
 	entradas: 
 	salidas: int exito
@@ -227,22 +226,22 @@ public class GestoraTienda
 		return exito;
 	}*/
 
-	public static int ContrataTrabajador(Trabajador trabajador)
+	public static int ContrataTrabajador(Trabajador trabajador, int tamanio)
 	{
 		int exito=0;
+		Trabajador [] t=new Trabajador[tamanio];
 		
-		
+		for(int i=0;i<tamanio;i++) 
+		{
+			/*Producto producto = productosVendidos[i];
+			Fecha fechaVenta = producto.getFechaVenta();*/
+			
+			trabajador=t[i];/**************************************/
+			exito=1;
+		}
 		
 		return exito;
 	}
-	////////////////////////////////////////////////
-/*	public static void Recorrer(Trabajador [] t)*********************************
-	{
-		for(int i=0;i<t.length;i++) 
-		{
-			System.out.println(t[i]);
-		}
-	}*/
 	
 	/*
 	//interfaz
