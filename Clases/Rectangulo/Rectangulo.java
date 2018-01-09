@@ -27,7 +27,7 @@
  * 
  * public double getPerimetro()
  * 
- * metodos añadidos: no hay
+ * metodos añadidos: CalcularDiagonal()
  * 
  */
  
@@ -110,5 +110,31 @@ public class Rectangulo
 		return area;
 	}
 	
+	/*
+	//interfaz
+	prototipo: public static double CalcularDiagonal(double largo, double ancho)
+	comentarios: este metodo calcula la diagonal de un rectangulo
+	precondiciones: el ancho  y el largo tienen que ser mayores que cero
+	entradas: double ancho, double largo
+	salidas: double resultado
+	entr/sal: no hay
+	postcondiciones: AN devolvera el resultado
+	*/
+	/*
+	//resguardo
+	public static double CalcularDiagonal(double largo, double ancho)
+	{
+		System.out.println("En construccion");
+		return 1.0;
+	}*/
+	
+	public double CalcularDiagonal()
+	{		
+		double diagonal=0.;
+		
+		diagonal=Math.sqrt((Math.pow(getAncho(),2))+(Math.pow(getLargo(),2)));
+		
+		return diagonal;
+	}
 }
 

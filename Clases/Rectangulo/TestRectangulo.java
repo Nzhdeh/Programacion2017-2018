@@ -20,8 +20,8 @@ public class TestRectangulo {
 		//prueba getters y setters
 		System.out.println("---------------------------------------------------");
 		System.out.println("Get y set de Largo:");
-		//r1.setLargo(3);
-		r1.setLargo(-3);
+		r1.setLargo(3);
+		//r1.setLargo(-3);
 		System.out.println(r1.getLargo());
 		
 		System.out.println("---------------------------------------------------");
@@ -44,5 +44,11 @@ public class TestRectangulo {
 		System.out.println("Get y set de Parametro:");
 		System.out.println(r1.getPerimetro());
 		//fin prueba parametro
+		
+		//prueba de calcular diagonal
+		System.out.println("---------------------------------------------------");
+		System.out.println("Diagonal:");
+		System.out.println(r1.CalcularDiagonal());
+		//fin prueba alcular diagonal
 	}
 }
