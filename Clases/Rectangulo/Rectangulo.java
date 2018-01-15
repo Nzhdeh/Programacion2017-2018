@@ -11,7 +11,9 @@
  * 		area: tipo double, consultable
  * 		perimetro: tipo double, consultable
  * 
- * restricciones:el largo y el ancho tienen que ser mayores que cero
+ * restricciones: el largo y el ancho tienen que ser mayores que cero
+ * 
+ * Recuerda: Las propiedades basicos se convierten en atributos, las derivadas NO
  * 
  * INTERFAZ DE LA CLASE
  * 
@@ -50,10 +52,21 @@ public class Rectangulo
 	}
 	
 	//sobrecargados
-	public Rectangulo(double largo, double ancho)
+	public Rectangulo(double largo, double ancho) throws ExcepcionRectangulo
 	{
-		this.largo=largo;
-		this.ancho=ancho;
+		if(largo<1)
+		{
+			throw new ExcepcionRectangulo("El largo tiene que ser mayor que cero");
+		}
+		else if(ancho<1)
+		{
+			throw new ExcepcionRectangulo("El ancho tiene que ser mayor que cero");
+		}
+		else
+		{
+			this.largo=largo;
+			this.ancho=ancho;
+		}
 	}
 	
 	//de copia
@@ -65,19 +78,13 @@ public class Rectangulo
 	
 	
 	//getters y setters
-	public double getLargo()
+	public double getLargo() 
 	{
 		return largo;
 	}
-    public void setLargo(double largo)
+    public void setLargo(double largo) 
     {
-		if(largo>0)
-		{
-			this.largo=largo;
-		}else
-		{
-			System.out.println("El Largo tiene que ser mayor que cero");
-		}
+		this.largo=largo;
 	}
   
     public double getAncho()
@@ -86,13 +93,7 @@ public class Rectangulo
 	}
     public void setAncho(double ancho)
     {
-		if(ancho>0)
-		{
-			this.ancho=ancho;
-		}else
-		{
-			System.out.println("El Ancho tiene que ser mayor que cero");
-		}
+		this.ancho=ancho;
 	}
 	
 	public double getArea()
@@ -131,7 +132,7 @@ public class Rectangulo
 		return 1.0;
 	}*/
 	
-	public double CalcularDiagonal()
+	public double CalcularDiagonal() //throws ExcepcionRectangulo
 	{		
 		double diagonal=0.;
 		
