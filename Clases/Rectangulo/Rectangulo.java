@@ -13,7 +13,7 @@
  * 
  * restricciones: el largo y el ancho tienen que ser mayores que cero
  * 
- * Recuerda: Las propiedades basicos se convierten en atributos, las derivadas NO
+ * Recuerda: Las propiedades basicas se convierten en atributos, las derivadas NO
  * 
  * INTERFAZ DE LA CLASE
  * 

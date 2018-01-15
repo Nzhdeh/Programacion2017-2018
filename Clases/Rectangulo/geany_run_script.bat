@@ -1,4 +1,4 @@
-java "TestRectangulo"
+java "GestionRectangulo"
 
 pause
 del "%0"
