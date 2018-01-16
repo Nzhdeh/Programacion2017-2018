@@ -20,12 +20,12 @@ public class GestionRectangulo
 		
 		return area;
 	}
-	
+	/*
 	public static double PerimetroRectangulo(double largo, double ancho) throws ExcepcionRectangulo
 	{
 		double perimetro=0.0;
-		//Rectangulo r=new Rectangulo(5,10);
-		Rectangulo r=new Rectangulo(-5,10);
+		Rectangulo r=new Rectangulo(5,10);
+		//Rectangulo r=new Rectangulo(-5,10);
 		//Rectangulo r=new Rectangulo(5,-10);
 		
 		if(largo<1)
@@ -41,18 +41,18 @@ public class GestionRectangulo
 		}
 		
 		return perimetro;
-	}
+	}*/
 	
-	public static void main (String [] args)
+	public static void main (String [] args) throws ExcepcionRectangulo
 	{
 		double ancho=5;
 		double largo=10;
 		
-		try
-		{
-			System.out.println("Perimetro= "+PerimetroRectangulo(largo,ancho));
+		//try
+		//{
 			System.out.println("Area= "+AreaRectangulo(largo,ancho));
-		}
+			//System.out.println("Perimetro= "+PerimetroRectangulo(largo,ancho));
+		/*}
 		catch(ExcepcionRectangulo error)
 		{
 			if(ancho<1)
@@ -66,8 +66,9 @@ public class GestionRectangulo
 			{
 				System.out.println("El largo tiene que ser mayor de cero");
 			}
-		}
+		}*/
 		
-		System.out.println("No te preocupes. El programa sigue");
+		//System.out.println("No te preocupes. El programa sigue");
 	}
 }
+
