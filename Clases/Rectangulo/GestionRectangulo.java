@@ -58,13 +58,15 @@ public class GestionRectangulo
 			if(ancho<1)
 			{
 				System.out.println("El ancho tiene que ser mayor de cero");
+				error.printStackTrace();
 			}
 		}
-		catch(Exception error)
+		catch(Exception err)
 		{
 			if(largo<1)
 			{
 				System.out.println("El largo tiene que ser mayor de cero");
+				err.printStackTrace();
 			}
 		}*/
 		
