@@ -13,8 +13,8 @@ public class TestRectangulo
 	{
 		try
 		{
-			Rectangulo r1=new Rectangulo(4.0,7.0);
-			//Rectangulo r1=new Rectangulo(-10,20);
+			//Rectangulo r1=new Rectangulo(4.0,7.0);
+			Rectangulo r1=new Rectangulo(-10,20);
 			//Rectangulo r1=new Rectangulo(10,-20);
 			
 			System.out.println("Antes del cambio: "+r1.getLargo()+" "+r1.getAncho());
@@ -22,14 +22,14 @@ public class TestRectangulo
 			//prueba getters y setters
 			System.out.println("---------------------------------------------------");
 			System.out.println("Get y set de Largo:");
-			//r1.setLargo(3);
-			r1.setLargo(-3);
+			r1.setLargo(3);
+			//r1.setLargo(-3);
 			System.out.println(r1.getLargo());
 			
 			System.out.println("---------------------------------------------------");
 			System.out.println("Get y set de Ancho:");
-			r1.setAncho(8);
-			//r1.setAncho(-8);
+			//r1.setAncho(8);
+			r1.setAncho(-8);
 			System.out.println(r1.getAncho());
 			//fin
 			

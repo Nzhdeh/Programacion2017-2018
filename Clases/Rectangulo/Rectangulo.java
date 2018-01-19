@@ -60,7 +60,7 @@ public class Rectangulo
 		}
 		else if(ancho<1)
 		{
-			throw new ExcepcionRectangulo("El ancho tiene que ser mayor que cero");
+		throw new ExcepcionRectangulo("El ancho tiene que ser mayor que cero");	
 		}
 		else
 		{
@@ -82,18 +82,31 @@ public class Rectangulo
 	{
 		return largo;
 	}
-    public void setLargo(double largo) 
+    public void setLargo(double largo)  throws ExcepcionRectangulo
     {
-		this.largo=largo;
+		if(largo>0)
+		{
+			this.largo=largo;
+		}else
+		{
+			throw new ExcepcionRectangulo("El largo tiene que ser mayor que cero");
+		}
+		
 	}
   
     public double getAncho()
     {
 		return ancho;
 	}
-    public void setAncho(double ancho)
+    public void setAncho(double ancho) throws ExcepcionRectangulo
     {
-		this.ancho=ancho;
+		if(ancho>0)
+		{
+			this.ancho=ancho;
+		}else
+		{
+			throw new ExcepcionRectangulo("El ancho tiene que ser mayor que cero");
+		}
 	}
 	
 	public double getArea()
