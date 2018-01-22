@@ -96,7 +96,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		return nombre;
 	}
-	public void setNombre(String nombre) 
+	public void setNombre(String nombre) throws ExcepcionProducto
 	{
 		this.nombre=nombre;
 	}
@@ -106,16 +106,23 @@ public class Producto implements Cloneable, Comparable <Producto>
 		return precio;
 	}
 	
-	public void setPrecio(double precio) 
+	public void setPrecio(double precio) throws ExcepcionProducto
 	{
-		this.precio=precio;
+		if(precio<0) 
+		{
+			this.precio=precio;
+		}else 
+		{
+			throw new ExcepcionProducto("El precio no puede ser menor que cero");
+		}
+		
 	}
 	
 	public Fecha getFechaVenta() 
 	{
 		return fechaVenta;
 	}
-	public void setFechaVenta(Fecha fechaVenta) 
+	public void setFechaVenta(Fecha fechaVenta)
 	{
 		this.fechaVenta=fechaVenta;
 	}
@@ -124,18 +131,30 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		return cantidad;
 	}
-	public void setCantidad(int cantidad) 
+	public void setCantidad(int cantidad) throws ExcepcionProducto
 	{
-		this.cantidad=cantidad;
+		if(cantidad<0) 
+		{
+			throw new ExcepcionProducto("La cantidad no puede ser negativo");
+		}else 
+		{
+			this.cantidad=cantidad;
+		}
 	}
 	
 	public double getPeso() 
 	{
 		return peso;
 	}
-	public void setPeso(double peso) 
+	public void setPeso(double peso) throws ExcepcionProducto 
 	{
-		this.peso=peso;
+		if(peso<0) 
+		{
+			throw new ExcepcionProducto("El peso no puede menor que cero");
+		}else 
+		{
+			this.peso=peso;
+		}
 	}
 	
 	
@@ -151,7 +170,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	@Override
 	public int hashCode() 
 	{
-		return (int)(1000*getPrecio()*getPeso()/1000);
+		return (int)(16152821*getPrecio()*getPeso()/1000);
 	}
 	
 	@Override

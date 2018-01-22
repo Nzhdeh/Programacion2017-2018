@@ -5,9 +5,11 @@ public class TestTrabajador
 
 	public static void main(String[] args) throws ExcepcionTrabajador 
 	{
+		Fecha fecha1=new Fecha();
+		Fecha fecha2=new Fecha();
 		
-		Trabajador t1=new Trabajador("Antonio","Sanchez","26584475A",30,'V');
-		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X9923978F",26,'V');
+		Trabajador t1=new Trabajador("Antonio","Sanchez","26584475A",fecha1,'V');
+		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V');
 		Trabajador copia=null;
 		
 		

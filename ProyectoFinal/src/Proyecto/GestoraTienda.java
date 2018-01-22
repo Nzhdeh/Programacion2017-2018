@@ -78,7 +78,7 @@ public class GestoraTienda
 			System.out.println("-----------------------------------------------");
 			System.out.println("Pulsar 0 para Salir ");
 			System.out.println("Pulsar 1 para encargar productos nuevos ");
-			System.out.print("Pulsar 2 para avisar sobre un incidete: ");
+			System.out.print("Pulsar 2 para avisar sobre una incidecia: ");
 	}
 	
 	/*
@@ -205,6 +205,36 @@ public class GestoraTienda
 		//System.out.println("Total venta: "+venta+" €");
 		return venta;
 	}
+
+	/*
+	//interfaz
+	prototipo: public static boolean ExisteTrabajador(Trabajador [] trabajador,String dni) throws ExcepcionTrabajador
+	comentario: sirve para ver si el producto que quieremos vender esta en la tienda
+	precondiciones: no hay
+	entradas:un array de Trabajadores
+	salidas: boolean exsiste
+	entr/sal:no hay
+	postcondiciones:AN devolvera true si el trabajador esta en la tienda false en caso contrario.
+	*/
+	/*
+	//resguardo
+	public static boolean ExisteTrabajador(Trabajador [] trabajador,String dni) throws ExcepcionTrabajador
+	{
+		boolean exsiste=false;
+		System.out.println("En construccion");
+		return exsiste;
+	}*/
+	
+	public static boolean ExisteTrabajador(Trabajador [] trabajador,String dni) throws ExcepcionTrabajador
+	{
+		boolean existe=false;
+		for(int i=0; i<trabajador.length && existe==false;i++){
+			if(trabajador[i].getDni().equalsIgnoreCase(dni)==true){
+				existe=true;
+			}
+		}
+		return existe;		
+	}
 	
 	/*
 	//interfaz
@@ -226,21 +256,17 @@ public class GestoraTienda
 		return exito;
 	}*/
 
-	public static int ContrataTrabajador(Trabajador trabajador, int tamanio)
+	public static int ContrataTrabajador(Trabajador trabajador,int tam)
 	{
-		int exito=0;
-		Trabajador [] t=new Trabajador[tamanio];
+		int i;
+		Trabajador [] t=new Trabajador[tam];
 		
-		for(int i=0;i<tamanio;i++) 
+		for(i=0;i<t.length;i++) 
 		{
-			/*Producto producto = productosVendidos[i];
-			Fecha fechaVenta = producto.getFechaVenta();*/
-			
-			trabajador=t[i];/**************************************/
-			exito=1;
+			t[i]=trabajador;
 		}
-		
-		return exito;
+		//System.out.println("En construccion");
+		return 1;
 	}
 	
 	/*
@@ -320,7 +346,7 @@ public class GestoraTienda
 	
 	/*
 	//interfaz
-	prototipo: public static Producto [] VendeProducto(Producto [] producto,String nombre,Fecha fechaVenta)
+	prototipo: public static Producto VendeProducto(Producto [] producto,String nombre,Fecha fechaVenta)
 	comentario:sirve para vender un producto
 	precondiciones: El producto tiene que estar en la tienda
 	entradas: un array de producto y una fecha
@@ -339,10 +365,11 @@ public class GestoraTienda
 	/*
 	public static Producto [] VendeProducto(Producto [] producto,String nombre,Fecha fechaVenta) throws ExcepcionProducto
 	{
+		total=new Float(0);
 		
 		for(int i=0;i<producto.length;i++)
 		{
-			
+	    	total+=compra.getSubtotal();
 		}
 		return producto;
 	}*/

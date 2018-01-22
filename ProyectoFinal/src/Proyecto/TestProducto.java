@@ -2,7 +2,7 @@ package Proyecto;
 
 public class TestProducto {
 
-	public static void main(String[] args) throws ExcepcionProducto {
+	public static void main(String[] args) throws ExcepcionProducto, ExcepcionFecha {
 		
 		Fecha fecha1=new Fecha(12,2,2016);
 		Fecha fecha2=new Fecha(16,1,1991);

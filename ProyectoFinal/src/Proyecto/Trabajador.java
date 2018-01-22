@@ -35,7 +35,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	private String nombre;
 	private String apellidos;
 	private String dni;
-	private int edad;
+	private Fecha fechaNacimiento;
 	private char sexo;
 	
 	//constructores 
@@ -45,26 +45,14 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		String nombre=" ";
 		String apellidos=" ";
 		String dni=" ";
-		int edad=0;
+		Fecha fechaNacimiento=null;
 		char sexo=' ';
 	}
 	
 	//sobrecargado
-	public Trabajador(String nombre,String apellidos,String dni,int edad,char sexo) throws ExcepcionTrabajador
+	public Trabajador(String nombre,String apellidos,String dni,Fecha fechaNacimiento,char sexo) throws ExcepcionTrabajador
 	{
-		if(nombre==null) 
-		{
-			throw new ExcepcionTrabajador("El nombre no puede estar vac\\u00edo");
-		}
-		else if(apellidos==null) 
-		{
-			throw new ExcepcionTrabajador("El apellido no puede estar vac\\u00edo");
-		}
-		else if(dni==null) 
-		{
-			throw new ExcepcionTrabajador("El DNI no puede estar vac\\u00edo");
-		}
-		else if((sexo!='V' && sexo!='M') && (sexo!='v' && sexo!='m')) 
+		if((sexo!='V' && sexo!='M') && (sexo!='v' && sexo!='m')) 
 		{
 			throw new ExcepcionTrabajador("El sexo se representa con las letras 'V' o 'M'");
 		}
@@ -73,7 +61,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 			this.nombre=nombre;
 			this.apellidos=apellidos;
 			this.dni=dni;
-			this.edad=edad;
+			this.fechaNacimiento=fechaNacimiento;
 			this.sexo=sexo;
 		}
 	}
@@ -84,49 +72,54 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		this.nombre=trabajador.getNombre();
 		this.apellidos=trabajador.getApellidos();
 		this.dni=trabajador.getDni();
-		this.edad=trabajador.getEdad();
+		this.fechaNacimiento=trabajador.getFechaNacimiento();
 		this.sexo=trabajador.getSexo();
 	}
 	
 	//getters y setters
 
-	public String getNombre() {
+	public String getNombre() 
+	{
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws ExcepcionTrabajador
+	{
 		this.nombre = nombre;
 	}
 
-	public String getApellidos() {
+	public String getApellidos() 
+	{
 		return apellidos;
 	}
 
-	public void setApellidos(String apellidos) {
+	public void setApellidos(String apellidos) throws ExcepcionTrabajador
+	{
 		this.apellidos = apellidos;
 	}
 
-	public String getDni() {
+	public String getDni() 
+	{
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(String dni) throws ExcepcionTrabajador
+	{
 		this.dni = dni;
 	}
 
-	public int getEdad() {
-		return edad;
+	public Fecha getFechaNacimiento()
+	{
+		return fechaNacimiento;
 	}
-/*
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}*/
 
-	public char getSexo() {
+	public char getSexo() 
+	{
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
+	public void setSexo(char sexo) 
+	{
 		this.sexo = sexo;
 	}
 	
@@ -134,15 +127,20 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	@Override
 	public String toString() 
 	{
-		return ("Nombre: "+nombre+'\n'+"Apellidos: "+apellidos+'\n'+
-				"DNI: "+dni+'\n'+"Sexo: "+sexo);
+		return ("Nombre: "+getNombre()+'\n'+"Apellidos: "+getApellidos()+'\n'+
+				"Fecha de nacimiento: "+getFechaNacimiento()+'\n'+"Sexo: "+getSexo()+'\n'+"Dni: "+getDni());
 	}
 	
 	@Override
 	public int hashCode() 
 	{
-		return (int)(1000*getEdad()/1000);
+		int hash=1;
+		
+		hash=hash*27+nombre.hashCode();
+		
+		return hash;
 	}
+	
 	
 	@Override
 	public Trabajador clone() 
@@ -167,12 +165,17 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	{
 		boolean res=false;
 		
-		if(o!=null && o instanceof Producto) 
+		if(this==o) 
+		{
+			res=true;
+		}
+		else if(o!=null && o instanceof Producto) 
 		{
 			Trabajador trabajador=(Trabajador) o;
 			
-			if(this.getNombre()==trabajador.getNombre() && this.getApellidos()==trabajador.getApellidos()
-					&& this.getDni()==trabajador.getDni()) 
+			if(this.getNombre()==trabajador.getNombre() && 
+			   this.getApellidos()==trabajador.getApellidos() && 
+			   this.getDni()==trabajador.getDni()) 
 			{
 				res=true;
 			}
@@ -186,15 +189,16 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	{
 		int comparar=0;
 		
-		if(this.getEdad()>t.getEdad()) 
+		if(this.getFechaNacimiento().compareTo(t.getFechaNacimiento())==1) 
 		{
 			comparar=1;
 		}
-		else if(this.getEdad()<t.getEdad()) 
+		else if(this.getFechaNacimiento().compareTo(t.getFechaNacimiento())==(-1)) 
 		{
 			comparar=(-1);
 		}
 		
 		return comparar;
 	}
+	
 }

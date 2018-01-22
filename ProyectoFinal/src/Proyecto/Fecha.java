@@ -50,11 +50,23 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	}
 	
 	//sobrecargado
-	public Fecha(int dia, int mes, int anio)
+	public Fecha(int dia, int mes, int anio) throws ExcepcionFecha
 	{
-		this.dia=dia;
-		this.mes=mes;
-		this.anio=anio;
+		if(dia<1) 
+		{
+			throw new ExcepcionFecha("El dia no puede ser menor que 1");
+		}else if(mes<1 || mes >12)		
+		{
+			throw new ExcepcionFecha("El mes tiene que estar entre 1 y 12");
+		}else if(anio<1) 
+		{
+			throw new ExcepcionFecha("El anio no puede ser menor que 1");
+		}else 
+		{
+			this.dia=dia;
+			this.mes=mes;
+			this.anio=anio;
+		}
 	}
 	
 	//de copia
@@ -71,9 +83,15 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return dia;
 	}
 	
-	public void setDia(int dia)
+	public void setDia(int dia) throws ExcepcionFecha
 	{
-		this.dia=dia;
+		if(dia<1) 
+		{
+			throw new ExcepcionFecha("El dia no puede ser menor que 1");
+		}else 
+		{
+			this.dia=dia;
+		}
 	}
 	
 	public int getMes()
@@ -81,19 +99,31 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return mes;
 	}
 	
-	public void setMes(int mes)
+	public void setMes(int mes) throws ExcepcionFecha
 	{
-		this.mes=mes;
+		if(mes<1 || mes >12)		
+		{
+			throw new ExcepcionFecha("El mes tiene que estar entre 1 y 12");
+		}else 
+		{
+			this.mes=mes;
+		}
 	}
 	
-	public int getAnio()
+	public int getAnio() 
 	{
 		return anio;
 	}
 	
-	public void setAnio(int anio)
+	public void setAnio(int anio) throws ExcepcionFecha
 	{
-		this.anio=anio;
+		if(anio<1) 
+		{
+			throw new ExcepcionFecha("El anio no puede ser menor que 1");
+		}else 
+		{
+			this.anio=anio;
+		}
 	}
 	
 	//metodos heredados

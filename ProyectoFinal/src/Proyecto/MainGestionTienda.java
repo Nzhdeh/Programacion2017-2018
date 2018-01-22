@@ -86,7 +86,7 @@ public class MainGestionTienda {
 		Scanner sc=new Scanner (System.in);
 		
 		//variables
-		int opcion=0,cantidadTrab=0;
+		int opcion=0,cantidadTrab=0,tam=0;
 		//char seguir=' ';
 		double venta=0;
 		int cont=0,exito=0,tamanio=0;
@@ -145,7 +145,7 @@ public class MainGestionTienda {
 											
 								case 2:
 								//contratar un trabajador
-									exito=GestoraTienda.ContrataTrabajador(trabajador, tamanio);
+									exito=GestoraTienda.ContrataTrabajador(trabajador,tam);
 									break;
 											
 								case 3:
@@ -187,7 +187,7 @@ public class MainGestionTienda {
 											
 								case 2:
 									//avisar sobre una incidencia
-									System.out.println("En construccion");
+									GestoraTienda.AvisaIncidencias();
 									break;
 							}
 	
