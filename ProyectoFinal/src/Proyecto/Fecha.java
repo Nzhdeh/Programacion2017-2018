@@ -50,23 +50,11 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	}
 	
 	//sobrecargado
-	public Fecha(int dia, int mes, int anio) throws ExcepcionFecha
+	public Fecha(int dia, int mes, int anio)
 	{
-		if(dia<1) 
-		{
-			throw new ExcepcionFecha("El dia no puede ser menor que 1");
-		}else if(mes<1 || mes >12)		
-		{
-			throw new ExcepcionFecha("El mes tiene que estar entre 1 y 12");
-		}else if(anio<1) 
-		{
-			throw new ExcepcionFecha("El anio no puede ser menor que 1");
-		}else 
-		{
-			this.dia=dia;
-			this.mes=mes;
-			this.anio=anio;
-		}
+		this.dia=dia;
+		this.mes=mes;
+		this.anio=anio;
 	}
 	
 	//de copia
@@ -176,6 +164,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}
 	
+	//condicion de comparacion: dia,mes y año
 	@Override
 	public int compareTo(Fecha f)
 	{
@@ -205,7 +194,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	precondiciones:no hay
 	entradas: no hya
 	salidas: logico
-	postcondiciones: true si la fecha es valida y false si no.
+	postcondiciones: AN devolvera true si la fecha es valida y false si no.
 	*/
 	/*
 	
@@ -255,14 +244,12 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 						
 						case 2:
 							
-						if(this.getAnio()>1581)
+						if ((this.getAnio()>1581) && (this.getAnio() % 400 == 0) || 
+							((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
 						{
-							if ((this.getAnio() % 400 == 0) || ((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
+							if (this.getDia () > 0 && this.getDia () < 30)
 							{
-								if (this.getDia () > 0 && this.getDia () < 30)
-								{
-									res = true;
-								}
+								res = true;
 							}
 						}
 						else if (this.getDia () > 0 && this.getDia () < 29)

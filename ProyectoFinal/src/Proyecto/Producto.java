@@ -60,7 +60,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		if(precio<=0) 
 		{
-			throw new ExcepcionProducto("El precio no puede ser menor o igul que cero");
+			throw new ExcepcionProducto("El precio no puede ser menor que cero");
 		}
 		else if(peso<=0) 
 		{
@@ -68,7 +68,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 		}
 		else if(cantidad<=0) 
 		{
-			throw new ExcepcionProducto("La cantidad no puede ser menor o igul que cero");
+			throw new ExcepcionProducto("La cantidad no puede ser menor que cero");
 		}
 		else 
 		{
@@ -108,7 +108,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	
 	public void setPrecio(double precio) throws ExcepcionProducto
 	{
-		if(precio<0) 
+		if(precio>=0) 
 		{
 			this.precio=precio;
 		}else 
@@ -215,11 +215,13 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		int comparar=0;
 		
-		if(this.getPrecio()>p.getPrecio() || this.getNombre()!=p.getNombre()) 
+		if((this.getPrecio()>p.getPrecio() && this.getNombre()!=p.getNombre()) ||
+			this.getPrecio()>p.getPrecio() || this.getNombre()!=p.getNombre()) 
 		{
 			comparar=1;
 		}
-		else if(this.getPrecio()<p.getPrecio() || this.getNombre()!=p.getNombre()) 
+		else if(this.getPrecio()<p.getPrecio() && this.getNombre()!=p.getNombre()||
+				this.getPrecio()<p.getPrecio() || this.getNombre()!=p.getNombre()) 
 		{
 			comparar=(-1);
 		}
