@@ -4,7 +4,7 @@
  * 						nombre: tipo String,consultable, modificable
  * 						apellidos:tipo String,consultable, modificable
  * 						dni: tipo String,consultable, modificable
- * 						edad: tipo int,consultable
+ * 						fechaNacimiento: tipo Fecha,consultable
  * 						sexo: tipo char,consultable,modificable
  * 
  * propiedades derivadas:no hay
@@ -22,13 +22,14 @@
  * public String getDni()
  * public void setNombre(String dni)
  * 
- * public int getedad()
+ * public Fecha getFechaNacimiento()
  * 
  * public char getSexo()
  * public void setSexo(char sexo)
  * 
  * 
- */package Proyecto;
+ */
+package Proyecto;
 
 public class Trabajador implements Cloneable,Comparable <Trabajador>
 {
