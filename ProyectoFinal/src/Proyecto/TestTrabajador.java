@@ -5,27 +5,42 @@ public class TestTrabajador
 
 	public static void main(String[] args) //throws ExcepcionTrabajador
 	{
-		try 
+			
+		Fecha fecha1=new Fecha(15,2,1999);
+		Fecha fecha2=new Fecha(10,3,1991);
+		
+		Trabajador t1=new Trabajador("Tomas","Zumarraga","26584475A",fecha1,'V');
+		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V');
+		Trabajador copia=null;
+			
+		
+		//prueba getters y setters
+		System.out.println("---------------------------------------------------");
+		System.out.println("Get y set:");
+		System.out.println(t1.getNombre());
+			
+		try
 		{
-			
-			Fecha fecha1=new Fecha(15,2,1999);
-			Fecha fecha2=new Fecha(10,3,1991);
-			
-			Trabajador t1=new Trabajador("Tomas","Zumarraga","26584475A",fecha1,'V');
-			Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V');
-			Trabajador copia=null;
-			
-			//prueba getters y setters
-			System.out.println("---------------------------------------------------");
-			System.out.println("Get y set:");
-			System.out.println(t1.getNombre());
 			t1.setNombre("Luis");
 			System.out.println(t1.getNombre());
+		}catch(ExcepcionTrabajador et) 
+		{
+			System.out.println(et);//se pone et para que salte el mensaje de la excepcion. 
+		}
+			
+		try 
+		{
 			System.out.println("-------------------------");
-			//System.out.println(t1.getSexo());
-			//t1.setSexo('4');
-			//System.out.println(t1.getSexo());
+			System.out.println(t1.getSexo());
+			t1.setSexo('4');
+		}catch(ExcepcionTrabajador et) 
+		{
+			System.out.println(et);//se pone et para que salte el mensje de la excepcion. 
+		}
+		System.out.println(t1.getSexo());
 			//fin
+			
+		
 			//prueba toString
 			System.out.println("---------------------------------------------------");
 			System.out.println("To string:");
@@ -44,6 +59,7 @@ public class TestTrabajador
 			System.out.println("---------------------------------------------------");
 			System.out.println("hashCode:");
 			System.out.println(t1.hashCode ());
+			System.out.println(t2.hashCode ());
 			//Fin
 			
 			//Prueba equals
@@ -60,11 +76,8 @@ public class TestTrabajador
 			System.out.println(t2.compareTo (t2));
 			System.out.println(copia.compareTo (t1));
 			System.out.println(t1.compareTo (t2));
-			//Fin Prueba compareTop
-		}catch(ExcepcionTrabajador et) 
-		{
-			System.out.println("Oooo what a pity");
-		}
+			System.out.println(t2.compareTo (t1));
+			//Fin Prueba compareTo
 	}
 
 }

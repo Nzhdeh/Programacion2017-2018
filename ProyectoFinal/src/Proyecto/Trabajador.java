@@ -27,7 +27,7 @@
  * public String getDni()
  * public void setNombre(String dni)
  * 
- * public Fecha getFechaNacimiento()
+ * public Fecha get FechaNacimiento() //se aplicara el patron delegacion
  * 
  * public char getSexo()
  * public void setSexo(char sexo)
@@ -84,7 +84,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 
 	public void setNombre(String nombre) throws ExcepcionTrabajador
 	{
-		if(nombre ==null)
+		if(nombre == null)
 		{
 			throw new ExcepcionTrabajador("El nombre no puede estar vacio");
 		}else
@@ -131,31 +131,32 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	{
 		return fechaNacimiento.getDia();
 	}
-
+/*
 	public void setFechaNacimientoDia(int dia) throws ExcepcionFecha 
 	{
 		fechaNacimiento.setDia(dia);
 	}
-
+*/
 	public int getFechaNacimientoMes() 
 	{
 		return fechaNacimiento.getMes();
 	}
-
+/*
 	public void setFechaNacimientoMes(int mes) throws ExcepcionFecha 
 	{
 		fechaNacimiento.setMes(mes);
 	}
-
+*/
 	public int getFechaNacimientoAnio() 
 	{
 		return fechaNacimiento.getAnio();
 	}
-
+/*
 	public void setFechaNacimientoAnio(int anio) throws ExcepcionFecha 
 	{
 		fechaNacimiento.setAnio(anio);
 	}
+*/
 	//fin patron delegacion
 	
 	public char getSexo() 
@@ -174,13 +175,12 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		}
 	}
 	
-	//metodos heredados
+	
 	@Override
 	public String toString() 
 	{
-		return ("Nombre: "+getNombre()+'\n'+"Apellidos: "+getApellidos()+'\n'+
-				"Fecha de nacimiento: "+getFechaNacimientoDia()+"-"+getFechaNacimientoMes()+"-"+getFechaNacimientoAnio()
-				+'\n'+"Sexo: "+getSexo()+'\n'+"Dni: "+getDni());
+		return (getNombre()+','+getApellidos()+','+getDni()+','+getFechaNacimientoDia()+"-"+getFechaNacimientoMes()+"-"+getFechaNacimientoAnio()
+				+','+getSexo());
 	}
 	
 	@Override

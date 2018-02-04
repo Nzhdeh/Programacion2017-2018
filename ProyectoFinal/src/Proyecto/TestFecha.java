@@ -4,24 +4,29 @@ public class TestFecha
 {
 	public static void main(String[] args) 
 	{
-		try 
-		{
+		
 			Fecha f1=new Fecha(31,5,1990);
 			Fecha f2=new Fecha(15,2,2016);
 			Fecha copia=null;
 			
-			
+		try 
+		{
 			//prueba getters y setters
 			System.out.println("---------------------------------------------------");
 			System.out.println("Get y set:");
-			System.out.println("Antes del cambio: "+f1);
-			f1.setDia(5);
-			System.out.println("Cambiamos el dia: "+f1.getDia());
-			System.out.println("-----------------------");
-			f1.setMes(12);
-			System.out.println("Cambiamos el dia: "+f1.getMes());
+		//	System.out.println("Antes del cambio: "+f2);
+		//	f2.setDia(10);
+		//	System.out.println("Despues del cambio: "+f2);
+			System.out.println("---------------------------------------------------");
+			f1.setDia(32);
+			System.out.println("Cambiamos el dia: "+f1);
 			//fin
-			
+		}
+		catch(ExcepcionFecha error) 
+		{
+			System.out.println(error);//podemos pintar un mensaje
+		}
+		
 			//prueba toString
 			System.out.println("---------------------------------------------------");
 			System.out.println("To string:");
@@ -60,14 +65,15 @@ public class TestFecha
 			//Prueba ValidarFecha
 			System.out.println("---------------------------------------------------");
 			System.out.println("Validar Fecha:");
-			System.out.println(f1.ValidarFecha());
+			try 
+			{
+				System.out.println(f1.ValidarFecha());
+			}catch(ExcepcionFecha ef) 
+			{
+				System.out.println(ef);
+			}
+			
 			//fin
-		}
-		catch(ExcepcionFecha error) 
-		{
-			System.out.println("Fecha incorrecta");
-		}
-
 	}
 
 }

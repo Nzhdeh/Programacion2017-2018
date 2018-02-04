@@ -3,8 +3,8 @@
  * propiedades basicas: 
  * 					Nombre: tipo String,consultable, modificable
  * 					precio: tipo double,consultable,modificable
- * 					fechaVenta: tipo Fecha,consultable,modificable
- * 					descripcion: tipo String,consultable, modificable
+ * 					fechaVenta: tipo Fecha,consultable
+ * 					cantidad: tipo String,consultable, modificable
  * 					peso: tipo double, consultable,modificable
  * 
  * Propiedades derivadas: No hay
@@ -19,11 +19,10 @@
  * public double getPrecio()
  * public void setPrecio(double precio)
  * 
- * public Fecha getFechaVenta()
- * public void setFechaVenta()
+ * public Fecha getFechaVenta()  
  * 
- * public String getDescripcion()
- * public void setDescripcion(String descripcion)
+ * public String getCantidad()
+ * public void setCantidad(String cantidad)
  * 
  * public double getPeso()
  * public void setPeso()
@@ -56,28 +55,13 @@ public class Producto implements Cloneable, Comparable <Producto>
 	}
 	
 	//sobrecargado
-	public Producto(String nombre,double precio,Fecha fechaVenta,int cantidad,double peso) throws ExcepcionProducto 
+	public Producto(String nombre,double precio,Fecha fechaVenta,int cantidad,double peso)
 	{
-		if(precio<=0) 
-		{
-			throw new ExcepcionProducto("El precio no puede ser menor que cero");
-		}
-		else if(peso<=0) 
-		{
-			throw new ExcepcionProducto("El peso no puede ser menor o igul que cero");
-		}
-		else if(cantidad<=0) 
-		{
-			throw new ExcepcionProducto("La cantidad no puede ser menor que cero");
-		}
-		else 
-		{
-			this.nombre=nombre;
-			this.precio=precio;
-			this.fechaVenta=fechaVenta;
-			this.cantidad=cantidad;
-			this.peso=peso;
-		}
+		this.nombre=nombre;
+		this.precio=precio;
+		this.fechaVenta=fechaVenta;
+		this.cantidad=cantidad;
+		this.peso=peso;
 	}
 	
 	//de copia
@@ -85,7 +69,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		this.nombre=producto.getNombre();
 		this.precio=producto.getPrecio();
-		this.fechaVenta=producto.getFechaVenta();
+		this.fechaVenta=producto.fechaVenta;
 		this.cantidad=producto.getCantidad();
 		this.peso=producto.getPeso();
 	}
@@ -120,17 +104,35 @@ public class Producto implements Cloneable, Comparable <Producto>
 	
 	public Fecha getFechaVenta() 
 	{
+		fechaVenta.getDia();
+		fechaVenta.getMes();
+		fechaVenta.getAnio();
+		
 		return fechaVenta;
 	}
-	public void setFechaVenta(Fecha fechaVenta)
+	/*
+	//Patron delegacion
+	public int getFechaVentaDia() 
 	{
-		this.fechaVenta=fechaVenta;
+		return fechaVenta.getDia();
 	}
-	
+
+	public int getFechaVentatMes() 
+	{
+		return fechaVenta.getMes();
+	}
+
+	public int getFechaVentaAnio() 
+	{
+		return fechaVenta.getAnio();
+	}
+	//Fin Patron delegacion
+	*/
 	public int getCantidad() 
 	{
 		return cantidad;
 	}
+
 	public void setCantidad(int cantidad) throws ExcepcionProducto
 	{
 		if(cantidad<0) 
@@ -163,8 +165,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	@Override
 	public String toString() 
 	{
-		return ("Nombre: "+nombre+'\n'+"Precio: "+precio+" €"+'\n'+"Fecha de Venta: "+fechaVenta+'\n'+
-				"Cantidad en la tienda: "+cantidad+'\n'+"Peso: "+peso+" kg");
+		return (nombre+','+precio+" €"+','+fechaVenta+','+cantidad+','+peso+" kg");
 	}
 	
 	@Override
