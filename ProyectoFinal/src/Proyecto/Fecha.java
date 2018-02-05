@@ -73,9 +73,9 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	
 	public void setDia(int dia) throws ExcepcionFecha
 	{
-		if(dia<1) 
+		if(dia<0) 
 		{
-			throw new ExcepcionFecha("El dia tiene que ser mayor que 0");
+			throw new ExcepcionFecha("El dia tiene que ser mayor que 0 y dependiendo del mes puede tener maximo 28,29,30,31 dias");
 		}
 		else
 		{

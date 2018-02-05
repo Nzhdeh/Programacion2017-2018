@@ -77,10 +77,7 @@
 
 package Proyecto;
 
-//import java.io.*;
 import java.util.*;
-
-import javax.xml.bind.ValidationEvent;
 public class MainGestionTienda {
 
 	public static void main(String[] args) {
@@ -88,7 +85,7 @@ public class MainGestionTienda {
 		Scanner sc=new Scanner (System.in);
 		
 		//variables
-		int opcion=0,opcionDni=0, i=0;
+		int opcion=0,opcionDni=0, i=0,dia=0,mes=0,anio=0;
 		//char seguir=' ';
 		double venta=0.,precio=0.0,peso=0.0;
 		//int tam=0;
@@ -101,16 +98,18 @@ public class MainGestionTienda {
 		//int cantidad=0;
 		//boolean existe=false;
 		//Fecha fecha=new Fecha();
-		Fecha fechaIni=new Fecha();
-		Fecha fechaFin=new Fecha();
-		Fecha fechaVenta=new Fecha();
-		Fecha fechaNacimiento=new Fecha();
+		Fecha fechaIni=new Fecha(2,5,2000);
+		Fecha fechaFin=new Fecha(5,5,2005);
+		Fecha fechaVenta=new Fecha(2,5,2000);
+		Fecha fechaCompra=null;
+		Fecha fechaNacimiento=null;
 		
 		String incidencia = "";
 		String [] denuncia=null;
 		//Trabajador trabajador=new Trabajador();
 		String [] clienteDenuncia = new String[5];
 		ArrayList <Trabajador> trabajadorContratado = new ArrayList<Trabajador>();
+		Producto productoComprado=null;
 		Producto [] productoVendido=new Producto[10];
 		Producto [] arrayVendido = new Producto[10];
 		Producto [] producto={new Producto("Tarjeta de red",15.05,fechaVenta,10,0.3),new Producto("Disco DVD",1.20,fechaVenta,10,0.1),new Producto("Cable HDMI",3.50,fechaVenta,10,0.2)
@@ -151,13 +150,76 @@ public class MainGestionTienda {
 						{
 							case 1:
 								//calcular ventas 
-								venta=GestoraTienda.CalculaVenta(productoVendido, fechaIni, fechaFin);
+								//leer las fechas
+								System.out.println("Introduce La fecha de Inicio");
+								System.out.print("Dia: ");
+								try 
+								{
+									fechaIni.setDia(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								System.out.print("Mes: ");
+								try 
+								{
+									fechaIni.setMes(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								System.out.print("Anio: ");
+								try 
+								{
+									fechaIni.setAnio(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								
+								System.out.println("Introduce La fecha Final");
+								System.out.print("Dia: ");
+								try 
+								{
+									fechaFin.setDia(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								System.out.print("Mes: ");
+								try 
+								{
+									fechaFin.setMes(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								System.out.print("Anio: ");
+								try 
+								{
+									fechaFin.setAnio(sc.nextInt());
+								} catch (ExcepcionFecha ef) 
+								{
+									System.out.println(ef);
+								}
+								
+								//hacer el calculo de ventas
+								if(fechaIni.compareTo(fechaFin)==1) 
+								{
+									System.out.println("La fecha de Inicio no puede ser posterior que la fecha Final");
+								}else 
+								{
+									System.out.println("--------------------------------------------");
+									venta=GestoraTienda.CalculaVenta(producto, fechaIni, fechaFin);
 									
+									//Mostrar el resultado
+									System.out.println("Venta="+venta);
+								}
 								break;
 										
 							case 2:
 							//contratar un trabajador
-								
+								/*
 								//preguntar la cantidad de trabajadores y validar la respuesta
 								do 
 								{
@@ -169,13 +231,11 @@ public class MainGestionTienda {
 								if(cantidad>0) 
 								{
 									for(;i<cantidad;i++) 
-									{
+									{*/
 										sc.nextLine();//para limpiar el buffer
 										
 										System.out.println("Introduce el nombre: ");
 										nombre=sc.nextLine();
-										
-										//sc.nextLine();//para limpiar el buffer
 										
 										System.out.println("Introduce el apellido: ");
 										apellidos=sc.nextLine();
@@ -210,41 +270,31 @@ public class MainGestionTienda {
 													dni=sc.nextLine();
 													
 												}while(dni.length()!=9 ||  dni.charAt(0)<'a' || dni.charAt(0)>'z'
-														|| dni.charAt(i+1)<'0' || dni.charAt(i+1)>'9' || dni.charAt(8)<'a' || dni.charAt(8)>'z');
+														|| dni.charAt(i+1)<'0' || dni.charAt(i+1)>'9' || dni.charAt(8)<'a' || dni.charAt(8)>'z'
+														|| dni.charAt(i+2)<'0' || dni.charAt(i+2)>'9'
+														|| dni.charAt(i+3)<'0' || dni.charAt(i+3)>'9'
+														|| dni.charAt(i+4)<'0' || dni.charAt(i+4)>'9'
+														|| dni.charAt(i+5)<'0' || dni.charAt(i+5)>'9'
+														|| dni.charAt(i+6)<'0' || dni.charAt(i+6)>'9'
+														|| dni.charAt(i+7)<'0' || dni.charAt(i+7)>'9');
 	
 												break;
-										}
+										}//fin segun validar dni/nie
 										
 										System.out.println("Introduce el sexo: ");
 										sexo=sc.next().charAt(0);
 										
 										System.out.println("Introduce la fecha de nacimiento ");
 										System.out.println("Introduce el dia: ");
-										try 
-										{
-											fechaNacimiento.setDia(sc.nextInt());
-										} catch (ExcepcionFecha e) 
-										{
-											System.out.println(e);
-										}
+										dia=sc.nextInt();
 										
 										System.out.println("Introduce el mes: ");
-										try 
-										{
-											fechaNacimiento.setMes(sc.nextInt());
-										} catch (ExcepcionFecha e) 
-										{
-											System.out.println(e);
-										}
-										
+										mes=sc.nextInt();
+											
 										System.out.println("Introduce el anio: ");
-										try 
-										{
-											fechaNacimiento.setAnio(sc.nextInt());
-										} catch (ExcepcionFecha e) 
-										{
-											System.out.println(e);
-										}
+										anio=sc.nextInt();
+										
+										fechaNacimiento=new Fecha(dia,mes,anio);//se instancia la fecha aqui porque sino da un error
 										
 										//comprobar si la fecha es valida
 										try 
@@ -259,19 +309,19 @@ public class MainGestionTienda {
 										if(fechaValida==true) 
 										{
 											trabajadorContratado.add(new Trabajador(nombre,apellidos,dni,fechaNacimiento,sexo));
+											
+											//contratar al trabajador
+											contrataTrabajador=GestoraTienda.ContrataTrabajador(trabajadorContratado);
+											
+											//mostrar el resultado
+											System.out.println(contrataTrabajador);
 										}
 										else 
 										{
 											System.out.println("La fecha no es valida");
 										}
-									}//for caso 2
-									
-									//contratar al trabajador
-									contrataTrabajador=GestoraTienda.ContrataTrabajador(trabajadorContratado);
-									
-									//mostrar el resultado
-									System.out.println(contrataTrabajador);
-								}
+									//}//for caso 2
+								//}
 								
 								
 								break;
@@ -346,7 +396,38 @@ public class MainGestionTienda {
 						{
 							case 1:
 								//encargar productos nuevos
-								GestoraTienda.EncargaProductos(producto);
+								
+								//leer el producto
+								sc.nextLine();//para limpiar el buffer
+								System.out.println("--------------------------------------------------");
+								System.out.println("Introduce el nombre: ");
+								nombre=sc.nextLine();
+								
+								System.out.println("Introduce el precio: ");
+								precio=sc.nextDouble();
+								
+								System.out.println("Introduce la cantidad: ");
+								cantidad=sc.nextInt();
+								
+								System.out.println("Introduce la fecha de adquisicion ");
+								System.out.println("Introduce el dia: ");
+								dia=sc.nextInt();
+								
+								System.out.println("Introduce el mes: ");
+								mes=sc.nextInt();
+								
+								System.out.println("Introduce el anio: ");
+								anio=sc.nextInt();
+								
+								fechaCompra=new Fecha(dia,mes,anio);
+								
+								System.out.println("Introduce el peso: ");
+								peso=sc.nextDouble();
+								
+								productoComprado=new Producto(nombre,precio,fechaCompra,cantidad,peso);
+								
+								//hacer el encargo
+								GestoraTienda.EncargaProductos(productoComprado);/*******************************/
 								break;
 										
 							case 2:
@@ -423,31 +504,15 @@ public class MainGestionTienda {
 								
 								System.out.println("Introduce la fecha de venta ");
 								System.out.println("Introduce el dia: ");
-								try 
-								{
-									fechaVenta.setDia(sc.nextInt());
-								} catch (ExcepcionFecha e) 
-								{
-									System.out.println(e);
-								}
-								
+								dia=sc.nextInt();
+
 								System.out.println("Introduce el mes: ");
-								try 
-								{
-									fechaVenta.setMes(sc.nextInt());
-								} catch (ExcepcionFecha e) 
-								{
-									System.out.println(e);
-								}
+								mes=sc.nextInt();
 								
 								System.out.println("Introduce el anio: ");
-								try 
-								{
-									fechaVenta.setAnio(sc.nextInt());
-								} catch (ExcepcionFecha e) 
-								{
-									System.out.println(e);
-								}
+								anio=sc.nextInt();
+								
+								fechaVenta=new Fecha(dia,mes,anio);
 								
 								System.out.println("Introduce el peso: ");
 								peso=sc.nextDouble();								

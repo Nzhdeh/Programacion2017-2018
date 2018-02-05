@@ -342,19 +342,20 @@ public class GestoraTienda
 	postcondiciones: no hay,solo pinta por pantalla las incidencias
 	*/
 	
-	
+	/*
 	//resguardo
 	public static void ConsultaIncidencias(String [] denuncia)
 	{
-		//String incidencia="";
-		
-		//denuncia=AvisaIncidencias(incidencia);
+		System.out.println("En construccion");
+	}*/
+	
+	public static void ConsultaIncidencias(String [] denuncia)
+	{
 		for(int i=0;i<denuncia.length;i++) 
 		{
 			System.out.println(denuncia[i]);
 		}
 	}
-	
 	/***********************Corregido**************************/
 	
 	/*
@@ -375,13 +376,25 @@ public class GestoraTienda
 		System.out.println("En construccion");
 	}*/
 	
-	public static void EncargaProductos(Producto [] producto)
+	public static void EncargaProductos(Producto productoComprado)
 	{
-		Producto [] productoEncargado = new Producto[producto.length];
+		int cantidad;
+		int i=0;
+		Producto [] productoTienda = new Producto[15];
+		//cantidad=productoTienda[i].getCantidad();
 		
-		for(int i=0;i<producto.length;i++) 
+		for(;i<productoTienda.length;i++) 
 		{
-			productoEncargado[i]=producto[i];
+			/*if(productoTienda[i].getNombre()==productoComprado.getNombre()) 
+			{*/
+				try
+				{
+					productoTienda[i].setCantidad(productoTienda[i].getCantidad()+productoComprado.getCantidad());
+				} catch (ExcepcionProducto ep) 
+				{
+					System.out.println(ep);
+				}
+			//}
 		}
 	}
 	
