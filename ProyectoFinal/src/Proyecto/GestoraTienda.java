@@ -474,6 +474,7 @@ public class GestoraTienda
 		System.out.println("En construccion");
 	}*/
 	
+<<<<<<< HEAD
 	public void ConsultaIncidencias(Incidencia [] denuncia)
 	{
 		try 
@@ -483,13 +484,22 @@ public class GestoraTienda
 				System.out.println(denuncia[i]);
 			}
 		}catch(NullPointerException npe) 
+=======
+	public static void ConsultaIncidencias(String [] denuncia)
+	{
+		for(int i=0;i<denuncia.length;i++) 
+>>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
 		{
 			System.out.println("---------------------------------------");
 			System.out.println("No hay nada en el array");
 		}
 		
 	}
+<<<<<<< HEAD
 	
+=======
+	/***********************Corregido**************************/
+>>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
 	
 	/*
 	//interfaz
@@ -510,6 +520,7 @@ public class GestoraTienda
 		return productoTienda;
 	}*/
 	
+<<<<<<< HEAD
 	public static Producto [] EncargaProductos(Producto [] productosEnTienda,Producto productoParaTienda)
 	{
 		int i=0;
@@ -522,6 +533,27 @@ public class GestoraTienda
 				productosEnTienda[i]=(productoParaTienda);
 				comprar=true;
 			}
+=======
+	public static void EncargaProductos(Producto productoComprado)
+	{
+		int cantidad;
+		int i=0;
+		Producto [] productoTienda = new Producto[15];
+		//cantidad=productoTienda[i].getCantidad();
+		
+		for(;i<productoTienda.length;i++) 
+		{
+			/*if(productoTienda[i].getNombre()==productoComprado.getNombre()) 
+			{*/
+				try
+				{
+					productoTienda[i].setCantidad(productoTienda[i].getCantidad()+productoComprado.getCantidad());
+				} catch (ExcepcionProducto ep) 
+				{
+					System.out.println(ep);
+				}
+			//}
+>>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
 		}
 		
 		return productosEnTienda;
