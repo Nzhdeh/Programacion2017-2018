@@ -73,14 +73,15 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	
 	public void setDia(int dia) throws ExcepcionFecha
 	{
-		if(dia<1) 
-		{
-			throw new ExcepcionFecha("El dia tiene que ser mayor que 0");
-		}
-		else
-		{
-			this.dia=dia;
-		}
+		
+			if(dia>0 && dia<32) 
+			{
+				this.dia=dia;
+			}else 
+			{
+				throw new ExcepcionFecha("Dia incorrecto.");
+			}
+		
 	}
 	
 	public int getMes()
@@ -120,7 +121,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	@Override
 	public String toString()
 	{
-		return (dia+","+mes+" ,"+anio);
+		return (dia+"-"+mes+"-"+anio);
 	}
 	
 	

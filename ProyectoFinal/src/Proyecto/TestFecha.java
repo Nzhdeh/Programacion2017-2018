@@ -9,8 +9,7 @@ public class TestFecha
 			Fecha f2=new Fecha(15,2,2016);
 			Fecha copia=null;
 			
-		try 
-		{
+		try {
 			//prueba getters y setters
 			System.out.println("---------------------------------------------------");
 			System.out.println("Get y set:");
@@ -21,12 +20,10 @@ public class TestFecha
 			f1.setDia(32);
 			System.out.println("Cambiamos el dia: "+f1);
 			//fin
-		}
-		catch(ExcepcionFecha error) 
+		}catch(ExcepcionFecha ep) 
 		{
-			System.out.println(error);//podemos pintar un mensaje
+			
 		}
-		
 			//prueba toString
 			System.out.println("---------------------------------------------------");
 			System.out.println("To string:");

@@ -6,6 +6,7 @@
  * 						dni: tipo String,consultable, modificable
  * 						fechaNacimiento: tipo Fecha,consultable
  * 						sexo: tipo char,consultable,modificable
+ * 						CARGO: tipo TipoCargo,consultable
  * 
  * propiedades derivadas:no hay
  * 
@@ -32,6 +33,8 @@
  * public char getSexo()
  * public void setSexo(char sexo)
  * 
+ * public TipoCargo getCARGO()
+ * 
  * 
  */
 package Proyecto;
@@ -43,6 +46,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	private String dni;
 	private Fecha fechaNacimiento;
 	private char sexo;
+	private TipoCargo CARGO;
 	
 	//constructores 
 	//por defecto
@@ -53,16 +57,18 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		String dni=" ";
 		Fecha fechaNacimiento=null;
 		char sexo=' ';
+		TipoCargo CARGO=null;
 	}
 	
 	//sobrecargado
-	public Trabajador(String nombre,String apellidos,String dni,Fecha fechaNacimiento,char sexo)
+	public Trabajador(String nombre,String apellidos,String dni,Fecha fechaNacimiento,char sexo,TipoCargo CARGO)
 	{
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.dni=dni;
 		this.fechaNacimiento=fechaNacimiento;
 		this.sexo=sexo;
+		this.CARGO=CARGO;
 	}
 	
 	//de copia
@@ -73,6 +79,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		this.dni=trabajador.getDni();
 		this.fechaNacimiento=trabajador.fechaNacimiento;
 		this.sexo=trabajador.getSexo();
+		this.CARGO=trabajador.getCARGO();
 	}
 	
 	//getters y setters
@@ -125,6 +132,12 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 			this.dni = dni;
 		}
 	}
+	
+	public TipoCargo getCARGO() 
+	{
+		return CARGO;
+	}
+	
 	
 	//patron delegacion
 	public int getFechaNacimientoDia() 
@@ -179,7 +192,7 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	@Override
 	public String toString() 
 	{
-		return (getNombre()+','+getApellidos()+','+getDni()+','+getFechaNacimientoDia()+"-"+getFechaNacimientoMes()+"-"+getFechaNacimientoAnio()
+		return (getNombre()+','+getApellidos()+','+getDni()+','+getCARGO()+','+getFechaNacimientoDia()+"-"+getFechaNacimientoMes()+"-"+getFechaNacimientoAnio()
 				+','+getSexo());
 	}
 	

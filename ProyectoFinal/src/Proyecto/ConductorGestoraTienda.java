@@ -1,61 +1,127 @@
 
 package Proyecto;
 
-public class ConductorGestoraTienda{
+import java.util.ArrayList;
 
-	public static void main(String[] args) throws ExcepcionTrabajador, ExcepcionFecha{
+public class ConductorGestoraTienda
+{
+	public static void main(String[] args) throws ExcepcionTrabajador, ExcepcionFecha
+	{
+		int i=0;
+		String nombre="",dni="";
+		GestoraTienda gt=new GestoraTienda();
 		
-		//Fecha fechaVenta=new Fecha(20,1,2017);
-		//Fecha fecha=new Fecha(16,1,2017);
-		Fecha fecha1=new Fecha(31,1,2017);
-		Fecha fecha2=new Fecha(5,1,2017);
-		Fecha fecha3=new Fecha(25,1,2017);
-		Fecha fecha4=new Fecha(16,5,2017);
-		Fecha fecha5=new Fecha(7,5,2016);
-		Fecha fecha6=new Fecha(1,1,2017);
+		Fecha fechaVenta1=new Fecha(31,1,2017);
+		Fecha fechaVenta2=new Fecha(5,1,2017);
+		Fecha fechaNacimiento=new Fecha(16,1,1991);
 		
 		Fecha fechaIni=new Fecha(1,1,2017);
 		Fecha fechaFin=new Fecha(31,1,2017);
-		//String dni1="00000000A";
-		//String dni2="25413698Z";
-		//String nombre="Tarjeta de red";
-		//Trabajador trabajador= new Trabajador("Nzhdeh","Yeghiazaryan","00000000A",fecha1,'v');
-		Trabajador [] trabajador=  {new Trabajador("Nzhdeh","Yeghiazaryan","00000000A",fecha1,'v'),
-									new Trabajador("Luis","Zumarraga","11100000A",fecha2,'v')};
-		//Trabajador [] t= new Trabajador[10];
-		/*Producto [] producto={new Producto("Tarjeta de red",15.05,fecha,8,0.3),new Producto("Disco CD",1.20,fecha,9,0.1),new Producto("Cable HDMI",3.50,fecha,10,0.2)
-							 ,new Producto("Placa base",100,fecha,10,0.7),new Producto("Disco duro SSD",80,fecha,6,0.1),new Producto("Procesador i5",180,fecha,10,0.2)
-							 ,new Producto("Tarjeta de red",30,fecha,5,0.3),new Producto("Disco CD",1.20,fecha,7,0.1),new Producto("Cable DVI",1.50,fecha,10,0.2)
-							 ,new Producto("Placa base",120,fecha,10,0.7),new Producto("Disco duro m.2",140,fecha,10,0.1),new Producto("Procesador i5",180,fecha,10,0.2)
-							 ,new Producto("Fuente de alimentacion",60.50,fecha,10,1.0),new Producto("Disco duro m.2",140,fecha,5,0.1),new Producto("Procesador i3",180,fecha,10,0.2)
-							 };*/
 		
-			//System.out.println(trabajador.length);
-		/*
-		Producto [] productosVendidos={new Producto("Tarjeta de red",15.05,fecha1,8,0.3),new Producto("Disco CD",1.20,fecha2,9,0.1),
-							  new Producto("Cable HDMI",3.50,fecha3,10,1.0),new Producto("Placa base",100,fecha4,10,0.7),
-							  new Producto("Tarjeta de red",33.48,fecha5,7,0.5),new Producto("Cable USB",1.25,fecha6,7,0.2)
-							 };*/
+		Producto p1=new Producto ("cd",2.4,fechaVenta1,10,0.1);
+		Producto p2= new Producto("usb",2.4,fechaVenta2,10,0.2);
 		
-		//GestoraTienda.MenuPrincipal();
-		//GestoraTienda.MenuJefe();
-		//GestoraTienda.MenuEncargado();
-		//GestoraTienda.MenuTrabajador();
-		//GestoraTienda.pintaProductos(producto);
-		//System.out.println(GestoraTienda.CalculaVenta(productosVendidos, fechaIni, fechaFin));
-		//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
-		//nombre="usb 3.0";
-		//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
-		//System.out.println(GestoraTienda.ExisteTrabajador(trabajador, dni1));
-		//System.out.println(GestoraTienda.ExisteTrabajador(trabajador, dni2));
-		//System.out.println(GestoraTienda.ContrataTrabajador(trabajador));
-		//GestoraTienda.ConsultarTrabajadorContratado(trabajador);
-		//System.out.println(GestoraTienda.DespideTrabajador(tarbajador));
-		//GestoraTienda.ConsultaIncidencias();
-		//GestoraTienda.EncargaProductos();
-		//GestoraTienda.AvisaIncidencias(trabajador);
-		//System.out.println(GestoraTienda.VendeProducto(producto, nombre, fechaVenta));
-		//GestoraTienda.DevuelveProducto(producto, nombre, fechaVenta);
-		//System.out.println(GestoraTienda.ContrataTrabajador(trabajador));
+		Producto [] productosVendidos=new Producto[20];
+		Producto [] producto=new Producto[20];
+		producto[0]=(p1);
+		producto[1]=(p2);
+		
+		productosVendidos[0]=(p1);
+		productosVendidos[1]=(p2);
+		
+		Trabajador t1=new Trabajador("Nzhdeh","Yeghiazaryan","X9923978F",fechaNacimiento,'V',TipoCargo.ENCARGADO);
+		Trabajador t2=new Trabajador("Luis","Zumarraga","00000000T",fechaNacimiento,'V',TipoCargo.VENDEDOR);
+		Trabajador [] contrataTrabajador=new Trabajador[20];
+		contrataTrabajador[0]=(t1);
+		contrataTrabajador[1]=(t2);
+		//dni=contrataTrabajador.get(i).getDni();
+		dni="X9923979F";
+		Incidencia [] inci=new Incidencia[5];
+		Incidencia denuncia1=new Incidencia("El pan esta duro");
+		Incidencia denuncia2=new Incidencia("Denuncia");
+		inci[0]=denuncia1;
+		inci[1]=denuncia2;
+		
+		Producto [] productoComprado=new Producto[20];
+		productoComprado[0]=(p1);
+		productoComprado[1]=(p2);	
+		
+		Producto [] arrayVendido=new Producto[20];
+		arrayVendido[0]=(p1);
+		
+//		GestoraTienda.MenuPrincipal();
+//		GestoraTienda.MenuJefe();
+//		GestoraTienda.MenuEncargado();
+//		GestoraTienda.MenuTrabajador();
+		GestoraTienda.PintaProductos(producto);
+//		try 
+//		{
+//			System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
+//		} catch (ExcepcionProducto e) 
+//		{
+//			System.out.println(e+": Producto no encontrado");
+//		}
+//		nombre="usb";
+//		try 
+//		{
+//			System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
+//		} catch (ExcepcionProducto e) 
+//		{
+//			System.out.println(e+": Producto no encontrado");
+//		}
+		
+//		System.out.println(GestoraTienda.CalculaVenta(productosVendidos, fechaIni, fechaFin));	
+//		System.out.println(GestoraTienda.ExisteTrabajador(contrataTrabajador, dni));
+//		System.out.println(GestoraTienda.ContrataTrabajador(contrataTrabajador));
+//		GestoraTienda.ConsultarTrabajadorContratado(contrataTrabajador);
+//		dni="X9923978F";
+//		GestoraTienda.DespideTrabajador(contrataTrabajador, dni);
+//		GestoraTienda.ConsultarTrabajadorContratado(contrataTrabajador);
+//		gt.ConsultaIncidencias(inci);
+//		System.out.println(GestoraTienda.EncargaProductos(productoComprado,p1));
+//		System.out.println(gt.AvisaIncidencias(denuncia1, inci));
+//		System.out.println(gt.EliminarIncidencia(inci, 1));
+//		System.out.println(gt.EliminarIncidencia(inci, 1));
+//		GestoraTienda.ConsultarProductosTienda(productoComprado);
+//		try 
+//		{
+//			System.out.println(GestoraTienda.VendeProducto(productoComprado,p1,arrayVendido));
+//		} catch (ExcepcionProducto e) 
+//		{
+//			System.out.println(e+": No hay productos");
+//		}
+//		try 
+//		{
+//			GestoraTienda.DevuelveProducto(arrayVendido,p1, productoComprado);
+//		} catch (ExcepcionProducto e) 
+//		{
+//			System.out.println(e+": No existe");
+//		}catch (IndexOutOfBoundsException e) 
+//		{
+//			System.out.println("Array vacio");
+//		}
+//		try 
+//		{
+//			System.out.println(GestoraTienda.ValidarDNI("15674732"));
+//		}catch(NumberFormatException e) 
+//		{
+//			System.out.println(e+": No valido");
+//		}
+//		
+//		try 
+//		{
+//			System.out.println(GestoraTienda.ValidarNIE("X9923978F"));
+//		}catch(NumberFormatException e) 
+//		{
+//			System.out.println(e+": No valido");
+//		}
+		
+//		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923978F"));
+//		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923979F"));
+//		System.out.println(gt.ExisteEncargado(contrataTrabajador));
+//		System.out.println(gt.ExisteEncargado(contrataTrabajador));
+		
+		
+		
 	}
 }

@@ -9,8 +9,8 @@ public class TestTrabajador
 		Fecha fecha1=new Fecha(15,2,1999);
 		Fecha fecha2=new Fecha(10,3,1991);
 		
-		Trabajador t1=new Trabajador("Tomas","Zumarraga","26584475A",fecha1,'V');
-		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V');
+		Trabajador t1=new Trabajador("Tomas","Zumarraga","26584475A",fecha1,'V', null);
+		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V',null);
 		Trabajador copia=null;
 			
 		
@@ -46,7 +46,13 @@ public class TestTrabajador
 			System.out.println("To string:");
 			System.out.println(t2.toString());
 			//fin
-			
+			/*
+			//prueba toString bonito
+			System.out.println("---------------------------------------------------");
+			System.out.println("To string bonito:");
+			System.out.println(t2.toStringNombreApellidos());
+			//fin
+			*/
 			//prueba clone
 			System.out.println("---------------------------------------------------");
 			System.out.println("Clone:");

@@ -2,7 +2,7 @@ package Proyecto;
 import java.util.*;
 public class GestoraTienda 
 {	
-	
+	static Scanner sc=new Scanner(System.in);
 	/*
 	//interfaz
 	prototipo: public static void MenuPrincipal()
@@ -54,7 +54,8 @@ public class GestoraTienda
 			System.out.println("Pulsar 2 para contratar un trabajador ");
 			System.out.println("Pulsar 3 para despedir a un trabajador ");
 			System.out.println("Pulsar 4 para la lista de trabajadores ");
-			System.out.print("Pulsar 5 para consultar incidencias: ");
+			System.out.println("Pulsar 5 para consultar incidencias: ");
+			System.out.print("Pulsar 6 para generar nomina: ");
 	}
 	
 	/*
@@ -80,7 +81,8 @@ public class GestoraTienda
 			System.out.println("Pulsar 0 para Salir ");
 			System.out.println("Pulsar 1 para encargar productos nuevos ");
 			System.out.println("Pulsar 2 para avisar sobre una incidecia ");
-			System.out.print("Pulsar 3 para consultar productos en la tienda: ");
+			System.out.println("Pulsar 3 para consultar productos en la tienda");
+			System.out.print("Pulsar 4 para eliminar la incidencia: ");
 	}
 	
 	/*
@@ -108,36 +110,120 @@ public class GestoraTienda
 			System.out.print("Pulsar 2 para hacer una devolucion: ");
 	}
 	
+	/*
+	//interfaz
+	prototipo: public Fecha LeerValidarFecha() 
+	comentario:sirve para leer y validar una fecha
+	precondiciones:no hay
+	entradas:no hay
+	salidas:una fecha
+	entr/sal:no hay
+	postcondiciones:AN devolvera la fecha
+	*/
+	/*
+	//resguardo
+	public Fecha LeerValidarFecha() 
+	{
+		Fecha f=null;
+		System.out.println("En construccion");
+		return f;
+	}*/
+	
+	public Fecha LeerValidarFecha() 
+	{
+		boolean repetir=false;
+		Fecha f=new Fecha();
+		
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el dia: ");
+			try 
+			{
+				f.setDia(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+				//sc.nextLine();
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero");
+				sc.nextLine();
+			}
+		}
+		
+		
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el mes: ");
+			try 
+			{
+				f.setMes(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+				//sc.nextLine();
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero");
+				sc.nextLine();
+			}
+		}
+		
+		
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el anio: ");
+			try 
+			{
+				f.setAnio(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+				//sc.nextLine();
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero");
+				sc.nextLine();
+			}
+		}
+		return f;
+	}
 
 	/*
 	 Interfaz
-	 prototipo: public void PintaProductos(Producto [] producto)
+	 prototipo: public static void PintaProductos(Producto [] productosEnTienda)
 	 Precondiciones: nada
 	 Entradas: un array de productos
 	 Salidas: nada
 	 Entr/sal: nada
-	 Postcondiciones:pintara por pantalla los los nombres,los precios y las cantidades de los productos
+	 Postcondiciones:pintara por pantalla los productos en la tienda
 	 */
 	
 	//resguardo
 	/*
-	public static void PintaProductos(Producto [] producto)
+	public static void PintaProductos(Producto [] productosEnTienda)
 	{
-		int cont=0;
 		System.out.println("En construccion");
-		return cont;
-		
 	}*/
 	
-	public static void PintaProductos(Producto [] producto)
+	public static void PintaProductos(Producto [] productosEnTienda)
 	{
-		for(int i=0;i<producto.length;i++)
+		try 
 		{
-			System.out.println("------------------------------------------------");
-			/*System.out.println((i+1)+"-"+producto[i].getNombre()+" , "+producto[i].getPrecio()+
-					" €, "+producto[i].getCantidad()+" , "+producto[i].getPeso()+" kg");*/
-			
-			System.out.println(producto[i].toString());
+			for(int i=0;i<productosEnTienda.length && productosEnTienda[i]!=null;i++)
+			{
+				System.out.println("------------------------------------------------");
+				System.out.println(productosEnTienda[i].toString());
+			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println(npe+": No hay productos en la tienda");
 		}
 	}
 	
@@ -145,7 +231,7 @@ public class GestoraTienda
 	//interfaz
 	prototipo: public static boolean ExsisteProducto(Producto [] producto,String nombre)
 	comentario: sirve para ver si el producto que quieremos vender esta en la tienda
-	precondiciones: el array tiene que tener al menos un producto
+	precondiciones: No hay
 	entradas:un array de Productos,nombre del producto
 	salidas: logico
 	entr/sal:no hay
@@ -163,27 +249,34 @@ public class GestoraTienda
 	public static boolean ExisteProducto(Producto [] producto,String nombre) throws ExcepcionProducto
 	{
 		boolean existe=false;
-		for(int i=0; i<producto.length;i++){
-			if(producto[i].getNombre().equalsIgnoreCase(nombre)==true){
-				existe=true;
+		try 
+		{
+			for(int i=0; i<producto.length && existe==false;i++){
+				if(producto[i].getNombre().equalsIgnoreCase(nombre)==true){
+					existe=true;
+				}
 			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println("No hay productos disponibles");
 		}
+		
 		return existe;		
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static double CalculaVenta(Producto [] producto,Fecha fechaIni,Fecha fechaFin)
+	prototipo: public static double CalculaVenta (Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	comentario:sirve para calcular los gastos de un periodo de una tienda
-	precondiciones: las fechas introducidas son correctas y el array lleno
-	entradas: Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin
+	precondiciones: las fechas introducidas son correctas
+	entradas: un array de productosVendidos,Fecha fechaIni,Fecha fechaFin
 	salidas:double ventas
 	entr/sal:no hay
 	postcondiciones:AN devolvera las ventas de un periodo de fechas.
 	*/
 	/*
 	//resguardo
-	public static double CalculaVenta(Producto [] producto,Fecha fechaIni,Fecha fechaFin)
+	public static double CalculaVenta (Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	{
 		System.out.println("En construccion");
 		return 1;
@@ -193,91 +286,111 @@ public class GestoraTienda
 	{
 		int i=0;
 		double venta=0.;
+		double precio=0.0;
 		
+		try 
+		{
 			for(;i<productosVendidos.length;i++) 
 			{
-				Producto producto = productosVendidos[i];
-				Fecha fechaVenta = producto.getFechaVenta();
+				Fecha fechaVenta = productosVendidos[i].getFechaVenta();
 				
 				if((fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) ||
 				   (fechaVenta.compareTo(fechaIni)==(-1) && fechaVenta.compareTo(fechaFin)==1) ||
 				   (fechaVenta.compareTo(fechaIni)==0 || fechaVenta.compareTo(fechaFin)==0)) 
 				{
-					venta+=productosVendidos[i].getPrecio();
+					precio=productosVendidos[i].getPrecio()*productosVendidos[i].getCantidad();
+					venta+=precio;
 				}
 			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println(npe+"No hay productos guardados");
+		}
 		return venta;
 	}
 
 	/*
 	//interfaz
-	prototipo: public static boolean ExisteTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni)
+	prototipo: public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
 	comentario: sirve para ver si el trabajador exciste
-	precondiciones: array lleno
-	entradas:un ArrayList de Trabajadores
+	precondiciones: no hay
+	entradas:un array de Trabajadores,el dni 
 	salidas: logico
 	entr/sal:no hay
 	postcondiciones:AN devolvera true si el trabajador existe, false en caso contrario.
 	*/
 	/*
 	//resguardo
-	public static boolean ExisteTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni) throws ExcepcionTrabajador
+	public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
 	{
 		boolean exsiste=false;
 		System.out.println("En construccion");
 		return exsiste;
 	}*/
 	
-	public static boolean ExisteTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni) throws ExcepcionTrabajador
+	public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
 	{
 		boolean existe=false;
-		for(int i=0; i<contrataTrabajador.size() /*&& existe==false*/;i++){
-			if(contrataTrabajador.get(i).getDni().equalsIgnoreCase(dni)==true){
-				existe=true;
+		try 
+		{
+			for(int i=0; i<contrataTrabajador.length && existe==false;i++){
+				if(contrataTrabajador[i].getDni().equalsIgnoreCase(dni)==true){
+					existe=true;
+				}
 			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println("No hay ningun trabajador guardado");
 		}
+		
 		return existe;		
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static ArrayList<Trabajador> ContrataTrabajador(ArrayList<Trabajador> trabajador)
-	comentario: este metodo sirve para simular a contratar un trabajador
+	prototipo: public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t)
+	comentario: este metodo sirve para simular incerta a un trabajador en el sistema
 	precondiciones: no hay
-	entradas: un ArrayList de trabajadores
-	salidas: un ArrayList de trabajadores
-	entr/sal:no hay
-	postcondiciones:AN devolvera a los trabajadores contratados
+	entradas: un objeto trabajador
+	salidas: no hay
+	entr/sal:un array de trabajadores
+	postcondiciones: AN devolvera a los trabajadores contratados
 	*/
 	
 	/*
 	//resguardo
-	public static ArrayList<Trabajador> ContrataTrabajador(ArrayList<Trabajador> trabajador)
+	public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t)
 	{
-		ArrayList <Trabajador> trabajadorContratado=new ArrayList <Trabajador>();
 		System.out.println("En construccion");
 		return trabajadorContratado;
 	}*/
 	
-	public static ArrayList<Trabajador> ContrataTrabajador(ArrayList<Trabajador> trabajador)
+	public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t)
 	{
-		ArrayList <Trabajador> trabajadorContratado=new ArrayList <Trabajador>();
+		boolean contratado=false;
 		
-		for(int i=0;i<trabajador.size();i++) 
+		for(int i=0;i<trabajadorContratado.length && contratado==false;i++) 
 		{
-			trabajadorContratado.add(trabajador.get(i));
+			if(trabajadorContratado[i]==null) 
+			{
+				trabajadorContratado[i]=t;
+				contratado=true;
+			}
 		}
-		
+		int i=0;
+		if(i==trabajadorContratado.length && contratado==false) 
+		{
+			System.out.println("Array lleno");
+		}
 		return trabajadorContratado;
 	}
 	
-	
 	/*
 	//interfaz
-	prototipo: public static void ConsultarTrabajadorContratado(ArrayList<Trabajador> trabajadorContratado)
+	prototipo: public static void ConsultarTrabajadorContratado(Trabajador [] trabajadorContratado)
 	comentario: este metodo sirve para ver a todos los trabajadores contratados
 	precondiciones: El array debe tener al menos un trabajador
-	entradas: un ArrayList de trabajadores
+	entradas: un array de trabajadores
 	salidas: no hay
 	entr/sal:no hay
 	postcondiciones:No hay, solo pinta la lista de trabajadores
@@ -285,229 +398,471 @@ public class GestoraTienda
 	
 	/*
 	//resguardo
-	public static void ConsultarTrabajadorContratado(ArrayList<Trabajador> trabajadorContratado)
+	public static void ConsultarTrabajadorContratado(Trabajador [] trabajadorContratado)
 	{
 		System.out.println("En construccion");
 	}*/
-	public static void ConsultarTrabajadorContratado(ArrayList<Trabajador> trabajadorContratado)
+	
+	public static void ConsultarTrabajadorContratado(Trabajador [] trabajadorContratado)
 	{
-		for(int i=0;i<trabajadorContratado.size();i++) 
+		for(int i=0;i<trabajadorContratado.length && trabajadorContratado[i]!=null;i++) 
 		{
 			System.out.println("------------------------------------------------");
-			System.out.println(trabajadorContratado.get(i));
+			System.out.println(trabajadorContratado[i]);
 		}
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static void DespideTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni) 
+	prototipo: public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni) 
 	comentario:este metodo simula la despedida de un trabajador
-	precondiciones: el array lleno
-	entradas: ArrayList de trabajadores
-	salidas: no hay
+	precondiciones: no hay
+	entradas: array de trabajadores
+	salidas: logico
 	entr/sal: no hay
-	postcondiciones:nada
+	postcondiciones: AN devolvera true si el trabajador se ha eliminado y false si no.
 	*/
 	
 	/*
 	//resguardo
-	public static void DespideTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni) 
+	public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni)
 	{
 		ArrayList <Trabajador> tarbajador=new ArrayList <Trabajador>();
 		System.out.println("En construccion");
 		return tarbajador;
 	}*/
 	
-	public static void DespideTrabajador(ArrayList<Trabajador> contrataTrabajador,String dni) throws ExcepcionTrabajador
+	public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
 	{
-		for(int i=0;i<contrataTrabajador.size();i++) 
+		boolean resultado=false;
+		try 
 		{
-			if(contrataTrabajador.get(i).getDni().equals(dni)) 
+			for(int i=0;i<contrataTrabajador.length && resultado==false;i++) 
 			{
-				contrataTrabajador.remove(i);
+				if(contrataTrabajador[i].getDni().equals(dni)) 
+				{
+					for (int j=i;j<contrataTrabajador.length-1;j++) 
+					{
+						contrataTrabajador[j]=contrataTrabajador[j+1];
+					}
+					contrataTrabajador[contrataTrabajador.length-1]=null;
+					resultado=true;
+				}
 			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println(npe+": Array vacio");
 		}
-		//return contrataTrabajador;
+		return resultado;
 	}
-	
 	
 	/*
 	//interfaz
-	prototipo: public static void ConsultaIncidencias()
-	comentario:este metodo sirve para consultar el libro de quejas
+	prototipo: public static void ConsultaIncidencias(Incidencia [] denuncia))
+	comentario:este metodo sirve para consultar las incidencias
 	precondiciones: no hay
-	entradas: un array
+	entradas: un array de objeto Incidencia
 	salidas: no hay
 	entr/sal: no hay
 	postcondiciones: no hay,solo pinta por pantalla las incidencias
 	*/
 	
-	
-	//resguardo
-	public static void ConsultaIncidencias(String [] denuncia)
-	{
-		//String incidencia="";
-		
-		//denuncia=AvisaIncidencias(incidencia);
-		for(int i=0;i<denuncia.length;i++) 
-		{
-			System.out.println(denuncia[i]);
-		}
-	}
-	
-	/***********************Corregido**************************/
-	
-	/*
-	//interfaz
-	prototipo: public static void EncargaProductos()
-	comentario:este metodo sirve para rellenar el almacen de productos
-	precondiciones: 
-	entradas: 
-	salidas: 
-	entr/sal:
-	postcondiciones:
-	*/
-	
 	/*
 	//resguardo
-	public static void EncargaProductos()
+	public static void ConsultaIncidencias(Incidencia [] denuncia))
 	{
 		System.out.println("En construccion");
 	}*/
 	
-	public static void EncargaProductos(Producto [] producto)
+	public void ConsultaIncidencias(Incidencia [] denuncia)
 	{
-		Producto [] productoEncargado = new Producto[producto.length];
-		
-		for(int i=0;i<producto.length;i++) 
+		try 
 		{
-			productoEncargado[i]=producto[i];
+			for(int i=0;i<denuncia.length && denuncia[i]!=null;i++) 
+			{
+				System.out.println(denuncia[i]);
+			}
+		}catch(NullPointerException npe) 
+		{
+			System.out.println("---------------------------------------");
+			System.out.println("No hay nada en el array");
 		}
+		
+	}
+	
+	
+	/*
+	//interfaz
+	prototipo: public static Producto [] EncargaProductos(Producto [] productosEnTienda,Producto productoParaTienda)
+	comentario:este metodo sirve para rellenar el almacen de productos
+	precondiciones: no hay
+	entradas:  un objeto Producto
+	salidas: no hay
+	entr/sal: array de productos
+	postcondiciones: AN devolvera un array de productos 
+	*/
+	
+	/*
+	//resguardo
+	public static Producto [] EncargaProductos(Producto [] productosEnTienda,Producto productoParaTienda)
+	{
+		System.out.println("En construccion");
+		return productoTienda;
+	}*/
+	
+	public static Producto [] EncargaProductos(Producto [] productosEnTienda,Producto productoParaTienda)
+	{
+		int i=0;
+		boolean comprar=false;
+		
+		for(;i<productosEnTienda.length && comprar==false;i++) 
+		{
+			if(productosEnTienda[i]==null) 
+			{
+				productosEnTienda[i]=(productoParaTienda);
+				comprar=true;
+			}
+		}
+		
+		return productosEnTienda;
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static void AvisaIncidencias()
-	comentario:este metodo sirve para rellenar el almacen de productos
+	prototipo: public Incidencia [] AvisaIncidencias(Incidencia incidencia,Incidencia [] clienteDenuncia )
+	comentario:este metodo sirve para avisar qualquier incidencia
 	precondiciones: No hay
-	entradas: un array de cadenas
-	salidas: un array de cadenas
+	entradas: un objeto,y un array
+	salidas: un array de objeto Incidencia
 	entr/sal:no hay
 	postcondiciones:AN devolvera el array de incidencias
 	*/
 	
 	/*
 	//resguardo
-	public static void AvisaIncidencias()
+	public Incidencia [] AvisaIncidencias(Incidencia incidencia,Incidencia [] clienteDenuncia )
 	{
 		System.out.println("En construccion");
+		return clienteDenuncia[0];
 	}*/
 	
-	public static String [] AvisaIncidencias(String [] clienteDenuncia)
-	{
-		String [] denuncia = new String [5];
+	public Incidencia [] AvisaIncidencias(Incidencia incidencia,Incidencia [] clienteDenuncia )
+	{	
+		boolean insertado=false;
 		
-		for(int i=0;i<clienteDenuncia.length;i++) 
+		for(int i=0;i<clienteDenuncia.length && insertado==false;i++) 
 		{
-			denuncia[i]=clienteDenuncia[i];
+			if(clienteDenuncia[i]==null) 
+			{
+				clienteDenuncia[i]=incidencia;
+				insertado=true;
+			}
+		}
+		if(insertado==false) 
+		{
+			System.out.println("Array lleno. No se puede incertar mas incidencias.");
 		}
 		
-		return denuncia;
+		return clienteDenuncia;
 	}
-	
+
 	/*
 	//interfaz
-	prototipo: public static void ConsultarProductosTienda(Producto [] producto)
-	comentario:sirve para consultar los productos en la tienda
+	prototipo: public boolean EliminarIncidencia(Incidencia [] clienteDenuncia,int idIncidencia) 
+	comentario:este metodo sirve para eliminar las incidencias 
 	precondiciones: no hay
-	entradas: un array de producto
-	salidas: no hay
+	entradas: un entero y un array de incidencia
+	salidas: logico
 	entr/sal:no hay
-	postcondiciones:no hay, solo pinta en pantalla
+	postcondiciones:AN true si se ha eliminado ,false en caso contrario
 	*/
+	
 	/*
 	//resguardo
-	public static void ConsultarProductosTienda(Producto [] producto) 
+	public boolean EliminarIncidencia(Incidencia [] clienteDenuncia,int idIncidencia) 
 	{
 		System.out.println("En construccion");
+		return true;
 	}*/
 	
-	public static void ConsultarProductosTienda(Producto [] producto) 
+	public boolean EliminarIncidencia(Incidencia [] denuncia,int idIncidencia) 
 	{
-		for(int i=0;i<producto.length;i++) 
-		{
-			System.out.println(producto[i]);
-		}
-	}
-	
+        boolean resultado = false;
+       
+        try 
+    	{
+	        for (int i = 0; i < denuncia.length && resultado==false; i++) 
+	        {
+	    		 if (denuncia[i].getId() == idIncidencia) 
+	             {
+	                 for (int j = i; j < denuncia.length - 1; j++) 
+	                 {
+	                 	denuncia[j] = denuncia[j+1];
+	                 }
+	                 denuncia[denuncia.length - 1] = null;
+	                 resultado = true;
+	             }
+	        }
+    	}catch(NullPointerException npe) 
+    	{
+    		System.out.println("Elemento no encontrado");
+    	}
+        return resultado;
+    }	
 	
 	/*
 	//interfaz
-	prototipo: public static Producto [] VendeProducto(Producto [] producto,int cantidad)
+	prototipo: public static Producto [] VendeProducto(Producto [] productos,Producto producto,Producto [] arrayVendido)
 	comentario: sirve para vender un producto
-	precondiciones: El producto tiene que estar en la tienda
-	entradas: un array de producto y la cantidad a vender
-	salidas: un array de producto
-	entr/sal:no hay
+	precondiciones: no hay
+	entradas: un objeto producto
+	salidas: no hay
+	entr/sal: un array de producto
 	postcondiciones:AN devolvera el array de productos vendidos
 	*/
 	
 	/*
 	//resguardo
-	public static Producto [] VendeProducto(Producto [] producto,int cantidad)
+	public static Producto [] VendeProducto(Producto [] productos,Producto producto,Producto [] arrayVendido)
 	{
 		System.out.println("En construccion");
-		return producto;
+		return arrayVendido[0];
 	}*/
 	
-	public static Producto [] VendeProducto(Producto [] producto,int cantidad) throws ExcepcionProducto
+	public static Producto [] VendeProducto(Producto [] productos,Producto producto,Producto [] arrayVendido) throws ExcepcionProducto
 	{
-		Producto [] productoVendido=new Producto[10];
+		int i=0;
 		
-		for(int i=0;i<producto.length;i++)
+		if(productos[i]==null) 
 		{
-	    	productoVendido[i]=producto[i];
-	    	producto[i].setCantidad(producto[i].getCantidad()-cantidad);
+			throw new ExcepcionProducto("No hay productos");
+		}else
+		{
+			arrayVendido[i]=(new Producto(producto));
+			productos[i].setCantidad(productos[i].getCantidad()-producto.getCantidad());
 		}
-		return productoVendido;
+		return arrayVendido;
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static Producto [] DevuelveProducto(Producto [] productoVendido,int cantidad)
+	prototipo: public static void DevuelveProducto(Producto [] arrayVendido,Producto productoDevolucion,Producto[] productosEnTienda)
 	comentario:sirve para devolver los productos vendidos
 	precondiciones: El producto tiene que haberse vendido antes
-	entradas: un array de producto,y la cantidad a devolver
-	salidas: un array de producto
+	entradas: dos arrays de producto,y un objeto Producto
+	salidas: no hay
 	entr/sal:no hay
-	postcondiciones:AN devolvera 1 si se ha hecho la devolucion si no -1 .
+	postcondiciones:No hay
 	*/
 	
 	/*
 	//resguardo
-	public static Producto [] DevuelveProducto(Producto [] productoVendido,int cantidad)
+	public static void DevuelveProducto(ArrayList <Producto> arrayVendido,Producto productoDevolucion,ArrayList <Producto> producto)
 	{
 		System.out.println("En construccion");
+		return 1;
 	}*/
 	
-	public static int DevuelveProducto(Producto [] productoVendido,int cantidad) throws ExcepcionProducto 
+	public static void DevuelveProducto(Producto [] arrayVendido,Producto productoDevolucion,Producto[] productosEnTienda) throws ExcepcionProducto 
 	{
-		int devuelto=0;
+		//int devuelto=0;
 		int i=0;
-		Producto [] producto=new Producto[10];
 		
-		for(;i<productoVendido.length;i++)
+		arrayVendido[i].setCantidad(arrayVendido[i].getCantidad()-productoDevolucion.getCantidad());
+		productosEnTienda[i].setCantidad(productosEnTienda[i].getCantidad()+productoDevolucion.getCantidad());
+	}
+	
+	/*
+	//interfaz
+	prototipo: public static char ValidarDNI(String dni)
+	comentario:sirve para validar un dni
+	precondiciones: el tamaño de la cadena es de 9,el ultimo caracter es una letra entre A y Z,
+					los demas digitos son numeros de entre 0 y 9
+	entradas: una cadena
+	salidas: un caracter
+	entr/sal:no hay
+	postcondiciones:AN devolvera la letra correspondiente a los digitos introducidos .
+	*/
+	
+	/*
+	//resguardo
+	public static char ValidarDNI(String dni)
+	{
+		System.out.println("En construccion");
+		return a;
+	}*/
+		
+	public static char ValidarDNI(String dni) 
+	{
+		String caracteres="TRWAGMYFPDXBNJZSQVHLCKE";
+		char letra=' ';
+		int res=0;
+		
+		res=Integer.parseInt(dni)%23;
+		letra = caracteres.charAt(res);
+		
+		return letra;
+	}
+	
+	/*
+	//interfaz
+	prototipo: public static char ValidarNIE(String dni)
+	comentario:sirve para validar un nie
+	precondiciones: el tamaño de la cadena es de 9,el primer digito es 'X', 'Y' o 'Z',
+					el ultimo caracter es una letra entre A y Z,los demas digitos son numeros de entre 0 y 9
+	entradas: una cadena
+	salidas: un caracter
+	entr/sal:no hay
+	postcondiciones:AN devolvera la letra correspondiente a los digitos introducidos .
+	*/
+	
+	/*
+	//resguardo
+	public static char ValidarNIE(String dni)
+	{
+		System.out.println("En construccion");
+		return a;
+	}*/
+		
+	public static char ValidarNIE(String dni) 
+	{
+		String caracteres="TRWAGMYFPDXBNJZSQVHLCKE";
+		char letra=' ';
+		int res=0;
+		
+		if(dni.charAt(0)=='X') 
 		{
-			producto[i]=productoVendido[i];
-	    	producto[i].setCantidad(producto[i].getCantidad()+cantidad);
+			dni='0'+dni.substring(1,8);
+			
+			res=Integer.parseInt(dni.substring(1, 8))%23;
+			letra = caracteres.charAt(res);
+		}else if(dni.charAt(0)=='Y') 
+		{
+			dni='1'+dni.substring(1,8);
+			
+			res=Integer.parseInt(dni.substring(0, 8))%23;
+			letra = caracteres.charAt(res);
+		}else if(dni.charAt(0)=='Z') 
+		{
+			dni='2'+dni.substring(1,8);
+			
+			res=Integer.parseInt(dni.substring(0, 8))%23;
+			letra = caracteres.charAt(res);
 		}
-		if(producto[i]==productoVendido[i]) 
+		
+		return letra;
+	}
+	
+	/*
+	//interfaz
+	prototipo: public boolean ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
+	comentario:sirve para comprobar la existencia de un dni o un nie
+	precondiciones: ninguno
+	entradas: un array,una cadena
+	salidas: un logico
+	entr/sal:no hay
+	postcondiciones:AN devolvera true si el documento de identidad ya existe y false si no.
+	*/
+	
+	/*
+	//resguardo
+	public boolean ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
+	{
+		System.out.println("En construccion");
+		return true;
+	}*/
+	
+	public boolean ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
+	{
+		boolean res=false;
+		
+		for(int i=0;i<trabajadorContratado.length;i++) 
 		{
-			devuelto=1;
-		}else 
-		{
-			devuelto=(-1);
+			if(trabajadorContratado[i]!=null) 
+			{
+				if(trabajadorContratado[i].getDni().equals(dni)) 
+				{
+					res=true;
+				}
+			}
 		}
-		return devuelto;
+		return res;
+	}
+	
+	/*
+	//interfaz
+	prototipo: public boolean ExisteEncargado(Trabajador [] trabajadorContratado) 
+	comentario:sirve para comprobar si hay un encargado contratado
+	precondiciones: el array tiene que tener al menos un ubjeto
+	entradas: un array
+	salidas: un logico
+	entr/sal:no hay
+	postcondiciones:AN devolvera true si hay un encargado y false si no.
+	*/
+	
+	/*
+	//resguardo
+	public boolean ExisteEncargado(Trabajador [] trabajadorContratado) 
+	{
+		System.out.println("En construccion");
+		return true;
+	}*/
+	
+	public boolean ExisteEncargado(Trabajador [] trabajadorContratado) 
+	{
+		boolean res=false;
+//		try 
+//		{
+			for(int i=0;i<trabajadorContratado.length;i++) 
+			{
+				if(trabajadorContratado[i].getCARGO()==TipoCargo.ENCARGADO) 
+				{
+					res=true;
+				}
+			}
+//		}catch(NullPointerException npe) 
+//		{
+//			System.out.println(npe+": Array vacio, No hay ningun trabajador contratado");
+//		}
+		
+		return res;
+	}
+	/*
+	//interfaz
+	prototipo: public boolean ExisteVendedor(Trabajador [] contrataTrabajador) 
+	comentario:sirve para comprobar si hay un encargado contratado
+	precondiciones: el array tiene que tener al menos un ubjeto
+	entradas: un array
+	salidas: un logico
+	entr/sal:no hay
+	postcondiciones:AN devolvera true si hay un encargado y false si no.
+	*/
+	
+	/*
+	//resguardo
+	public boolean ExisteVendedor(Trabajador [] contrataTrabajador) 
+	{
+		System.out.println("En construccion");
+		return true;
+	}*/
+	
+	public boolean ExisteVendedor(Trabajador [] contrataTrabajador) 
+	{
+		boolean res=false;
+//		try 
+//		{
+			for(int i=0;i<contrataTrabajador.length && contrataTrabajador!=null;i++) 
+			{
+				if(contrataTrabajador[i].getCARGO()==TipoCargo.VENDEDOR) 
+				{
+					res=true;
+				}
+			}
+//		}catch(NullPointerException npe) 
+//		{
+//			System.out.println(npe+": Array vacio. No hay ningun trabajador");
+//		}
+		
+		return res;
 	}
 }
