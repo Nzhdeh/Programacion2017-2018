@@ -71,28 +71,9 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return dia;
 	}
 	
-	public void setDia(int dia) throws ExcepcionFecha
+	public void setDia(int dia)
 	{
-<<<<<<< HEAD
-		
-			if(dia>0 && dia<32) 
-			{
-				this.dia=dia;
-			}else 
-			{
-				throw new ExcepcionFecha("Dia incorrecto.");
-			}
-		
-=======
-		if(dia<0) 
-		{
-			throw new ExcepcionFecha("El dia tiene que ser mayor que 0 y dependiendo del mes puede tener maximo 28,29,30,31 dias");
-		}
-		else
-		{
-			this.dia=dia;
-		}
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
+		this.dia=dia;
 	}
 	
 	public int getMes()
@@ -100,31 +81,19 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return mes;
 	}
 	
-	public void setMes(int mes) throws ExcepcionFecha
+	public void setMes(int mes)
 	{
-		if(mes<1 || mes >12)		
-		{
-			throw new ExcepcionFecha("El mes tiene que estar entre 1 y 12");
-		}else 
-		{
-			this.mes=mes;
-		}
+		this.mes=mes;
 	}
 	
-	public int getAnio() 
+	public int getAnio()
 	{
 		return anio;
 	}
 	
-	public void setAnio(int anio) throws ExcepcionFecha
+	public void setAnio(int anio)
 	{
-		if(anio<1) 
-		{
-			throw new ExcepcionFecha("El anio no puede ser menor que 1");
-		}else 
-		{
-			this.anio=anio;
-		}
+		this.anio=anio;
 	}
 	
 	//metodos heredados
@@ -132,7 +101,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	@Override
 	public String toString()
 	{
-		return (dia+"-"+mes+"-"+anio);
+		return ("Dia: "+dia+" Mes: "+mes+" A\u00f1o: "+anio);
 	}
 	
 	
@@ -177,25 +146,38 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}
 	
-	//condicion de comparacion: dia,mes y año
 	@Override
 	public int compareTo(Fecha f)
 	{
-		int comparar;
+		int comparar=0;
 		
-		if((this.getAnio()>f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()>f.getMes()) || 
-		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())) 
+		if(this.getAnio()>f.getAnio())
 		{
-			comparar=1; //el primero es mayor que el segundo
+			comparar=1;
+		}
+		else if(this.getAnio()==f.getAnio() && this.getMes()>f.getMes())
+		{
+			comparar=1;
+		}
+		else if (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())
+		{
+			comparar=1;
+		}
+		else if(this.getAnio()<f.getAnio())
+		{
+			comparar=(-1);
+		}
+		else if(this.getAnio()==f.getAnio() && this.getMes()<f.getMes())
+		{
+			comparar=(-1);
+		}
+		else if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia())
+		{
+			comparar=(-1);
 		}
 		else if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()==f.getDia())
 		{
-			comparar=0;//son iguales
-		}
-		else /*if((this.getAnio()<f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()<f.getMes()) || 
-		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia()))*/
-		{
-			comparar=(-1);
+			comparar=0;
 		}
 		
 		return comparar;
@@ -206,7 +188,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	comentario: sirve para validar una fecha
 	precondiciones:no hay
 	entradas: no hya
-	salidas: logico
+	salidas: boolean
 	postcondiciones: AN devolvera true si la fecha es valida y false si no.
 	*/
 	/*
@@ -220,7 +202,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}*/
 	
-	public boolean ValidarFecha() throws ExcepcionFecha
+	public boolean ValidarFecha()
 	{
 		boolean res=false;
 		
@@ -257,18 +239,25 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 						
 						case 2:
 							
-						if ((this.getAnio()>1581) && (this.getAnio() % 400 == 0) || 
-							((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
+						if(this.getAnio()>1581)
 						{
-							if (this.getDia () > 0 && this.getDia () < 30)
+							if ((this.getAnio() % 400 == 0) || ((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
+							{
+								if (this.getDia () > 0 && this.getDia () < 30)
+								{
+									res = true;
+								}
+							}
+						}
+						
+						else
+						{
+							if (this.getDia () > 0 && this.getDia () < 29)
 							{
 								res = true;
 							}
 						}
-						else if (this.getDia () > 0 && this.getDia () < 29)
-						{
-							res = true;
-						}
+						
 					}
 			}
 		}

@@ -1,11 +1,9 @@
 /**Nombre del programa: MainGestionTienda
  * 
- * analisis: Es un programa que gestiona una tienda. Segun las opciones que elija 
- * 			 el usuario podra contratar o despedir trabajadores avisar o consultar 
- * 			 incidencias, vender o devolver productos.
+ * analisis: Es un programa que gestiona las ventas de una red de tiendas
  * 
- * entradas: la opcion de los menus,objeto Fecha,objeto Trabajador
- * salidas: se pintara por pantalla los resultados y algunos mensajes de apollo
+ * entradas: int opcion, char seguir,
+ * salidas:
  * 
  * PSEUDOCODIGO GENERALIZADO
  * 
@@ -16,25 +14,9 @@
  * 				caso 1:
  * 					hacer las funciones del jefe
  * 				caso 2:
- * 					si hay trabajadores contratados
- * 						comprobar si el encargado existe(*)
- * 						si existe
- *							hacer las funciones del encargado 
- *						fin_si
- *						sino
- *							pintar mensaje
- *						fin_sino
- *					fin_si_contratado
+ *					hacer las funciones del encargado 
  * 				caso 3:
- * 					si hay trabajadores contratados
- * 						comprobar si el trabajador existe(*)
- * 						si existe
- *							hacer las funciones del trabajador 
- *						fin_si
- *						sino
- *							pintar mensaje
- *						fin_sino
- *					fin_si_contratado
+ * 					hacer las funciones del trabajador
  * 			fin_segun
  * 		volver a presentar el menu y leer y validar la opcion
  * 		fin_mientras
@@ -45,1551 +27,308 @@
  * 
  * 	//hacer las funciones del jefe
  * 		
- * 		presentar el menuJefe y leer y validar la opcion
- * 			mientras(opcion!=0)
+ * 		presentar el menu y leer y validar la opcion
+ * 		mientras(opcion!=0)
+ * 		preguntar si realmente quiere seguir y leer y validar seguir
+ * 			mientras(seguir=='S')
  * 				segun(opcion)
  * 					caso 1:
- * 						si(trabajadorContratado[i]!=null)
- * 							calcular ventas
- * 						fin_si
+ * 						gestion de la tienda 1
  * 					caso 2:
- * 						contratar un trabajador
+ * 						gestion de la tienda 2
  * 					caso 3:
+ * 						gestion de la tienda 3
+ * 					caso 4:
+ * 						contratar un trabajador
+ * 					caso 5:
  *              	    despedir a un trabajador
- *              	caso 4:
- *              		consultar trabajadores contratados (*)
- *             		caso 5:
- *              		consultar incidencias (*)
- *             	 	caso 6:
- *              		generara nomina (en construcion)
+ *             		 caso 6:
+ *              		consultar incidencias
  * 				fin_segun
- * 			volver a presentar el menuJefe y leer y validar la opcion
+ * 				volver a preguntar si realmente quiere seguir y leer y validar seguir
+ * 			fin_mientras	
+ * 			volver a presentar el menu y leer y validar la opcion
  * 		fin_mientras
- * 
- * 	//calcular ventas
- * 		inicio
- * 			si(arrayVendido!=null)
- * 				leer la fecha de inicio y validarla
- * 				repetir
- * 					leer y validar fecha(*)
- * 					comprobar si la fecha de inicio es valida (*)
- * 				mientras(no sea valida)
- * 				leer la fecha final y validarla
- * 				repetir
- * 					leer y validar fecha(*)
- * 					comprobar si la fecha final es valida (*)
- * 				mientras(no sea valida)
- * 
- * 				si(fechaIni>fechaFin)
- * 					pintar mensaje
- * 					fin_si
- * 				sino
- * 					hacer el calculo de ventas
- * 					mostrar el resultado
- * 				fin_sino
- * 			fin_si_vendido
- * 		fin_calcular
- * 
- * 	//contratar un trabajador
- * 		inicio
- * 			leer el nombre
- * 			leer el apellido
- * 			leer y validar el dni y el nie
- * 			presentar menuDni y validar la opcion
- * 				segun(opcionDni)
- * 					caso 1:
- * 						leer y validar el dni
- * 					caso 2: 
- * 						leer y validar el nie
- * 				fin_segun_dni
- * 			leer y validar el cargo
- * 			leer y validar el sexo
- * 			leer y validar la fecha de nacimiento
- * 			repetir
- * 				leer y validar fecha(*)
- * 				comprobar si la fecha es valida (*)
- * 			mientras(fecha no valida)
- * 			contratar al trabajador (*)
- * 			mostrar el resultado
- * 		fin_contratar
- * 
- * 	//despedir a un trabajador
- * 		inicio
- * 			leer el dni del trabajador
- * 			comprobar si el trabajador existe
- * 			si(existe)
- * 				eliminar al trabajador
- * 			fin_si
- * 			sino
- * 				pintar mensaje
- * 			fin_sino
- * 
- * 		fin_despedir
  * 
  * 	//hacer las funciones del encargado 
  * 
- * 		presentar el menuEncargado y leer y validar la opcion
- * 			mientras(opcion!=0)
+ * 		presentar el menu y leer y validar la opcion
+ * 		mientras(opcion!=0)
+ * 		preguntar si realmente quiere seguir y leer y validar seguir
+ * 			mientras(seguir=='S')
  * 				segun(opcion)
  * 					caso 1:
- * 						encargar productos nuevos
+ * 						gestion de la tienda 1
  * 					caso 2:
- * 						avisar sobre una incidencia
- *					caso 3:
- * 						consultar productos en la tienda (*)
+ * 						gestion de la tienda 2
+ * 					caso 3:
+ * 						gestion de la tienda 3
  * 					caso 4:
- * 						eliminar incidencias
- * 				fin_segun	
- * 			volver a presentar el menuEncargado y leer y validar la opcion
+ * 						avisar sobre una incidencia
+ * 				fin_segun
+ * 				volver a preguntar si realmente quiere seguir y leer y validar seguir
+ * 			fin_mientras	
+ * 			volver a presentar el menu y leer y validar la opcion
  * 		fin_mientras
- * 
- * 
- * 		//encargar productos nuevos
- * 			inicio
- * 				leer el nombre del producto
- * 				leer y validar el precio del producto
- * 				leer y validar la cantidad del producto
- * 				leer y validar la fecha de adquisicion del producto
- * 				repetir
- * 					leer y validar el dia
- * 					leer y validar el mes
- * 					leer y validar el año
- * 					comprobar si la fecha es valida (*)
- * 				mientras(fecha no valida)
- * 				leer y validar el peso del producto
- * 				realizar la compra (*)
- * 			fin_encargar
- * 
- * 	//avisar sobre una incidencia
- * 		inicio
- * 			leer el motivo de la incidencia
- * 			hacer el aviso (*)
- * 		fin_avisar
- * 
- * 
- * 	//eliminar incidencias
- * 		inicio
- * 			pintar las incidencias (*)
- * 			leer y validar la id de la incidencia que queremos eliminar
- * 			eliminar la incidencia(*)
- * 		fin_eliminar	
- * 
  * 
  * 	//hacer las funciones del trabajador
  * 
- * 		presentar el menuTrabajador y leer y validar la opcion
- * 			mientras(opcion!=0)
+ * 		presentar el menu y leer y validar la opcion
+ * 		mientras(opcion!=0)
+ * 		preguntar si realmente quiere seguir y leer y validar seguir
+ * 			mientras(seguir=='S')
  * 				segun(opcion)
  * 					caso 1:
- * 						vender productos
+ * 						gestion de la tienda 1
  * 					caso 2:
- * 						hacer una devolucion
+ * 						gestion de la tienda 2
+ * 					caso 3:
+ * 						gestion de la tienda 3
  * 				fin_segun
- * 			volver a presentar el menuTrabajador y leer y validar la opcion
+ * 				volver a preguntar si realmente quiere seguir y leer y validar seguir
+ * 			fin_mientras	
+ * 			volver a presentar el menu y leer y validar la opcion
  * 		fin_mientras
- * 
- * 	//vender productos
- * 		inicio
- * 			pintar los productos disponibles
- * 			leer el nombre del producto
- * 			leer y validar la cantidad
- * 			leer y validar la fecha de venta
- * 			repetir 
- * 				leer y validar el dia
- * 				leer y validar el mes
- * 				leer y validar el año
- * 				comprobar si la fecha es valida (*)
- * 			mientras (fecha no valida)
- * 			asignar el peso
- * 			asignar el precio
- * 			comprobar si el producto existe (*)
- * 			si(existe y la cantidad es superior o igual a la que vendemos)
- * 				realizar la venta (*)
- * 				mostrar mensaje de apollo
- * 			fin_si
- * 			sino
- * 				pintar mensaje
- * 			fin_sino
- * 		fin_vender
  *  
- *  //hacer una devolucion
- *  	inicio
- *  		pintar los productos vendidos (*)
- *  		leer el nombre de producto
- *  		leer y validar la cantidad
- *  		leer y validar la fecha de devolucion
- *  		repetir 
- * 				leer y validar el dia
- * 				leer y validar el mes
- * 				leer y validar el año
- * 				comprobar si la fecha es valida (*)
- * 			mientras (fecha no valida)
- * 			comprobar si el producto existe (*)
- * 			si(existe)
- * 				realizar la devolucion (*)
- * 				mostrar mensaje de apollo
- * 			fin_si
- * 			sino
- * 				pintar mensaje
- * 			fin_sino
- *  	fin_devolver
  * 
- * Restricciones: no se puede meter caracteres en los datos numericos
- * 				  la opcion del menu principal esta entre 1 y 3 inclusive
- * 				  la opcion del menu jefe esta entre 1 y 6 inclusive
- * 				  la opcion del menu encargado esta entre 1 y 4 inclusive
- * 				  la opcion del menu trabajador esta entre 1 y 2 inclusive
- * 				  el cargo tiene que ser ENCARGADO o VENDEDOR
+ * Restricciones:
  */
 
 
 package Proyecto;
 
+//import java.io.*;
 import java.util.*;
 public class MainGestionTienda {
-	
-	
 
 	public static void main(String[] args) {
 		
 		Scanner sc=new Scanner (System.in);
 		
-<<<<<<< HEAD
-		int opcion=0,opcionDni=0,dia=0,mes=0,anio=0,idIncidencia=0,i=0;
-		double venta=0.0,precio=0.0,peso=0.0;//variables del producto
-		int cantidad=0;//cantidad de trabajadores
-		String nombre=" ",apellidos=" ",descripcionIncidencia=" ",dni=" ";
-		char letra=' ';
-		boolean existeTrabajador=false,fechaValida=false,existeProducto=false,incidenciaEliminado=false;
-		boolean repetir,existeDocumento=false;//para ver si el dni o el nie existen
-		boolean existeEncargado=false,existeVendedor=false,despedido=false;
-		TipoCargo CARGO=null;
-		
-		Fecha fechaIni=new Fecha();
-		Fecha fechaFin=new Fecha();
-		Fecha fechaVenta=new Fecha();
-		Fecha fechaDevolucion=new Fecha();
-		Fecha fechaCompra=new Fecha();
-		Fecha fechaNacimiento=new Fecha();
-		
-		//Empresa empresa=new Empresa();
-		//Nomina nomina=new Nomina();
-		
-		Incidencia incidencia = null;//creo un objeto Incidencia
-		Incidencia [] denuncia=null;//es donde guardo las incidencias
-		Trabajador t=new Trabajador();
-		Incidencia [] clienteDenuncia = new Incidencia[20];
-		Trabajador [] trabajadorContratado = new Trabajador[20];
-		Producto productoDevolucion=new Producto();
-		Producto productoAVender=new Producto();
-		Producto productoParaTienda=new Producto();//los productos que se van a guardar en la tienda
-		Trabajador [] contrataTrabajador = new Trabajador[20];
-		Producto [] arrayVendido = new Producto[20];//los productos vendidos
-		Producto [] productosEnTienda=new Producto[20];
-		GestoraTienda gt=new GestoraTienda();//declaramos un objeto de la gestora para los metodos no estaticos
-=======
 		//variables
-		int opcion=0,opcionDni=0, i=0,dia=0,mes=0,anio=0;
-		//char seguir=' ';
-		double venta=0.,precio=0.0,peso=0.0;
-		//int tam=0;
-		ArrayList<Trabajador> contrataTrabajador = null;
-		//ArrayList<Trabajador> despideTrabajador;
-		int cantidad=0;//cantidad de trabajadores
-		String nombre=" ",apellidos=" ",dni=" ";
-		char sexo=' ';
-		boolean existeTrabajador=false,fechaValida=false,existeProducto=false;
-		//int cantidad=0;
-		//boolean existe=false;
-		//Fecha fecha=new Fecha();
-		Fecha fechaIni=new Fecha(2,5,2000);
-		Fecha fechaFin=new Fecha(5,5,2005);
-		Fecha fechaVenta=new Fecha(2,5,2000);
-		Fecha fechaCompra=null;
-		Fecha fechaNacimiento=null;
+		int opcion=0;
+		char seguir=' ';
+		Fecha fecha=new Fecha();
 		
-		String incidencia = "";
-		String [] denuncia=null;
-		//Trabajador trabajador=new Trabajador();
-		String [] clienteDenuncia = new String[5];
-		ArrayList <Trabajador> trabajadorContratado = new ArrayList<Trabajador>();
-		Producto productoComprado=null;
-		Producto [] productoVendido=new Producto[10];
-		Producto [] arrayVendido = new Producto[10];
-		Producto [] producto={new Producto("Tarjeta de red",15.05,fechaVenta,10,0.3),new Producto("Disco DVD",1.20,fechaVenta,10,0.1),new Producto("Cable HDMI",3.50,fechaVenta,10,0.2)
-							 ,new Producto("Placa base",100,fechaVenta,10,0.9),new Producto("Disco duro SSD",80,fechaVenta,10,0.1),new Producto("Procesador i7",200.0,fechaVenta,10,0.2)
-							 ,new Producto("Tarjeta de red",30,fechaVenta,10,0.5),new Producto("Disco CD",1.20,fechaVenta,10,0.1),new Producto("Cable DVI",1.50,fechaVenta,10,0.2)
-							 ,new Producto("Placa base",120,fechaVenta,10,0.7),new Producto("Disco duro",50,fechaVenta,10,0.1),new Producto("Procesador i5",180.0,fechaVenta,10,0.2)
-							 ,new Producto("Fuente de alimentacion",60.50,fechaVenta,10,1.0),new Producto("Disco duro m.2",140,fechaVenta,10,0.1),new Producto("Procesador i3",100.0,fechaVenta,10,0.2)
-							 };
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-		
-		//presentar el MenuPrincipal y leer y validar la opcion
-		repetir=true;
-		while(repetir) 
+		try
 		{
+			Producto [] producto={new Producto("Tarjeta de red",15.05,fecha,"Muy util",0.3),new Producto("Disco CD",1.20,fecha,"No funciona",0.1),new Producto("Cable HDMI",3.50,fecha,"Es bonito",0.2)
+								 ,new Producto("Placa base",120,fecha,"Es impresionante",0.7),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 ,new Producto("Tarjeta de red",15.05,fecha,"Muy util",0.3),new Producto("Disco CD",1.20,fecha,"No funciona",0.1),new Producto("Cable HDMI",3.50,fecha,"Es bonito",0.2)
+								 ,new Producto("Placa base",120,fecha,"Es impresionante",0.7),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 ,new Producto("Fuente de alimentacion",60.5,fecha,"No te lo recomiendo",1.0),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 };
+			
+			//presentar el menu y leer y validar la opcion
 			do
 			{
 				GestoraTienda.MenuPrincipal();
-				try 
-				{
-					opcion=sc.nextInt();
-					repetir=false;
-				}catch(InputMismatchException ime) 
-				{
-					sc.nextLine();
-					System.out.println("Un numero entero porfa");
-				}
-				
-				if(opcion<0 || opcion>3) 
-				{
-					System.out.println("-----------------------------------------------");
-					System.out.println("Opcion incorrecta, vuelve a intentarlo");
-				}
+				opcion=sc.nextInt();
 			}while(opcion<0 || opcion>3);
-		}
-		
-		while(opcion!=0)
-		{
-			switch(opcion)
+			
+			while(opcion!=0)
 			{
-				case 1:
-					
-					//presentar el MenuJefe y leer y validar la opcion
-					repetir=true;
-					while(repetir) 
-					{
+				switch(opcion)
+				{
+					case 1:
+						
+						//presentar el menu y leer y validar la opcion
 						do
 						{
-							GestoraTienda.MenuJefe();
-							try 
-							{
-								opcion=sc.nextInt();
-								repetir=false;
-							}catch(InputMismatchException ime) 
-							{
-								System.out.println("Un numero entero porfa");
-								sc.nextLine();
-							}
+							GestoraTienda.MenuJefe(opcion);
+							opcion=sc.nextInt();
 						}while(opcion<0 || opcion>6);
-					}
-							
-					while(opcion!=0)
-					{
-						switch(opcion)
-						{
-							case 1:
-<<<<<<< HEAD
-								if(arrayVendido[i]!=null) 
-								{
-									//calcular ventas 
-									//leer la fecha de inicio y validarla
-									
-									do 
-									{
-										//leer y validar fecha
-										System.out.println("Introduce La fecha de Inicio");
-										/*
-										//leer y validar el año
-										repetir=true;
-										
-										while(repetir) 
-										{
-											System.out.print("Anio: ");
-											
-											try 
-											{
-												fechaIni.setAnio(sc.nextInt());
-												repetir=false;
-												
-											}catch (ExcepcionFecha e) 
-											{
-												System.out.println(e);
-											}catch(InputMismatchException e) 
-											{
-												sc.nextLine();
-												System.out.println(e+": Un numero entero porfa, gracias Angel");
-											}
-										}
-										
-=======
-								//calcular ventas 
-								//leer las fechas
-								System.out.println("Introduce La fecha de Inicio");
-								System.out.print("Dia: ");
-								try 
-								{
-									fechaIni.setDia(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								System.out.print("Mes: ");
-								try 
-								{
-									fechaIni.setMes(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								System.out.print("Anio: ");
-								try 
-								{
-									fechaIni.setAnio(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								
-								System.out.println("Introduce La fecha Final");
-								System.out.print("Dia: ");
-								try 
-								{
-									fechaFin.setDia(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								System.out.print("Mes: ");
-								try 
-								{
-									fechaFin.setMes(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								System.out.print("Anio: ");
-								try 
-								{
-									fechaFin.setAnio(sc.nextInt());
-								} catch (ExcepcionFecha ef) 
-								{
-									System.out.println(ef);
-								}
-								
-								//hacer el calculo de ventas
-								if(fechaIni.compareTo(fechaFin)==1) 
-								{
-									System.out.println("La fecha de Inicio no puede ser posterior que la fecha Final");
-								}else 
-								{
-									System.out.println("--------------------------------------------");
-									venta=GestoraTienda.CalculaVenta(producto, fechaIni, fechaFin);
-									
-									//Mostrar el resultado
-									System.out.println("Venta="+venta);
-								}
-								break;
-										
-							case 2:
-							//contratar un trabajador
-								/*
-								//preguntar la cantidad de trabajadores y validar la respuesta
-								do 
-								{
-									System.out.println("---------------------------------------------");
-									System.out.print("Cuantos trabajadores vas a contratar?: ");
-									cantidad=sc.nextInt();
-								}while(cantidad<1);
-								
-								if(cantidad>0) 
-								{
-									for(;i<cantidad;i++) 
-									{*/
-										sc.nextLine();//para limpiar el buffer
-										
-										System.out.println("Introduce el nombre: ");
-										nombre=sc.nextLine();
-										
-										System.out.println("Introduce el apellido: ");
-										apellidos=sc.nextLine();
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-										
-										//leer y validar el mes
-										repetir=true;
-										
-										while(repetir) 
-										{
-<<<<<<< HEAD
-											System.out.print("Mes: ");
-											try 
-											{
-												fechaIni.setMes(sc.nextInt());
-												repetir=false;
-											} catch (ExcepcionFecha ef) 
-											{
-												System.out.println(ef);
-											}catch(InputMismatchException e) 
-											{
-												sc.nextLine();
-												System.out.println(e+": Un numero entero porfa, gracias Angel");
-											}
-										}
-										
-										//leer y validar el dia
-										repetir=true;
-										while(repetir) 
-										{
-											System.out.print("Dia: ");
-											try 
-											{
-												fechaIni.setDia(sc.nextInt());
-												repetir=false;
-											}catch(ExcepcionFecha ef) 
-											{
-												System.out.println(ef);
-											}catch(InputMismatchException e) 
-											{
-												sc.nextLine();
-												System.out.println(e+": Un numero entero porfa, gracias Angel");
-											}
-										}*/
-										fechaIni=gt.LeerValidarFecha();
-										//comprobar si la fecha de inicio es valida
-										try 
-										{
-											fechaValida=fechaIni.ValidarFecha();
-										} catch (ExcepcionFecha e) 
-										{
-											System.out.println(e);
-										}
-										
-										if(fechaValida!=true) 
-										{
-											System.out.println("Dia incorrecto, compruebalo");
-										}
-										
-									}while(fechaValida!=true);
-									
-									//leer la fecha final y validarla
-									do 
-									{
-										//leer y validar fecha
-										System.out.println("Introduce La fecha Final");
-										fechaFin=gt.LeerValidarFecha();
-										
-										//comprobar si la fecha final es valida
-										try 
-										{
-											fechaValida=fechaFin.ValidarFecha();
-										} catch (ExcepcionFecha e) 
-										{
-											System.out.println(e);
-										}
-=======
-											case 1:
-												do 
-												{
-													sc.nextLine();
-													System.out.println("------------------------------------------------");
-													System.out.print("Introduce el DNI (Ej. 00000000B): ");
-													dni=sc.nextLine();
-													
-												}while(dni.length()!=9 || dni.charAt(i)<'0' || dni.charAt(i)>'9' || dni.charAt(8)<'a' || dni.charAt(8)>'z');
-												break;
-											case 2:
-												do 
-												{
-													sc.nextLine();
-													System.out.println("------------------------------------------------");
-													System.out.print("Introduce el NIE (Ej. X0000000A): ");
-													dni=sc.nextLine();
-													
-												}while(dni.length()!=9 ||  dni.charAt(0)<'a' || dni.charAt(0)>'z'
-														|| dni.charAt(i+1)<'0' || dni.charAt(i+1)>'9' || dni.charAt(8)<'a' || dni.charAt(8)>'z'
-														|| dni.charAt(i+2)<'0' || dni.charAt(i+2)>'9'
-														|| dni.charAt(i+3)<'0' || dni.charAt(i+3)>'9'
-														|| dni.charAt(i+4)<'0' || dni.charAt(i+4)>'9'
-														|| dni.charAt(i+5)<'0' || dni.charAt(i+5)>'9'
-														|| dni.charAt(i+6)<'0' || dni.charAt(i+6)>'9'
-														|| dni.charAt(i+7)<'0' || dni.charAt(i+7)>'9');
-	
-												break;
-										}//fin segun validar dni/nie
-										
-										System.out.println("Introduce el sexo: ");
-										sexo=sc.next().charAt(0);
-										
-										System.out.println("Introduce la fecha de nacimiento ");
-										System.out.println("Introduce el dia: ");
-										dia=sc.nextInt();
-										
-										System.out.println("Introduce el mes: ");
-										mes=sc.nextInt();
-											
-										System.out.println("Introduce el anio: ");
-										anio=sc.nextInt();
-										
-										fechaNacimiento=new Fecha(dia,mes,anio);//se instancia la fecha aqui porque sino da un error
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-										
-										if(fechaValida!=true) 
-										{
-<<<<<<< HEAD
-											System.out.println("Dia incorrecto, compruebalo");
-										}
-									}while(fechaValida!=true);
-									
-									
-									if(fechaIni.compareTo(fechaFin)==1) 
-									{
-										//pintar mensaje
-										System.out.println("La fecha de Inicio no puede ser posterior que la fecha Final");
-									}else 
-									{
-										//hacer el calculo de ventas
-										System.out.println("--------------------------------------------");
-										venta=GestoraTienda.CalculaVenta(arrayVendido, fechaIni, fechaFin);
-										
-										//Mostrar el resultado
-										System.out.println("Venta ="+venta);
-									}
-								}else 
-								{
-									System.out.println("--------------------------------------------");
-									System.out.println("No has vendido nada aun");
-								}
-=======
-											trabajadorContratado.add(new Trabajador(nombre,apellidos,dni,fechaNacimiento,sexo));
-											
-											//contratar al trabajador
-											contrataTrabajador=GestoraTienda.ContrataTrabajador(trabajadorContratado);
-											
-											//mostrar el resultado
-											System.out.println(contrataTrabajador);
-										}
-										else 
-										{
-											System.out.println("La fecha no es valida");
-										}
-									//}//for caso 2
-								//}
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-								
-								break;
-										
-							case 2:
-								//contratar un trabajador
 						
-								System.out.println("---------------------------------------------");
-								sc.nextLine();//para limpiar el buffer
-								System.out.println("Introduce los datos de la persona a contratar");
-								//leer el nombre
-								System.out.println("Introduce el nombre: ");
-								nombre=sc.nextLine();
+						//GestoraTienda.MenuTiendas(opcion);
 								
-								//leer el apellido
-								System.out.println("Introduce el apellido: ");
-								apellidos=sc.nextLine();
-								
-								//leer y validar el dni y el nie
-								//presentar menuDni y validar la opcion
-								repetir=true;
-								while(repetir) 
-								{
-									do 
-									{
-										System.out.println("Elige una opcion");
-										System.out.println("Pulsa 1 si es DNI");
-										System.out.print("Pulsa 2 si es NIE:");
-										
-										try 
-										{
-											opcionDni=sc.nextInt();
-											repetir=false;
-										}catch(InputMismatchException ioe) 
-										{
-											sc.nextLine();
-											System.out.println("Un numero entero porfa");
-										}
-										
-									}while(opcionDni<0 || opcionDni>2);
-								}
-								
-								switch(opcionDni) //segun opcionDni
-								{
-									case 1:
-										//leer y validar el dni
-										do 
-										{
-											sc.nextLine();
-											System.out.println("------------------------------------------------");
-											System.out.print("Introduce el DNI (Ej. 00000000T): ");
-											dni=sc.nextLine().toUpperCase();//añadir StringIndexOutOfBoundsException
-											letra=GestoraTienda.ValidarDNI(dni.substring(0,8));//para enviar los digitos que queramos
-											//comprobar dni repetido
-											existeDocumento=gt.ExisteDniNie(trabajadorContratado, dni);
-										}while(letra!=dni.charAt(8) || dni.length()!=9 
-												|| dni.charAt(0)<'0' || dni.charAt(0)>'9'
-												|| dni.charAt(1)<'0' || dni.charAt(1)>'9' 
-												|| dni.charAt(2)<'0' || dni.charAt(2)>'9'
-												|| dni.charAt(3)<'0' || dni.charAt(3)>'9'
-												|| dni.charAt(4)<'0' || dni.charAt(4)>'9'
-												|| dni.charAt(5)<'0' || dni.charAt(5)>'9'
-												|| dni.charAt(6)<'0' || dni.charAt(6)>'9'
-												|| dni.charAt(7)<'0' || dni.charAt(7)>'9' 
-												|| dni.charAt(8)<'A' || dni.charAt(8)>'Z'
-												|| existeDocumento== true);
-										
-										break;
-									case 2:
-										//leer y validar el nie
-										do 
-										{
-											sc.nextLine();
-											System.out.println("------------------------------------------------");
-											System.out.print("Introduce el NIE (Ej. X0000000T): ");
-											dni=sc.nextLine().toUpperCase();
-											letra=GestoraTienda.ValidarNIE(dni.substring(0,8));
-											//comprobar nie repetido
-											existeDocumento=gt.ExisteDniNie(trabajadorContratado, dni);
-										}while(letra!=dni.charAt(8) || dni.length()!=9  
-												|| dni.charAt(0)!='X' && dni.charAt(0)!='Y' && dni.charAt(0)!='Z'
-												|| dni.charAt(1)<'0' || dni.charAt(1)>'9' 
-												|| dni.charAt(2)<'0' || dni.charAt(2)>'9'
-												|| dni.charAt(3)<'0' || dni.charAt(3)>'9'
-												|| dni.charAt(4)<'0' || dni.charAt(4)>'9'
-												|| dni.charAt(5)<'0' || dni.charAt(5)>'9'
-												|| dni.charAt(6)<'0' || dni.charAt(6)>'9'
-												|| dni.charAt(7)<'0' || dni.charAt(7)>'9'
-												|| dni.charAt(8)<'A' || dni.charAt(8)>'Z'
-												|| existeDocumento== true);
-
-										break;
-								}//fin segun dni/nie
-								
-								//leer y validar el cargo
-								repetir=true;
-								while(repetir) 
-								{
-									System.out.println("Introduce el Cargo (VENDEDOR O ENCARGADO): ");
-									try 
-									{
-										CARGO=TipoCargo.valueOf(sc.nextLine().toUpperCase());//leer el enum
-										repetir=false;
-									}catch(IllegalArgumentException iae) 
-									{
-										sc.nextLine();
-										System.out.println(iae+": VENDEDOR o ENCARGADO porfa");
-									}
-									
-								}
-								
-								//leer y validar el sexo
-								repetir=true;
-								while(repetir) 
-								{
-									System.out.println("Introduce el sexo ('V' o 'M'): ");
-									try 
-									{
-										t.setSexo(sc.next().charAt(0));
-										repetir=false;
-									} catch (ExcepcionTrabajador et) 
-									{
-										sc.nextLine();
-										System.out.println(et);
-									}
-								}
-								
-								//leer y validar la fecha de nacimiento
-								do 
-								{	
-									//leer y validar fecha
-									System.out.println("Introduce la fecha de nacimiento ");
-									fechaNacimiento=gt.LeerValidarFecha();
-									
-									//comprobar si la fecha es valida
-									try 
-									{
-										fechaValida=fechaNacimiento.ValidarFecha();
-									}
-									catch(ExcepcionFecha ef) 
-									{
-										System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
-									}
-								}while(fechaValida!=true);
-							
-								t=new Trabajador(nombre,apellidos,dni,fechaNacimiento,t.getSexo(),CARGO);//asignar los datos al objeto
-								
-								//contratar al trabajador
-								contrataTrabajador=GestoraTienda.ContrataTrabajador(trabajadorContratado,t);
-								
-								//mostrar mensaje de apollo
-								System.out.println("Contratado con exito");
-								
-								break;
-										
-							case 3:
-//								if(trabajadorContratado[i]!=null) 
-//								{
-									//despedir a un trabajador
-									
-									//leer el dni del trabajador
-									sc.nextLine();
-									System.out.println("Introduce el dni/nie: ");
-									dni=sc.nextLine().toUpperCase();
-									
-									//comprobamos si el trabajador existe
-									try 
-									{
-										existeTrabajador=GestoraTienda.ExisteTrabajador(trabajadorContratado, dni);
-									} catch (ExcepcionTrabajador et) 
-									{
-										System.out.println(et);
-									}
-									
-									
-									if(existeTrabajador==true) 
-									{
-										//eliminar al trabajador
-										try 
-										{
-											despedido=GestoraTienda.DespideTrabajador(trabajadorContratado, dni);
-										} catch (ExcepcionTrabajador e)
-										{
-											System.out.println(e);
-										}
-									}else 
-									{
-										//pintar mensaje
-										System.out.println("El trabajador no existe");
-									}
-								/*}else 
-								{
-									System.out.println("-----------------------------------------------");
-									System.out.println("No hay ningun trabajador contratado");
-								}*/
-			
-								break;
-									
-							case 4:
-								if(trabajadorContratado[i]!=null) 
-								{
-									//consultar la lista de trabajadores
-									GestoraTienda.ConsultarTrabajadorContratado(trabajadorContratado);
-								}else 
-								{
-									System.out.println("-----------------------------------------------");
-									System.out.println("No hay ningun trabajador contratado");
-								}
-								
-								break;
-								
-							case 5:
-								//consultar incidencias
-								gt.ConsultaIncidencias(denuncia);
-								
-								break;
-							case 6:
-								System.out.println("-----------------------------------------------");
-								System.out.println("En construccion");
-								/*
-								//generar nomina
-								if(trabajadorContratado[i]!=null) 
-								{
-									//leer y validar el salario base
-									repetir=true;
-									while(repetir)
-									{
-										System.out.println("Introduce el salario base: ");
-										try 
-										{
-											nomina.setSalarioBase(sc.nextDouble());
-											repetir=false;
-										} catch (ExcepcionNomina e) 
-										{
-											System.out.println(e);
-										}catch(InputMismatchException ime) 
-										{
-											System.out.println("Un numero entero porfa");
-											sc.nextLine();
-										}
-									}
-									
-									//leer y validar El Plus Titulo
-									repetir=true;
-									while(repetir)
-									{
-										System.out.println("Introduce plus Titulo: ");
-										try 
-										{
-											nomina.setPlusTitulo(sc.nextDouble());
-											repetir=false;
-										} catch (ExcepcionNomina e) 
-										{
-											System.out.println(e);
-										}catch(InputMismatchException ime) 
-										{
-											System.out.println("Un numero entero porfa");
-											sc.nextLine();
-										}
-									}
-									
-									//leer y validar parte proporcional horas extras
-									repetir=true;
-									while(repetir)
-									{
-										System.out.println("Parte Proporcional horas Extras: ");
-										try 
-										{
-											nomina.setParteProporcinalHorasExtras(sc.nextDouble());
-											repetir=false;
-										} catch (ExcepcionNomina e) 
-										{
-											System.out.println(e);
-										}catch(InputMismatchException ime) 
-										{
-											System.out.println("Un numero entero porfa");
-											sc.nextLine();
-										}
-									}
-									
-									//leer y validar el transporte
-									repetir=true;
-									while(repetir)
-									{
-										System.out.println("Introduce el Transporte: ");
-										try 
-										{
-											nomina.setTransporte(sc.nextDouble());
-											repetir=false;
-										} catch (ExcepcionNomina e) 
-										{
-											System.out.println(e);
-										}catch(InputMismatchException ime) 
-										{
-											System.out.println("Un numero entero porfa");
-											sc.nextLine();
-										}
-									}
-									sc.nextLine();
-									//leer nombre de la empresa
-									System.out.println("Introduce el nombre de la empresa: ");
-									empresa.setNombreEmpresa(sc.nextLine());
-									
-									//leer el cif de  la empresa
-									System.out.println("Introduce el CIF de la empresa: ");
-									empresa.setCIFEmpresa(sc.nextLine());
-									
-									//leer la direccion de la empresa
-									System.out.println("Introduce la direccion de la empresa: ");
-									empresa.setDomicilioEmpresa(sc.nextLine());
-									
-									nomina=new Nomina(nomina.getSalarioBase(),nomina.getPlusTitulo(),nomina.getParteProporcinalHorasExtras(),nomina.getTransporte(),
-											empresa,trabajadorContratado);
-									
-									nomina.generarNomina();
-								}
-								else 
-								{
-									System.out.println("No hay Trabajadores contratados");
-								}
-								*/
-								break;
-						}//fin segun caso jefe
-						
-						//volver a presentar el MenuJefe y leer y validar la opcion
-						repetir=true;
-						while(repetir) 
+						while(opcion!=0)
 						{
+							 //preguntar si realmente quiere seguir y leer y validar seguir
 							do
 							{
-								GestoraTienda.MenuJefe();
-								try 
-								{
-									opcion=sc.nextInt();
-									repetir=false;
-								}catch(InputMismatchException ime) 
-								{
-									System.out.println("Un numero entero porfa");
-									sc.nextLine();
-								}
-							}while(opcion<0 || opcion>6);
-						}
-						
-					}//fin mientras de submenu Jefe
-						
-					break;
-					
-				case 2:
-					if(trabajadorContratado[i]!=null)
-					{
-						//comprobar si el encargado existe
-						existeEncargado=gt.ExisteEncargado(trabajadorContratado);
-						
-						if(existeEncargado==true) 
-						{
-<<<<<<< HEAD
-							//presentar el MenuEncargado y leer y validar la opcion
-							repetir=true;
-							while(repetir) 
-							{
-								do
-=======
-							case 1:
-								//encargar productos nuevos
+								GestoraTienda.PreguntarSeguir(opcion);
+								//System.out.println("-----------------------------------------------");
+								//System.out.print("Realmente quieres seguir? s/n: ");
+								seguir=Character.toUpperCase(sc.next().charAt(0));
+							}while(seguir!='S' && seguir!='N');
 								
-								//leer el producto
-								sc.nextLine();//para limpiar el buffer
-								System.out.println("--------------------------------------------------");
-								System.out.println("Introduce el nombre: ");
-								nombre=sc.nextLine();
-								
-								System.out.println("Introduce el precio: ");
-								precio=sc.nextDouble();
-								
-								System.out.println("Introduce la cantidad: ");
-								cantidad=sc.nextInt();
-								
-								System.out.println("Introduce la fecha de adquisicion ");
-								System.out.println("Introduce el dia: ");
-								dia=sc.nextInt();
-								
-								System.out.println("Introduce el mes: ");
-								mes=sc.nextInt();
-								
-								System.out.println("Introduce el anio: ");
-								anio=sc.nextInt();
-								
-								fechaCompra=new Fecha(dia,mes,anio);
-								
-								System.out.println("Introduce el peso: ");
-								peso=sc.nextDouble();
-								
-								productoComprado=new Producto(nombre,precio,fechaCompra,cantidad,peso);
-								
-								//hacer el encargo
-								GestoraTienda.EncargaProductos(productoComprado);/*******************************/
-								break;
-										
-							case 2:
-								//avisar sobre una incidencia
+							//GestoraTienda.PreguntarSeguir(opcion);
 							
-								//preguntar la cantidad de incidencias y validar la respuesta
-								do 
-								{
-									System.out.println("---------------------------------------------");
-									System.out.print("Cuantos incidencias ha ocurrido?: ");
-									cantidad=sc.nextInt();
-								}while(cantidad<1);
-								
-								//tam=tam+cantidad;
-								
-								//leer los datos del denunciante
-								for(;i<cantidad;i++) 
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-								{
-									GestoraTienda.MenuEncargado();
-									try 
-									{
-										opcion=sc.nextInt();
-										repetir=false;
-									}catch(InputMismatchException ime) 
-									{
-										System.out.println("Un numero entero porfa");
-										sc.nextLine();
-									}
-								}while(opcion<0 || opcion>4);
-							}
-									
-							while(opcion!=0)
+							while(seguir=='S')
 							{
 								switch(opcion)
 								{
 									case 1:
-										//encargar productos nuevos
-										
-										//leer el nombre del producto
-										sc.nextLine();//para limpiar el buffer
-										System.out.println("--------------------------------------------------");
-										System.out.println("Introduce el nombre del producto: ");
-										nombre=sc.nextLine();
-										
-										//leer y validar el precio del producto
-										repetir=true;
-										while(repetir) 
-										{
-											System.out.println("Introduce el precio: ");
-											try 
-											{
-												precio=sc.nextDouble();
-												repetir = false;
-											}catch(NumberFormatException nfe) 
-											{
-												System.out.println(nfe+": Un numero real porfa");
-												sc.nextLine();
-											}catch(InputMismatchException ioe) 
-											{
-												System.out.println(ioe+": Un numero real porfa");
-												sc.nextLine();
-											}
-										}	
-										//leer y validar la cantidad del producto
-										repetir=true;
-										while(repetir) 
-										{
-											System.out.println("Introduce la cantidad: ");
-											try 
-											{
-												cantidad=sc.nextInt();
-												repetir=false;
-											}catch(InputMismatchException ioe) 
-											{
-												sc.nextLine();
-												System.out.println(ioe+"Un numero porfa");
-											}
-										}
-										
-										//leer y validar la fecha de adquisicion del producto
-										do 
-										{
-											System.out.println("Introduce la fecha de adquisicion ");
-											fechaCompra=gt.LeerValidarFecha();
-											//fechaCompra=new Fecha(dia,mes,anio);//guardamos el objeto fechaCompra
+											System.out.println("En construccion");
 											
-											//comprobar si la fecha es valida
-											try 
-											{
-												fechaValida=fechaCompra.ValidarFecha();
-											}
-											catch(ExcepcionFecha ef) 
-											{
-												System.out.println(ef+": Fecha no valida,vuelve a intentarlo");
-											}
-										}while(fechaValida!=true);								
-										
-										//leer y validar el peso del producto
-										repetir=true;
-										while(repetir) 
-										{
-											System.out.println("Introduce el peso: ");
-											try 
-											{
-												peso=sc.nextDouble();
-												repetir=false;
-											}catch(InputMismatchException ioe) 
-											{
-												sc.nextLine();
-												System.out.println("Un numero porfa");
-											}
-										}
-										
-										productoParaTienda=new Producto(nombre,precio,fechaCompra,cantidad,peso);
-										//producto.add(new Producto(nombre,precio,fechaCompra,cantidad,peso));//guardamos el objeto en un ArrayList
-										
-										//realizar la compra
-										productosEnTienda=GestoraTienda.EncargaProductos(productosEnTienda,productoParaTienda);
 										break;
-												
+											
 									case 2:
-										//avisar sobre una incidencia
-									
-										sc.nextLine();//para limpiar el buffer
-										
-										//leer el motivo de la incidencia
-										System.out.println("Redacta el motivo de la denuncia: ");
-										descripcionIncidencia=sc.nextLine();
-										
-										incidencia=new Incidencia(descripcionIncidencia);
-										
-										//hacer el aviso
-										denuncia=gt.AvisaIncidencias(incidencia,clienteDenuncia);
-										
+										System.out.println("En construccion");
 										break;
-										
+											
 									case 3:
-										if(productosEnTienda[i]!=null) 
-										{
-											//consultar productos en la tienda
-											GestoraTienda.PintaProductos(productosEnTienda);
-										}else 
-										{
-											System.out.println("no hay productos en la tienda");
-										}
+										System.out.println("En construccion");
 										break;
 										
 									case 4:
-										if(denuncia[i]!=null) 
-										{
-											//eliminar incidencia
-											
-											//pintar las incidencias
-											gt.ConsultaIncidencias(denuncia);
-											
-											//leer y validar la id de la incidencia que queremos eliminar
-											repetir=true;
-											while(repetir) 
-											{
-												System.out.println("Introduce el numero de incidencia a eliminar: ");
-												try 
-												{
-													idIncidencia=sc.nextInt();
-													repetir=false;
-												}catch(InputMismatchException ime) 
-												{
-													sc.nextLine();
-													System.out.println(ime+": Un numero entero porfa");
-												}
-											}
-											
-											//eliminar la incidencia
-											incidenciaEliminado=gt.EliminarIncidencia(denuncia,idIncidencia);
-										}else 
-										{
-											System.out.println("No hay incidencias guardadas");
-										}
+										System.out.println("En construccion");
+										break;
 										
-									break;
-								}//fin segun Encargado
-		
-								//volver a presentar el MenuEncargado y leer y validar la opcion
-								repetir=true;
-								while(repetir) 
-								{
-									do
-									{
-										GestoraTienda.MenuEncargado();
-										try 
-										{
-											opcion=sc.nextInt();
-											repetir=false;
-										}catch(InputMismatchException ime) 
-										{
-											sc.nextLine();
-											System.out.println(ime+": Un numero entero porfa");
-										}
-									}while(opcion<0 || opcion>4);
+									case 5:
+										System.out.println("En construccion");
+										break;
+									case 6:
+										System.out.println("En construccion");
+										break;
 								}
-								
-							}//fin mientras Encargado
-						}/*else 
-						{
-							System.out.println("------------------------------------------------------------------");
-							System.out.println("No tienes ningun encargado contratado");
-						}*/
-						break;
-					}
-					
-				case 3:
-					if(trabajadorContratado[i]!=null)
-					{
-						//comprobar si hay un vendedor contratado
-						existeVendedor=gt.ExisteVendedor(contrataTrabajador);
-						
-						if(existeVendedor==true) 
-						{
-<<<<<<< HEAD
-							//presentar el MenuTrabajador y leer y validar la opcion
-							repetir=true;
-							while(repetir) 
-							{
+								 //volver a preguntar si realmente quiere seguir y leer y validar seguir
 								do
-=======
-							case 1:
-								//vender productos
-								//pintar los productos
-								GestoraTienda.PintaProductos(producto);
-								
-								//leer el producto
-								sc.nextLine();//para limpiar el buffer
-								System.out.println("--------------------------------------------------");
-								System.out.println("Introduce el nombre: ");
-								nombre=sc.nextLine();
-								
-								System.out.println("Introduce el precio: ");
-								precio=sc.nextDouble();
-								
-								System.out.println("Introduce la cantidad: ");
-								cantidad=sc.nextInt();
-								
-								System.out.println("Introduce la fecha de venta ");
-								System.out.println("Introduce el dia: ");
-								dia=sc.nextInt();
-
-								System.out.println("Introduce el mes: ");
-								mes=sc.nextInt();
-								
-								System.out.println("Introduce el anio: ");
-								anio=sc.nextInt();
-								
-								fechaVenta=new Fecha(dia,mes,anio);
-								
-								System.out.println("Introduce el peso: ");
-								peso=sc.nextDouble();								
-								
-								productoVendido[i]=new Producto(nombre,precio,fechaVenta,cantidad,peso);
-								try 
 								{
-									existeProducto=GestoraTienda.ExisteProducto(producto, nombre);
-								} catch (ExcepcionProducto ep)
-								{
-									System.out.println(ep);
-								}
-								if(existeProducto==true && producto[i].getCantidad()>cantidad) 
->>>>>>> 75b9913cf1dd0d63613bd3d6e72cbbf3f1976c15
-								{
-									GestoraTienda.MenuTrabajador();
-									try 
-									{
-										opcion=sc.nextInt();
-										repetir=false;
-									}catch(InputMismatchException ime) 
-									{
-										sc.nextLine();
-										System.out.println(ime+": Un numero entero porfa");
-									}
-								}while(opcion<0 || opcion>2);
+									GestoraTienda.PreguntarSeguir(opcion);
+									seguir=Character.toUpperCase(sc.next().charAt(0));
+								}while(seguir!='S' && seguir!='N');
 							}
-									
-							while(opcion!=0)
+							//volver a presentar el menu y leer y validar la opcion
+							do
+							{
+								GestoraTienda.MenuJefe(opcion);
+								opcion=sc.nextInt();
+							}while(opcion<0 || opcion>6);
+							//GestoraTienda.MenuTiendas(opcion);
+						}
+							
+						break;
+						
+					case 2:
+						//presentar el menu y leer y validar la opcion
+						do
+						{
+							GestoraTienda.MenuEncargado(opcion);
+							opcion=sc.nextInt();
+						}while(opcion<0 || opcion>4);
+						
+						//GestoraTienda.MenuTiendas(opcion);
+								
+						while(opcion!=0)
+						{
+							//preguntar si realmente quiere seguir y leer y validar seguir
+							do
+							{
+								GestoraTienda.PreguntarSeguir(opcion);
+								seguir=Character.toUpperCase(sc.next().charAt(0));
+							}while(seguir!='S' && seguir!='N');
+								
+							while(seguir=='S')
 							{
 								switch(opcion)
 								{
 									case 1:
-										//vender productos
-//										if(productosEnTienda[i]!=null) 
-//										{
-											//pintar los productos disponibles
-											GestoraTienda.PintaProductos(productosEnTienda);
-											
-											//leer el nombre del producto
-											sc.nextLine();//para limpiar el buffer
-											System.out.println("--------------------------------------------------");
-											System.out.println("Introduce el nombre: ");
-											nombre=sc.nextLine();
-											
-											//leer y validar la cantidad 
-											repetir=true;
-											while(repetir) 
-											{
-												System.out.println("Introduce la cantidad: ");
-												try 
-												{
-													cantidad=sc.nextInt();
-													repetir=false;
-												}catch(InputMismatchException ioe) 
-												{
-													sc.nextLine();
-													System.out.println("Un numero entero porfa");
-												}
-											}
-											
-											//leer y validar la fecha de venta
-											do {
-												System.out.println("Introduce la fecha de venta ");
-												fechaVenta=gt.LeerValidarFecha();
-												//fechaVenta=new Fecha(dia,mes,anio);
-												
-												//comprobar si la fecha es valida
-												try 
-												{
-													fechaValida=fechaVenta.ValidarFecha();
-												}
-												catch(ExcepcionFecha ef) 
-												{
-													System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
-												}
-											}while(fechaValida!=true);
-											
-											i=0;
-											if(productosEnTienda[i]!=null) 
-											{
-												//asignar el peso
-												peso=productosEnTienda[i].getPeso();	
-												//asignar el precio
-												precio=productosEnTienda[i].getPrecio();
-											}
-											
-											productoAVender=new Producto(nombre,precio,fechaVenta,cantidad,peso);
-											
-											//comprobar si el producto existe
-											try 
-											{
-												existeProducto=GestoraTienda.ExisteProducto(productosEnTienda, nombre);
-											} catch (ExcepcionProducto ep)
-											{
-												System.out.println(ep);
-											}
-											
-											
-											if(existeProducto==true && productosEnTienda[i].getCantidad()>productoAVender.getCantidad()) 
-											{
-												//realizar la venta
-												try 
-												{
-													arrayVendido=GestoraTienda.VendeProducto(productosEnTienda,productoAVender,arrayVendido);
-												} catch (ExcepcionProducto ep)
-												{
-													System.out.println(ep);
-												}
-												
-												//mostrar mensaje de apollo
-												System.out.println("La venta se ha realizado con exito");
-											}
-											else 
-											{
-												System.out.println("Producto no disponible o cantidad insuficiente");
-											}
-//										}
-//										else 
-//										{
-//											System.out.println("Opcion no disponible");
-//										}
-										
-										
+										System.out.println("En construccion");
 										break;
-												
+											
 									case 2:
-//										if(arrayVendido[i]!=null) 
-//										{
-											//hacer una devolucion
-											//pintar los productos vendidos
-											GestoraTienda.PintaProductos(arrayVendido);
-											
-											//leer el nombre de producto
-											sc.nextLine();//para limpiar el buffer
-											System.out.println("--------------------------------------------------");
-											System.out.println("Introduce el nombre: ");
-											nombre=sc.nextLine();
-											
-											//leer y validar la cantidad 
-											repetir=true;
-											while(repetir) 
-											{
-												do 
-												{
-													System.out.println("Introduce la cantidad: ");
-													try 
-													{
-														cantidad=sc.nextInt();
-														repetir=false;
-													}catch(InputMismatchException ioe) 
-													{
-														sc.nextLine();
-														System.out.println("Un numero entero porfa");
-													}
-												}while(cantidad<1 || cantidad>arrayVendido[i].getCantidad());
-											}
-											
-											//leer y validar la fecha de devolucion
-											do {
-												System.out.println("Introduce la fecha de devolucion ");
-												
-												fechaDevolucion=gt.LeerValidarFecha();
-												//fechaDevolucion=new Fecha(dia,mes,anio);
-												
-												//comprobar si la fecha es valida
-												try 
-												{
-													fechaValida=fechaDevolucion.ValidarFecha();
-												}
-												catch(ExcepcionFecha ef) 
-												{
-													System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
-												}
-											}while(fechaValida!=true);
-											
-											i=0;
-											if(arrayVendido[i]!=null) 
-											{
-												peso=arrayVendido[i].getPeso();//asignar peso
-												precio=arrayVendido[i].getPrecio();//asignar precio
-											}
-											
-											productoDevolucion=new Producto(nombre,precio,fechaDevolucion,cantidad,peso);
-			
-											//comprobar si el producto existe
-											try 
-											{
-												existeProducto=GestoraTienda.ExisteProducto(arrayVendido, nombre);
-											} catch (ExcepcionProducto ep)
-											{
-												System.out.println(ep);
-											}								
-											
-											if(existeProducto==true) 
-											{
-												//realizar la devolucion
-												try 
-												{
-													GestoraTienda.DevuelveProducto(arrayVendido,productoDevolucion,productosEnTienda);/****************/
-												} catch (ExcepcionProducto ep) 
-												{
-													System.out.println(ep);
-												}
-												
-												//mostrar mensaje de apollo
-												System.out.println("La devolucion se ha realizado con exito");
-											}
-											else 
-											{
-												System.out.println("Este producto no es de esta tienda");
-											}
-										}
-										
-										
+										System.out.println("En construccion");
 										break;
-								}//fin segun trabajador
-		
-								//volver a presentar el MenuTrabajador y leer y validar la opcion
-								repetir=true;
-								while(repetir) 
-								{
-									do
-									{
-										GestoraTienda.MenuTrabajador();
-										try 
-										{
-											opcion=sc.nextInt();
-											repetir=false;
-										}catch(InputMismatchException ime) 
-										{
-											sc.nextLine();
-											System.out.println(ime+": Un numero entero porfa");
-										}
-									}while(opcion<0 || opcion>2);
+											
+									case 3:
+										System.out.println("En construccion");
+										break;
+										
+									case 4:
+										System.out.println("En construccion");
+										break;
 								}
-							}//fin mientras de submenu Trabajador
-						/*}else 
-						{
-							System.out.println("-------------------------------------------------");
-							System.out.println("No hay Trabajadores contratados");
-						}*/
-					}else 
-					{
-						System.out.println("-------------------------------------------------");
-						System.out.println("No hay trabajadores contratados");
-					}
+								
+								//volver a preguntar si realmente quiere seguir y leer y validar seguir
+								do
+								{
+									GestoraTienda.PreguntarSeguir(opcion);
+									seguir=Character.toUpperCase(sc.next().charAt(0));
+								}while(seguir!='S' && seguir!='N');
+							}
+	
+							//volver a presentar el menu y leer y validar la opcion
+							do
+							{
+								GestoraTienda.MenuEncargado(opcion);
+								opcion=sc.nextInt();
+							}while(opcion<0 || opcion>4);
+							
+							//GestoraTienda.MenuTiendas(opcion);
+						}
 					
-					break;
-			}//fin_segun pricipal
-			
-			//volver a presentar el MenuPrincipal y leer y validar la opcion
-			repetir=true;
-			while(repetir) 
-			{
+						break;
+						
+					case 3:
+						//presentar el menu y leer y validar la opcion
+						do
+						{
+							GestoraTienda.MenuTrabajador(opcion);
+							opcion=sc.nextInt();
+						}while(opcion<0 || opcion>3);
+						
+						//GestoraTienda.MenuTiendas(opcion);
+								
+						while(opcion!=0)
+						{
+							//preguntar si realmente quiere seguir y leer y validar seguir
+							do
+							{
+								GestoraTienda.PreguntarSeguir(opcion);
+								seguir=Character.toUpperCase(sc.next().charAt(0));
+							}while(seguir!='S' && seguir!='N');
+								
+							while(seguir=='S')
+							{
+								switch(opcion)
+								{
+									case 1:
+										System.out.println("En construccion");
+										break;
+											
+									case 2:
+										System.out.println("En construccion");
+										break;
+											
+									case 3:
+										System.out.println("En construccion");
+										break;
+								}
+								
+								//volver a preguntar si realmente quiere seguir y leer y validar seguir
+								do
+								{
+									GestoraTienda.PreguntarSeguir(opcion);
+									seguir=Character.toUpperCase(sc.next().charAt(0));
+								}while(seguir!='S' && seguir!='N');
+							}
+	
+							//volver a presentar el menu y leer y validar la opcion
+							do
+							{
+								GestoraTienda.MenuTrabajador(opcion);
+								opcion=sc.nextInt();
+							}while(opcion<0 || opcion>3);
+							
+							//GestoraTienda.MenuTiendas(opcion);
+						}
+						
+						break;
+				}//fin_segun
+				
+				//volver a presentar el menu y leer y validar la opcion
+				
 				do
 				{
 					GestoraTienda.MenuPrincipal();
-					try 
-					{
-						opcion=sc.nextInt();
-						repetir=false;
-					}catch(InputMismatchException ime) 
-					{
-						sc.nextLine();
-						System.out.println("Un numero entero porfa");
-					}
-					
-					if(opcion<0 || opcion>3) 
-					{
-						System.out.println("-----------------------------------------------");
-						System.out.println("Opcion incorrecta, vuelve a intentarlo");
-					}
+					opcion=sc.nextInt();
 				}while(opcion<0 || opcion>3);
-			}
-			
-		}//fin_mientras_menu_principal
+			}//fin_mientras
+		}catch(ExcepcionProducto error)
+		{
+			System.out.println("O what a pity");
+		}
 		sc.close();
-	}//fin main
-}//fin clase
+	}
+}

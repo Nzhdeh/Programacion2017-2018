@@ -1,127 +1,37 @@
-
 package Proyecto;
 
-import java.util.ArrayList;
+public class ConductorGestoraTienda {
 
-public class ConductorGestoraTienda
-{
-	public static void main(String[] args) throws ExcepcionTrabajador, ExcepcionFecha
-	{
-		int i=0;
-		String nombre="",dni="";
-		GestoraTienda gt=new GestoraTienda();
+	public static void main(String[] args){
 		
-		Fecha fechaVenta1=new Fecha(31,1,2017);
-		Fecha fechaVenta2=new Fecha(5,1,2017);
-		Fecha fechaNacimiento=new Fecha(16,1,1991);
-		
-		Fecha fechaIni=new Fecha(1,1,2017);
-		Fecha fechaFin=new Fecha(31,1,2017);
-		
-		Producto p1=new Producto ("cd",2.4,fechaVenta1,10,0.1);
-		Producto p2= new Producto("usb",2.4,fechaVenta2,10,0.2);
-		
-		Producto [] productosVendidos=new Producto[20];
-		Producto [] producto=new Producto[20];
-		producto[0]=(p1);
-		producto[1]=(p2);
-		
-		productosVendidos[0]=(p1);
-		productosVendidos[1]=(p2);
-		
-		Trabajador t1=new Trabajador("Nzhdeh","Yeghiazaryan","X9923978F",fechaNacimiento,'V',TipoCargo.ENCARGADO);
-		Trabajador t2=new Trabajador("Luis","Zumarraga","00000000T",fechaNacimiento,'V',TipoCargo.VENDEDOR);
-		Trabajador [] contrataTrabajador=new Trabajador[20];
-		contrataTrabajador[0]=(t1);
-		contrataTrabajador[1]=(t2);
-		//dni=contrataTrabajador.get(i).getDni();
-		dni="X9923979F";
-		Incidencia [] inci=new Incidencia[5];
-		Incidencia denuncia1=new Incidencia("El pan esta duro");
-		Incidencia denuncia2=new Incidencia("Denuncia");
-		inci[0]=denuncia1;
-		inci[1]=denuncia2;
-		
-		Producto [] productoComprado=new Producto[20];
-		productoComprado[0]=(p1);
-		productoComprado[1]=(p2);	
-		
-		Producto [] arrayVendido=new Producto[20];
-		arrayVendido[0]=(p1);
-		
-//		GestoraTienda.MenuPrincipal();
-//		GestoraTienda.MenuJefe();
-//		GestoraTienda.MenuEncargado();
-//		GestoraTienda.MenuTrabajador();
-		GestoraTienda.PintaProductos(producto);
-//		try 
-//		{
-//			System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
-//		} catch (ExcepcionProducto e) 
-//		{
-//			System.out.println(e+": Producto no encontrado");
-//		}
-//		nombre="usb";
-//		try 
-//		{
-//			System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
-//		} catch (ExcepcionProducto e) 
-//		{
-//			System.out.println(e+": Producto no encontrado");
-//		}
-		
-//		System.out.println(GestoraTienda.CalculaVenta(productosVendidos, fechaIni, fechaFin));	
-//		System.out.println(GestoraTienda.ExisteTrabajador(contrataTrabajador, dni));
-//		System.out.println(GestoraTienda.ContrataTrabajador(contrataTrabajador));
-//		GestoraTienda.ConsultarTrabajadorContratado(contrataTrabajador);
-//		dni="X9923978F";
-//		GestoraTienda.DespideTrabajador(contrataTrabajador, dni);
-//		GestoraTienda.ConsultarTrabajadorContratado(contrataTrabajador);
-//		gt.ConsultaIncidencias(inci);
-//		System.out.println(GestoraTienda.EncargaProductos(productoComprado,p1));
-//		System.out.println(gt.AvisaIncidencias(denuncia1, inci));
-//		System.out.println(gt.EliminarIncidencia(inci, 1));
-//		System.out.println(gt.EliminarIncidencia(inci, 1));
-//		GestoraTienda.ConsultarProductosTienda(productoComprado);
-//		try 
-//		{
-//			System.out.println(GestoraTienda.VendeProducto(productoComprado,p1,arrayVendido));
-//		} catch (ExcepcionProducto e) 
-//		{
-//			System.out.println(e+": No hay productos");
-//		}
-//		try 
-//		{
-//			GestoraTienda.DevuelveProducto(arrayVendido,p1, productoComprado);
-//		} catch (ExcepcionProducto e) 
-//		{
-//			System.out.println(e+": No existe");
-//		}catch (IndexOutOfBoundsException e) 
-//		{
-//			System.out.println("Array vacio");
-//		}
-//		try 
-//		{
-//			System.out.println(GestoraTienda.ValidarDNI("15674732"));
-//		}catch(NumberFormatException e) 
-//		{
-//			System.out.println(e+": No valido");
-//		}
-//		
-//		try 
-//		{
-//			System.out.println(GestoraTienda.ValidarNIE("X9923978F"));
-//		}catch(NumberFormatException e) 
-//		{
-//			System.out.println(e+": No valido");
-//		}
-		
-//		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923978F"));
-//		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923979F"));
-//		System.out.println(gt.ExisteEncargado(contrataTrabajador));
-//		System.out.println(gt.ExisteEncargado(contrataTrabajador));
-		
-		
-		
+		try
+		{
+			String nombre="Tarjeta de red";
+			Fecha fechaVenta=new Fecha(20,1,2017);
+			Fecha fecha=new Fecha(16,1,2017);
+			Fecha fechaIni=new Fecha(01,1,2017);
+			Fecha fechaFin=new Fecha(31,1,2017);
+			Producto [] producto={new Producto("Tarjeta de red",15.05,fecha,"Muy util",0.3),new Producto("Disco CD",1.20,fecha,"No funciona",0.1),new Producto("Cable HDMI",3.50,fecha,"Es bonito",0.2)
+								 ,new Producto("Placa base",100,fecha,"Es impresionante",0.7),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 ,new Producto("Tarjeta de red",15.05,fecha,"Muy util",0.3),new Producto("Disco CD",1.20,fecha,"No funciona",0.1),new Producto("Cable HDMI",3.50,fecha,"Es bonito",0.2)
+								 ,new Producto("Placa base",120,fecha,"Es impresionante",0.7),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 ,new Producto("Fuente de alimentacion",60.5,fecha,"No te lo recomiendo",1.0),new Producto("Disco duro m.2",140,fecha,"Va muy rapido",0.1),new Producto("Procesador i5",180,fecha,"Es magnifico",0.2)
+								 };
+			
+			GestoraTienda.pintaProductos(producto);
+			//GestoraTienda.PreguntarSeguir(1);
+			//GestoraTienda.MenuPrincipal();
+			//GestoraTienda.MenuJefe(1);
+			//GestoraTienda.MenuEncargado(2);
+			//GestoraTienda.MenuTrabajador(0);
+			//System.out.println(GestoraTienda.CalcularVenta(producto, fechaIni, fechaFin,1));
+			//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
+			//nombre="usb 3.0";
+			//System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
+			//System.out.println(GestoraTienda.VenderProducto(producto, nombre, fechaVenta));
+		}catch(ExcepcionProducto error)
+		{
+			System.out.println("Ooooooh... Wata pity");
+		}
 	}
 }
