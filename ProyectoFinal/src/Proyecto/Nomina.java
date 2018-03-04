@@ -98,11 +98,17 @@
  	
  	public String getCIFEmpresaEmpresa() 
 	
-	public int getFechaDia() 
-
-	public int getFechaMes() 
-
-	public int getFechaAnio()
+	public int getFechaFirmaDia() 
+	public int getFechaFirmaMes() 
+	public int getFechaFirmaAnio() 
+	
+	public int getPeriodoFinalDia() 
+	public int getPeriodoFinalMes() 
+	public int getPeriodoFinalAnio() 
+	
+	public int getPeriodoInicialDia() 
+	public int getPeriodoInicialMes() 
+	public int getPeriodoInicialAnio() 
  * 
  * 
  * metodos añadidos: 
@@ -124,10 +130,11 @@ public class Nomina
 	private double parteProporcinalHorasExtras;
 	private double transporte;
 	private double horasExtras;
-	//private Fecha fechaNacimientoTrabajador;
-	private Trabajador [] trabajador;
+	private Trabajador trabajador;
 	private Empresa empresa;
-	private Fecha fecha;
+	private Fecha fechaFirma;
+	private Fecha fechaPeriodoInicial;
+	private Fecha fechaPeriodoFinal;
 		 
 	//propiedades compartidas:
 	private final double porcentajeContingenciaComun=4.7;
@@ -135,7 +142,7 @@ public class Nomina
 	private final double porcentajeFormacionProfecional=0.1;
 	private final double porcentajeHorasExtras=4.7;
 	private final double porcentajeIRPF=15.0;
-	private int i=0;
+	private GestoraTienda gt;
 	
 	//propiedades derivadas:
 	private double contingenciaComun;
@@ -154,15 +161,19 @@ public class Nomina
 		double parteProporcinalHorasExtras=0.0;
 		double transporte=0.0;
 		//Fecha fechaNacimientoTrabajador=new Fecha();
-		Trabajador [] trabajador=new Trabajador[20];
+		Trabajador trabajador=new Trabajador();
 		Empresa empresa=new Empresa();
-		Fecha fecha=new Fecha();
+		Fecha fechaFirma=new Fecha();
+		Fecha fechaPeriodoInicial=new Fecha();
+		Fecha fechaPeriodoFinal=new Fecha();
 		
 		double porcentajeContingenciaComun=4.7;;
 		double porcentajeDesempleo=1.6;
 		double porcentajeFormacionProfecional=0.1;
 		double porcentajeHorasExtras=4.7;
 		double porcentajeIRPF=15.0;
+		
+		GestoraTienda gt=new GestoraTienda();
 		
 		double antiguedad=0.0; 
 		double contingenciaComun=0.0;
@@ -172,21 +183,20 @@ public class Nomina
 		double IRPF=0.0;
 	}
 	
-/*
-	public Nomina(double salarioBase2, double plusTitulo2, double parteProporcinalHorasExtras2, double transporte2,
-			Trabajador[] trabajadorContratado, Empresa empresa2) {
-		// TODO Auto-generated constructor stub
-	}*/
+
 	//con parametros
 	public Nomina(double salarioBase,double plusTitulo,double parteProporcinalHorasExtras,double transporte,
-				  Empresa empresa, Trabajador [] trabajador) 
+				  Fecha fechaFirma,Fecha fechaPeriodoInicial,Fecha fechaPeriodoFinal,Empresa empresa, Trabajador trabajador) 
 	{
 		this.salarioBase=salarioBase;
 		this.plusTitulo=plusTitulo;
 		this.parteProporcinalHorasExtras=parteProporcinalHorasExtras;
 		this.transporte=transporte;
-		this.trabajador=new Trabajador[i];
-		this.empresa=new Empresa();
+		this.fechaFirma=fechaFirma;
+		this.fechaPeriodoInicial=fechaPeriodoInicial;
+		this.fechaPeriodoFinal=fechaPeriodoFinal;
+		this.trabajador=trabajador;
+		this.empresa=empresa;
 	}
 	
 	//de copia
@@ -202,7 +212,7 @@ public class Nomina
 		this.horasExtras=nomina.getHorasExtras();
 		this.IRPF=nomina.getIRPF();
 		
-		this.trabajador[i]=nomina.trabajador[i];
+		this.trabajador=new Trabajador(nomina.trabajador);
 		this.empresa=new Empresa(nomina.empresa);
 	}
 
@@ -348,42 +358,42 @@ public class Nomina
 	//patron delegacion
 	public String getNombreTrabajador() 
 	{
-		return trabajador[i].getNombre();
+		return trabajador.getNombre();
 	}
 
 	public String getApellidosTrabajador() 
 	{
-		return trabajador[i].getApellidos();
+		return trabajador.getApellidos();
 	}
 
 	public String getDniTrabajador() 
 	{
-		return trabajador[i].getDni();
+		return trabajador.getDni();
 	}
 
 	public TipoCargo getCARGOTrabajador() 
 	{
-		return trabajador[i].getCARGO();
+		return trabajador.getCARGO();
 	}
 
 	public int getFechaNacimientoDiaTrabajador() 
 	{
-		return trabajador[i].getFechaNacimientoDia();
+		return trabajador.getFechaNacimientoDia();
 	}
 
 	public int getFechaNacimientoMesTrabajador() 
 	{
-		return trabajador[i].getFechaNacimientoMes();
+		return trabajador.getFechaNacimientoMes();
 	}
 
 	public int getFechaNacimientoAnioTrabajador() 
 	{
-		return trabajador[i].getFechaNacimientoAnio();
+		return trabajador.getFechaNacimientoAnio();
 	}
 
 	public char getSexoTrabajador() 
 	{
-		return trabajador[i].getSexo();
+		return trabajador.getSexo();
 	}
 
 	public String getNombreEmpresaEmpresa() 
@@ -401,19 +411,53 @@ public class Nomina
 		return empresa.getCIFEmpresa();
 	}
 	
-	public int getFechaDia() 
+	public int getFechaFirmaDia() 
 	{
-		return fecha.getDia();
+		return fechaFirma.getDia();
 	}
 
-	public int getFechaMes() 
+	public int getFechaFirmaMes() 
 	{
-		return fecha.getMes();
+		return fechaFirma.getMes();
 	}
 
-	public int getFechaAnio() 
+	public int getFechaFirmaAnio() 
 	{
-		return fecha.getAnio();
+		return fechaFirma.getAnio();
+	}
+	
+	public int getPeriodoFinalDia() 
+	{
+		return fechaPeriodoFinal.getDia();
+	}
+
+
+	public int getPeriodoFinalMes() 
+	{
+		return fechaPeriodoFinal.getMes();
+	}
+
+
+	public int getPeriodoFinalAnio() 
+	{
+		return fechaPeriodoFinal.getAnio();
+	}
+	
+	public int getPeriodoInicialDia() 
+	{
+		return fechaPeriodoInicial.getDia();
+	}
+
+
+	public int getPeriodoInicialMes() 
+	{
+		return fechaPeriodoInicial.getMes();
+	}
+
+
+	public int getPeriodoInicialAnio() 
+	{
+		return fechaPeriodoInicial.getAnio();
 	}
 	
 	//interfaz
@@ -466,7 +510,7 @@ public class Nomina
 	public double calcularTotalAportaciones() 
 	{
 		double totalAportaciones=0.0;
-		totalAportaciones=Math.round(getContingenciaComun()+getDesempleo()+getFormacionProfecional()+getHorasExtras());//Math.round para redondear
+		totalAportaciones=Math.round(getContingenciaComun()+getDesempleo()+getFormacionProfecional()+getHorasExtras());
 		return totalAportaciones;
 	}
 	
@@ -588,57 +632,55 @@ public class Nomina
 	}*/
 	public void generarNomina() 
 	{
-		for(i=0;i<trabajador.length && trabajador[i]==null;i++) 
-		{
-			System.out.println("-----------------------------------------------------------------------------------------");
-			System.out.println("|----------------------------------------"+"	----------------------------------------||");
-			System.out.println("|Empresa: "+empresa.getNombreEmpresa()+"			|"+"	|Trabajador: "+"		||");
-			System.out.println("|Domicilio: "+empresa.getDomicilioEmpresa()+"	|"+"	|DNI/NIE: "+"			||");
-			System.out.println("|Cif: "+empresa.getCIFEmpresa()+"				|"+"	|Categoria: "+"			||");
-			System.out.println("|----------------------------------------"+"	----------------------------------------||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-			System.out.println("|Periodo de liquidacion: 			||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-			System.out.println("|I. DEVENGOS										||");
-			System.out.println("|		1. Percepciones salariales						||");
-			System.out.println("|		Salario base----------------------------------------------"+getSalarioBase()+" €	||");
-			System.out.println("|		Complementos salariales:						||");
-			System.out.println("|		Plus Titulo-----------------------------------------------"+getPlusTitulo()+" €	||");
-			System.out.println("|		Parte proporcional horas extras---------------------------"+getParteProporcinalHorasExtras()+" €	||");
-			System.out.println("|		2. Percepciones extrasalariales						||");
-			System.out.println("|		Indemnizaciones o suplidos:						||");
-			System.out.println("|		Transporte------------------------------------------------"+getTransporte()+" €	||");
-			System.out.println("|				     A.TOTAL DEVENGADO-------------------------"+calcularTotalDevengado()+" € ||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-			System.out.println("|II. DEDUCCIONES									||");
-			System.out.println("|		1. Cotizaciones a la seguridad social					||");
-			System.out.println("|		Contingencias comunes--------------- "+getPorcentajecontingenciacomun()+"% --------------"+getContingenciaComun()+" €		||");
-			System.out.println("|		Desempleo--------------------------- "+getPorcentajedesempleo()+"% --------------"+getDesempleo()+" €		||");
-			System.out.println("|		Formacion profecional--------------- "+getPorcentajeformacionprofecional()+"% --------------"+getFormacionProfecional()+"€		||");
-			System.out.println("|		Horas extras------------------------ "+getPorcentajehorasextras()+"% --------------"+getHorasExtras()+"€		||");
-			System.out.println("|				TOTAL APORTACIONES----------------------"+calcularTotalAportaciones()+" € 		||");
-			System.out.println("|		2. IRPF----------------------------- "+getPorcentajeIRPF()+"% -------------"+getIRPF()+" €		||");
-			System.out.println("|		3. Anticipos----------------------------------------------------	||");
-			System.out.println("|		4. Valor de los productos recibidos en especie------------------ 	||");
-			System.out.println("|		5. Otras deducciones--------------------------------------------	||");
-			System.out.println("|					  B.TOTAL A DEDUCIR---------------------"+calcularTotalADeducir()+" € ||");
-			System.out.println("|			LIQUIDO TOTAL A PERCIBIR (A-B)--------------------------"+calcularLiquidoTotalAPercibir()+" € ||");
-			System.out.println("|				Firma y sello de la empresa	"+getFechaDia()+'/'+getFechaMes()+'/'+getFechaAnio()+"		||");
-			System.out.println("|								Recibi			||");
-			System.out.println("|											||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-			System.out.println("|BASES DE COTIZACION A LA SEGURIDAD SOCIAL E IRPF					||");
-			System.out.println("|		1. Base de cotización por contingencias comunes				||");
-			System.out.println("|			Remuneración mensual--------------------------------"+getRemuneracionMensual()+" €	||");
-			System.out.println("|			Prorrata de pagas extraordinarias-------------------"+getProrotaPagasExtraordinarias()+" €	||");
-			System.out.println("|								Total-------"+calcularTotal()+" €	||");
-			System.out.println("|		2. Base de cotización por contingencias					||");
-			System.out.println("|		   profecionales----------------------------------------"+calcularBaseCotizacionPorContingenciasProfesionales()+" €	||");
-			System.out.println("|		3. Base de cotización por horas extras------------------"+getParteProporcinalHorasExtras()+" €		||");
-			System.out.println("|		4. Base sujeta a retención del IRPF---------------------"+calcularTotalDevengado()+" €	||");
-			System.out.println("|---------------------------------------------------------------------------------------||");
-					
-		}
-	}
+		Fecha f=new Fecha();
+		
+		System.out.println("-----------------------------------------------------------------------------------------");
+		System.out.println("|----------------------------------------"+"	----------------------------------------||");
+		System.out.println("|Empresa: "+empresa.getNombreEmpresa()+"			|"+"	|Trabajador: "+getNombreTrabajador()+' '+getApellidosTrabajador()+"		||");
+		System.out.println("|Domicilio: "+empresa.getDomicilioEmpresa()+"		|"+"	|DNI/NIE: "+getDniTrabajador()+"			||");
+		System.out.println("|Cif: "+empresa.getCIFEmpresa()+"				|"+"	|Categoria: "+getCARGOTrabajador()+"			||");
+		System.out.println("|----------------------------------------"+"	----------------------------------------||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+f.RestarFecha(fechaPeriodoFinal, fechaPeriodoInicial)+"	||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+		System.out.println("|I. DEVENGOS										||");
+		System.out.println("|		1. Percepciones salariales						||");
+		System.out.println("|		Salario base----------------------------------------------"+getSalarioBase()+" €	||");
+		System.out.println("|		Complementos salariales:						||");
+		System.out.println("|		Plus Titulo-----------------------------------------------"+getPlusTitulo()+" €	||");
+		System.out.println("|		Parte proporcional horas extras---------------------------"+getParteProporcinalHorasExtras()+" €	||");
+		System.out.println("|		2. Percepciones extrasalariales						||");
+		System.out.println("|		Indemnizaciones o suplidos:						||");
+		System.out.println("|		Transporte------------------------------------------------"+getTransporte()+" €	||");
+		System.out.println("|				     A.TOTAL DEVENGADO-------------------------"+calcularTotalDevengado()+" € ||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+		System.out.println("|II. DEDUCCIONES									||");
+		System.out.println("|		1. Cotizaciones a la seguridad social					||");
+		System.out.println("|		Contingencias comunes--------------- "+getPorcentajecontingenciacomun()+"% --------------"+getContingenciaComun()+" €		||");
+		System.out.println("|		Desempleo--------------------------- "+getPorcentajedesempleo()+"% --------------"+getDesempleo()+" €		||");
+		System.out.println("|		Formacion profecional--------------- "+getPorcentajeformacionprofecional()+"% --------------"+getFormacionProfecional()+"€		||");
+		System.out.println("|		Horas extras------------------------ "+getPorcentajehorasextras()+"% --------------"+getHorasExtras()+"€		||");
+		System.out.println("|				TOTAL APORTACIONES----------------------"+calcularTotalAportaciones()+" € 		||");
+		System.out.println("|		2. IRPF----------------------------- "+getPorcentajeIRPF()+"% -------------"+getIRPF()+" €		||");
+		System.out.println("|		3. Anticipos----------------------------------------------------	||");
+		System.out.println("|		4. Valor de los productos recibidos en especie------------------ 	||");
+		System.out.println("|		5. Otras deducciones--------------------------------------------	||");
+		System.out.println("|					  B.TOTAL A DEDUCIR---------------------"+calcularTotalADeducir()+" € ||");
+		System.out.println("|			LIQUIDO TOTAL A PERCIBIR (A-B)--------------------------"+calcularLiquidoTotalAPercibir()+" € ||");
+		System.out.println("|				Firma y sello de la empresa	"+fechaFirma.toString()+"		||");
+		System.out.println("|								Recibi			||");
+		System.out.println("|											||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+		System.out.println("|BASES DE COTIZACION A LA SEGURIDAD SOCIAL E IRPF					||");
+		System.out.println("|		1. Base de cotización por contingencias comunes				||");
+		System.out.println("|			Remuneración mensual--------------------------------"+getRemuneracionMensual()+" €	||");
+		System.out.println("|			Prorrata de pagas extraordinarias-------------------"+getProrotaPagasExtraordinarias()+" €	||");
+		System.out.println("|								Total-------"+calcularTotal()+" €	||");
+		System.out.println("|		2. Base de cotización por contingencias					||");
+		System.out.println("|		   profecionales----------------------------------------"+calcularBaseCotizacionPorContingenciasProfesionales()+" €	||");
+		System.out.println("|		3. Base de cotización por horas extras------------------"+getParteProporcinalHorasExtras()+" €		||");
+		System.out.println("|		4. Base sujeta a retención del IRPF---------------------"+calcularTotalDevengado()+" €	||");
+		System.out.println("|---------------------------------------------------------------------------------------||");
+	}	
 }

@@ -71,9 +71,17 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return dia;
 	}
 	
-	public void setDia(int dia)
+	public void setDia(int dia) throws ExcepcionFecha
 	{
-		this.dia=dia;
+		
+			if(dia>0 && dia<32) 
+			{
+				this.dia=dia;
+			}else 
+			{
+				throw new ExcepcionFecha("Dia incorrecto.");
+			}
+		
 	}
 	
 	public int getMes()
@@ -81,19 +89,31 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return mes;
 	}
 	
-	public void setMes(int mes)
+	public void setMes(int mes) throws ExcepcionFecha
 	{
-		this.mes=mes;
+		if(mes<1 || mes >12)		
+		{
+			throw new ExcepcionFecha("El mes tiene que estar entre 1 y 12");
+		}else 
+		{
+			this.mes=mes;
+		}
 	}
 	
-	public int getAnio()
+	public int getAnio() 
 	{
 		return anio;
 	}
 	
-	public void setAnio(int anio)
+	public void setAnio(int anio) throws ExcepcionFecha
 	{
-		this.anio=anio;
+		if(anio<1) 
+		{
+			throw new ExcepcionFecha("El anio no puede ser menor que 1");
+		}else 
+		{
+			this.anio=anio;
+		}
 	}
 	
 	//metodos heredados
@@ -101,7 +121,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	@Override
 	public String toString()
 	{
-		return ("Dia: "+dia+" Mes: "+mes+" A\u00f1o: "+anio);
+		return (dia+"-"+mes+"-"+anio);
 	}
 	
 	
@@ -146,38 +166,25 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}
 	
+	//condicion de comparacion: dia,mes y año
 	@Override
 	public int compareTo(Fecha f)
 	{
-		int comparar=0;
+		int comparar;
 		
-		if(this.getAnio()>f.getAnio())
+		if((this.getAnio()>f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()>f.getMes()) || 
+		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())) 
 		{
-			comparar=1;
-		}
-		else if(this.getAnio()==f.getAnio() && this.getMes()>f.getMes())
-		{
-			comparar=1;
-		}
-		else if (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()>f.getDia())
-		{
-			comparar=1;
-		}
-		else if(this.getAnio()<f.getAnio())
-		{
-			comparar=(-1);
-		}
-		else if(this.getAnio()==f.getAnio() && this.getMes()<f.getMes())
-		{
-			comparar=(-1);
-		}
-		else if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia())
-		{
-			comparar=(-1);
+			comparar=1; //el primero es mayor que el segundo
 		}
 		else if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()==f.getDia())
 		{
-			comparar=0;
+			comparar=0;//son iguales
+		}
+		else /*if((this.getAnio()<f.getAnio()) || (this.getAnio()==f.getAnio() && this.getMes()<f.getMes()) || 
+		   (this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()<f.getDia()))*/
+		{
+			comparar=(-1);
 		}
 		
 		return comparar;
@@ -187,8 +194,8 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	prototipo: public boolean ValidarFecha()
 	comentario: sirve para validar una fecha
 	precondiciones:no hay
-	entradas: no hya
-	salidas: boolean
+	entradas: no hay
+	salidas: logico
 	postcondiciones: AN devolvera true si la fecha es valida y false si no.
 	*/
 	/*
@@ -202,7 +209,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}*/
 	
-	public boolean ValidarFecha()
+	public boolean ValidarFecha() throws ExcepcionFecha
 	{
 		boolean res=false;
 		
@@ -239,28 +246,96 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 						
 						case 2:
 							
-						if(this.getAnio()>1581)
+						if ((this.getAnio()>1581) && (this.getAnio() % 400 == 0) || 
+							((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
 						{
-							if ((this.getAnio() % 400 == 0) || ((this.getAnio() % 4 == 0) && (this.getAnio() % 100 != 0)))
-							{
-								if (this.getDia () > 0 && this.getDia () < 30)
-								{
-									res = true;
-								}
-							}
-						}
-						
-						else
-						{
-							if (this.getDia () > 0 && this.getDia () < 29)
+							if (this.getDia () > 0 && this.getDia () < 30)
 							{
 								res = true;
 							}
 						}
-						
+						else if (this.getDia () > 0 && this.getDia () < 29)
+						{
+							res = true;
+						}
 					}
 			}
 		}
 		return res;
+	}
+	
+	
+	/*
+	prototipo: public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	comentario: sireve para restar dos fechas
+	precondiciones:no hay
+	entradas: dos fechas
+	salidas: una fecha
+	postcondiciones: AN devolvera el resultado
+	*/
+	/*
+	
+	resguardo
+	
+	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	{
+		Fecha fecha=null;
+		System.out.println("En construccion");
+		return fecha;
+	}*/
+	
+	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	{
+		
+		int anio=0;
+		int mes=0;
+		int dia=0;
+		Fecha fechaResultante=new Fecha();
+		
+		if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		fechaResultante=new Fecha(dia,mes,anio);
+		
+		return fechaResultante;
 	}
 }

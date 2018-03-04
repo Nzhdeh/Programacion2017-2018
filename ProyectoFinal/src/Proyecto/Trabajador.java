@@ -4,10 +4,16 @@
  * 						nombre: tipo String,consultable, modificable
  * 						apellidos:tipo String,consultable, modificable
  * 						dni: tipo String,consultable, modificable
- * 						edad: tipo int,consultable
+ * 						fechaNacimiento: tipo Fecha,consultable
  * 						sexo: tipo char,consultable,modificable
+ * 						CARGO: tipo TipoCargo,consultable
  * 
  * propiedades derivadas:no hay
+ * 
+ * propiedades compartidas: no hay
+ * 
+ * restricciones: El nombre, el apellido y el dni no pueden ser nulos
+ * 				  El sexo tiene que ser 'V' o 'M' o 'v' o 'm'
  * 
  * INTERFAZ DE LA CLASE
  * 
@@ -22,21 +28,25 @@
  * public String getDni()
  * public void setNombre(String dni)
  * 
- * public int getedad()
+ * public Fecha get FechaNacimiento() //se aplicara el patron delegacion
  * 
  * public char getSexo()
  * public void setSexo(char sexo)
  * 
+ * public TipoCargo getCARGO()
  * 
- */package Proyecto;
+ * 
+ */
+package Proyecto;
 
 public class Trabajador implements Cloneable,Comparable <Trabajador>
 {
 	private String nombre;
 	private String apellidos;
 	private String dni;
-	private int edad;
+	private Fecha fechaNacimiento;
 	private char sexo;
+	private TipoCargo CARGO;
 	
 	//constructores 
 	//por defecto
@@ -45,37 +55,20 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		String nombre=" ";
 		String apellidos=" ";
 		String dni=" ";
-		int edad=0;
+		Fecha fechaNacimiento=null;
 		char sexo=' ';
+		TipoCargo CARGO=null;
 	}
 	
 	//sobrecargado
-	public Trabajador(String nombre,String apellidos,String dni,int edad,char sexo) throws ExcepcionTrabajador
+	public Trabajador(String nombre,String apellidos,String dni,Fecha fechaNacimiento,char sexo,TipoCargo CARGO)
 	{
-		if(nombre==null) 
-		{
-			throw new ExcepcionTrabajador("El nombre no puede estar vac\\u00edo");
-		}
-		else if(apellidos==null) 
-		{
-			throw new ExcepcionTrabajador("El apellido no puede estar vac\\u00edo");
-		}
-		else if(dni==null) 
-		{
-			throw new ExcepcionTrabajador("El DNI no puede estar vac\\u00edo");
-		}
-		else if(sexo!='V' && sexo!='M') 
-		{
-			throw new ExcepcionTrabajador("El sexo se representa con las letras 'V' o 'M'");
-		}
-		else 
-		{
-			this.nombre=nombre;
-			this.apellidos=apellidos;
-			this.dni=dni;
-			this.edad=edad;
-			this.sexo=sexo;
-		}
+		this.nombre=nombre;
+		this.apellidos=apellidos;
+		this.dni=dni;
+		this.fechaNacimiento=fechaNacimiento;
+		this.sexo=sexo;
+		this.CARGO=CARGO;
 	}
 	
 	//de copia
@@ -84,65 +77,135 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		this.nombre=trabajador.getNombre();
 		this.apellidos=trabajador.getApellidos();
 		this.dni=trabajador.getDni();
-		this.edad=trabajador.getEdad();
+		this.fechaNacimiento=trabajador.fechaNacimiento;
 		this.sexo=trabajador.getSexo();
+		this.CARGO=trabajador.getCARGO();
 	}
 	
 	//getters y setters
 
-	public String getNombre() {
+	public String getNombre() 
+	{
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws ExcepcionTrabajador
+	{
+		if(nombre == null)
+		{
+			throw new ExcepcionTrabajador("El nombre no puede estar vacio");
+		}else
+		{
+			this.nombre = nombre;
+		}
+		
 	}
 
-	public String getApellidos() {
+	public String getApellidos() 
+	{
 		return apellidos;
 	}
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setApellidos(String apellidos) throws ExcepcionTrabajador
+	{
+		if(apellidos ==null)
+		{
+			throw new ExcepcionTrabajador("El apellido no puede estar vacio");
+		}else
+		{
+			this.apellidos = apellidos;
+		}
 	}
 
-	public String getDni() {
+	public String getDni() 
+	{
 		return dni;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDni(String dni) throws ExcepcionTrabajador
+	{
+		if(apellidos==null)
+		{
+			throw new ExcepcionTrabajador("El DNI no puede estar vacio");
+		}else
+		{
+			this.dni = dni;
+		}
 	}
-
-	public int getEdad() {
-		return edad;
+	
+	public TipoCargo getCARGO() 
+	{
+		return CARGO;
+	}
+	
+	
+	//patron delegacion
+	public int getFechaNacimientoDia() 
+	{
+		return fechaNacimiento.getDia();
 	}
 /*
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}*/
-
-	public char getSexo() {
+	public void setFechaNacimientoDia(int dia) throws ExcepcionFecha 
+	{
+		fechaNacimiento.setDia(dia);
+	}
+*/
+	public int getFechaNacimientoMes() 
+	{
+		return fechaNacimiento.getMes();
+	}
+/*
+	public void setFechaNacimientoMes(int mes) throws ExcepcionFecha 
+	{
+		fechaNacimiento.setMes(mes);
+	}
+*/
+	public int getFechaNacimientoAnio() 
+	{
+		return fechaNacimiento.getAnio();
+	}
+/*
+	public void setFechaNacimientoAnio(int anio) throws ExcepcionFecha 
+	{
+		fechaNacimiento.setAnio(anio);
+	}
+*/
+	//fin patron delegacion
+	
+	public char getSexo() 
+	{
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
+	public void setSexo(char sexo) throws ExcepcionTrabajador
+	{
+		if((sexo=='V' || sexo=='M') || (sexo=='v' || sexo=='m')) 
+		{
+			this.sexo = sexo;
+		}else
+		{
+			throw new ExcepcionTrabajador("El sexo se representa con las letras 'V' o 'M'");
+		}
 	}
 	
-	//metodos heredados
+	
 	@Override
 	public String toString() 
 	{
-		return ("Nombre: "+nombre+'\n'+"Apellidos: "+apellidos+'\n'+
-				"DNI: "+dni+'\n'+"Sexo: "+sexo);
+		return (getNombre()+','+getApellidos()+','+getDni()+','+getCARGO()+','+getFechaNacimientoDia()+"-"+getFechaNacimientoMes()+"-"+getFechaNacimientoAnio()
+				+','+getSexo());
 	}
 	
 	@Override
 	public int hashCode() 
 	{
-		return (int)(1000*getEdad()/1000);
+		int hash=1;
+		
+		hash=hash*27+nombre.hashCode();
+		
+		return hash;
 	}
+	
 	
 	@Override
 	public Trabajador clone() 
@@ -152,6 +215,8 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		try 
 		{
 			clon=(Trabajador) super.clone();
+			
+			clon.fechaNacimiento=this.fechaNacimiento.clone();
 		}
 		catch(CloneNotSupportedException error) 
 		{
@@ -167,12 +232,17 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 	{
 		boolean res=false;
 		
-		if(o!=null && o instanceof Producto) 
+		if(this==o) 
+		{
+			res=true;
+		}
+		else if(o!=null && o instanceof Trabajador) 
 		{
 			Trabajador trabajador=(Trabajador) o;
 			
-			if(this.getNombre()==trabajador.getNombre() && this.getApellidos()==trabajador.getApellidos()
-					&& this.getDni()==trabajador.getDni()) 
+			if(this.getNombre()==trabajador.getNombre() && 
+			   this.getApellidos()==trabajador.getApellidos() && 
+			   this.getDni()==trabajador.getDni()) 
 			{
 				res=true;
 			}
@@ -180,21 +250,29 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 		return res;
 	}
 	
-	//condicion de comparacion: la edad
-	@Override
+	//condicion de comparacion: fecha de nacimiento
 	public int compareTo(Trabajador t) 
-	{
+	{		
 		int comparar=0;
-		
-		if(this.getEdad()>t.getEdad()) 
+		/*
+		if((this.getFechaNacimientoAnio()>t.getFechaNacimientoAnio()) || (this.getFechaNacimientoAnio()==t.getFechaNacimientoAnio() && this.getFechaNacimientoMes()>t.getFechaNacimientoMes()) ||
+		  (this.getFechaNacimientoAnio()==t.getFechaNacimientoAnio() && this.getFechaNacimientoMes()==t.getFechaNacimientoMes() && this.getFechaNacimientoDia()>t.getFechaNacimientoDia())) 
 		{
 			comparar=1;
 		}
-		else if(this.getEdad()<t.getEdad()) 
+		else if(this.getFechaNacimientoAnio()==t.getFechaNacimientoAnio() && this.getFechaNacimientoMes()==t.getFechaNacimientoMes() && this.getFechaNacimientoDia()==t.getFechaNacimientoDia())
+		{
+			comparar=0;
+		}
+		*/
+		if(this.fechaNacimiento.compareTo(t.fechaNacimiento)==1) 
+		{
+			comparar=1;
+		}
+		else if(this.fechaNacimiento.compareTo(t.fechaNacimiento)==(-1)) 
 		{
 			comparar=(-1);
 		}
-		
 		return comparar;
 	}
 }

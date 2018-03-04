@@ -4,8 +4,8 @@
  * 					Nombre: tipo String,consultable, modificable
  * 					precio: tipo double,consultable,modificable
  * 					fechaVenta: tipo Fecha,consultable
- * 					descripcion: tipo String,consultable, modificable
- * 					peso: tipo double, consultable
+ * 					cantidad: tipo String,consultable, modificable
+ * 					peso: tipo double, consultable,modificable
  * 
  * Propiedades derivadas: No hay
  * 
@@ -19,12 +19,13 @@
  * public double getPrecio()
  * public void setPrecio(double precio)
  * 
- * public Fecha getFechaVenta()
+ * public Fecha getFechaVenta()  
  * 
- * public String getDescripcion()
- * public void setDescripcion(String descripcion)
+ * public String getCantidad()
+ * public void setCantidad(String cantidad)
  * 
  * public double getPeso()
+ * public void setPeso()
  * 
  * metodos añadidos: No hay
  * 
@@ -38,7 +39,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	private String nombre;
 	private double precio;
 	private Fecha fechaVenta;
-	private String descripcion;
+	private int cantidad;
 	private double peso;
 	
 	//constructores
@@ -49,29 +50,18 @@ public class Producto implements Cloneable, Comparable <Producto>
 		String nombre=" ";
 		double precio=0;
 		Fecha fechaVenta=null;
-		String descripcion=" ";
+		int cantidad=0;
 		double peso=0.0;
 	}
 	
 	//sobrecargado
-	public Producto(String nombre,double precio,Fecha fechaVenta,String descripcion,double peso) throws ExcepcionProducto 
+	public Producto(String nombre,double precio,Fecha fechaVenta,int cantidad,double peso)
 	{
-		if(precio<=0) 
-		{
-			throw new ExcepcionProducto("El precio no puede ser menor o igul que cero");
-		}
-		else if(peso<=0) 
-		{
-			throw new ExcepcionProducto("El peso no puede ser menor o igul que cero");
-		}
-		else 
-		{
-			this.nombre=nombre;
-			this.precio=precio;
-			this.fechaVenta=fechaVenta;
-			this.descripcion=descripcion;
-			this.peso=peso;
-		}
+		this.nombre=nombre;
+		this.precio=precio;
+		this.fechaVenta=fechaVenta;
+		this.cantidad=cantidad;
+		this.peso=peso;
 	}
 	
 	//de copia
@@ -79,8 +69,8 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		this.nombre=producto.getNombre();
 		this.precio=producto.getPrecio();
-		this.fechaVenta=producto.getFechaVenta();
-		this.descripcion=producto.getDescripcion();
+		this.fechaVenta=producto.fechaVenta;
+		this.cantidad=producto.getCantidad();
 		this.peso=producto.getPeso();
 	}
 	
@@ -90,7 +80,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		return nombre;
 	}
-	public void setNombre(String nombre) 
+	public void setNombre(String nombre) throws ExcepcionProducto
 	{
 		this.nombre=nombre;
 	}
@@ -100,28 +90,73 @@ public class Producto implements Cloneable, Comparable <Producto>
 		return precio;
 	}
 	
-	public void setPrecio(double precio) 
+	public void setPrecio(double precio) throws ExcepcionProducto
 	{
-		this.precio=precio;
+		if(precio>=0) 
+		{
+			this.precio=precio;
+		}else 
+		{
+			throw new ExcepcionProducto("El precio no puede ser menor que cero");
+		}
+		
 	}
 	
 	public Fecha getFechaVenta() 
 	{
+		fechaVenta.getDia();
+		fechaVenta.getMes();
+		fechaVenta.getAnio();
+		
 		return fechaVenta;
 	}
-	
-	public String getDescripcion() 
+	/*
+	//Patron delegacion
+	public int getFechaVentaDia() 
 	{
-		return descripcion;
+		return fechaVenta.getDia();
 	}
-	public void setDescripcion(String descripcion) 
+
+	public int getFechaVentatMes() 
 	{
-		this.descripcion=descripcion;
+		return fechaVenta.getMes();
+	}
+
+	public int getFechaVentaAnio() 
+	{
+		return fechaVenta.getAnio();
+	}
+	//Fin Patron delegacion
+	*/
+	public int getCantidad() 
+	{
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) throws ExcepcionProducto
+	{
+		if(cantidad<0) 
+		{
+			throw new ExcepcionProducto("La cantidad no puede ser negativo");
+		}else 
+		{
+			this.cantidad=cantidad;
+		}
 	}
 	
 	public double getPeso() 
 	{
 		return peso;
+	}
+	public void setPeso(double peso) throws ExcepcionProducto 
+	{
+		if(peso<0) 
+		{
+			throw new ExcepcionProducto("El peso no puede menor que cero");
+		}else 
+		{
+			this.peso=peso;
+		}
 	}
 	
 	
@@ -130,14 +165,13 @@ public class Producto implements Cloneable, Comparable <Producto>
 	@Override
 	public String toString() 
 	{
-		return ("Nombre: "+nombre+'\n'+"Precio: "+precio+" €"+'\n'+"Fecha de Venta: "+fechaVenta+'\n'+
-				"Descripcion: "+descripcion+'\n'+"Peso: "+peso+" kg");
+		return (nombre+','+precio+" €"+','+fechaVenta+','+cantidad+','+peso+" kg");
 	}
 	
 	@Override
 	public int hashCode() 
 	{
-		return (int)(1000*getPrecio()*getPeso()/1000);
+		return (int)(16152821*getPrecio()*getPeso()/1000);
 	}
 	
 	@Override
@@ -157,7 +191,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 		return clon;
 	}
 	
-	//los productos son iguales si el nombre,el precio,la descripcion y el peso de ellos son iguales
+	//los productos son iguales si el nombre,el precio y el peso de ellos son iguales
 	@Override
 	public boolean equals(Object o) 
 	{
@@ -167,7 +201,7 @@ public class Producto implements Cloneable, Comparable <Producto>
 		{
 			Producto producto=(Producto) o;
 			
-			if(this.getNombre()==producto.getNombre() && this.getPrecio()==producto.getPrecio() && this.getDescripcion()==producto.getDescripcion()
+			if(this.getNombre()==producto.getNombre() && this.getPrecio()==producto.getPrecio()
 					&& this.getPeso()==producto.getPeso()) 
 			{
 				res=true;
@@ -182,11 +216,13 @@ public class Producto implements Cloneable, Comparable <Producto>
 	{
 		int comparar=0;
 		
-		if(this.getPrecio()>p.getPrecio() || this.getNombre()!=p.getNombre()) 
+		if((this.getPrecio()>p.getPrecio() && this.getNombre()!=p.getNombre()) ||
+			this.getPrecio()>p.getPrecio() || this.getNombre()!=p.getNombre()) 
 		{
 			comparar=1;
 		}
-		else if(this.getPrecio()<p.getPrecio() || this.getNombre()!=p.getNombre()) 
+		else if(this.getPrecio()<p.getPrecio() && this.getNombre()!=p.getNombre()||
+				this.getPrecio()<p.getPrecio() || this.getNombre()!=p.getNombre()) 
 		{
 			comparar=(-1);
 		}
