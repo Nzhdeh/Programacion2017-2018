@@ -258,84 +258,10 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 						{
 							res = true;
 						}
+						break;
 					}
 			}
 		}
 		return res;
-	}
-	
-	
-	/*
-	prototipo: public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
-	comentario: sireve para restar dos fechas
-	precondiciones:no hay
-	entradas: dos fechas
-	salidas: una fecha
-	postcondiciones: AN devolvera el resultado
-	*/
-	/*
-	
-	resguardo
-	
-	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
-	{
-		Fecha fecha=null;
-		System.out.println("En construccion");
-		return fecha;
-	}*/
-	
-	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
-	{
-		
-		int anio=0;
-		int mes=0;
-		int dia=0;
-		Fecha fechaResultante=new Fecha();
-		
-		if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		fechaResultante=new Fecha(dia,mes,anio);
-		
-		return fechaResultante;
 	}
 }

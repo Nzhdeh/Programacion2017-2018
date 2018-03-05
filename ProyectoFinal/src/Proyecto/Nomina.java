@@ -618,8 +618,8 @@ public class Nomina
 	/**
 	prototipo: public void generarNomina()  
 	comentarios: este metodo sirve para generar una nomina
-	precondiciones: no hay
-	entradas: no hay
+	precondiciones: El array tiene que estar lleno
+	entradas: 4 numeros reales, dos objetos
 	salidas: no hay
 	entr/sal: no hay
 	postcondiciones: se pintara en pantalla la nomina
@@ -632,7 +632,7 @@ public class Nomina
 	}*/
 	public void generarNomina() 
 	{
-		Fecha f=new Fecha();
+		GestoraTienda gt=new GestoraTienda();
 		
 		System.out.println("-----------------------------------------------------------------------------------------");
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
@@ -642,7 +642,7 @@ public class Nomina
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
-		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+f.RestarFecha(fechaPeriodoFinal, fechaPeriodoInicial)+"	||");
+		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+(gt.RestarFecha(fechaPeriodoInicial,fechaPeriodoFinal)+1)+"		||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|I. DEVENGOS										||");
 		System.out.println("|		1. Percepciones salariales						||");

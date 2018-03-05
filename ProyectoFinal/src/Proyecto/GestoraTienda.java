@@ -145,7 +145,6 @@ public class GestoraTienda
 			}catch (ExcepcionFecha e) 
 			{
 				System.out.println(e);
-				//sc.nextLine();
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero");
@@ -165,7 +164,6 @@ public class GestoraTienda
 			}catch (ExcepcionFecha e) 
 			{
 				System.out.println(e);
-				//sc.nextLine();
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero");
@@ -185,7 +183,6 @@ public class GestoraTienda
 			}catch (ExcepcionFecha e) 
 			{
 				System.out.println(e);
-				//sc.nextLine();
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero");
@@ -202,7 +199,7 @@ public class GestoraTienda
 	 Entradas: un array de productos
 	 Salidas: nada
 	 Entr/sal: nada
-	 Postcondiciones:pintara por pantalla los productos en la tienda
+	 Postcondiciones: pintara por pantalla los productos en la tienda
 	 */
 	
 	//resguardo
@@ -212,18 +209,20 @@ public class GestoraTienda
 		System.out.println("En construccion");
 	}*/
 	
-	public static void PintaProductos(Producto [] productosEnTienda)
+	public static void PintaProductos(Producto [] productosEnTienda) throws NullPointerException
 	{
-		try 
+		int i=0;
+		if(productosEnTienda[i]==null) 
 		{
-			for(int i=0;i<productosEnTienda.length && productosEnTienda[i]!=null;i++)
+			throw new NullPointerException("No hay productos en La tienda");
+		}
+		else 
+		{
+			for(i=0;i<productosEnTienda.length && productosEnTienda[i]!=null;i++)
 			{
 				System.out.println("------------------------------------------------");
 				System.out.println(productosEnTienda[i].toString());
 			}
-		}catch(NullPointerException npe) 
-		{
-			System.out.println(npe+": No hay productos en la tienda");
 		}
 	}
 	
@@ -268,7 +267,7 @@ public class GestoraTienda
 	//interfaz
 	prototipo: public static double CalculaVenta (Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin)
 	comentario:sirve para calcular los gastos de un periodo de una tienda
-	precondiciones: las fechas introducidas son correctas
+	precondiciones: las fechas introducidas son correctas y el array tiene que tener al menos un producto
 	entradas: un array de productosVendidos,Fecha fechaIni,Fecha fechaFin
 	salidas:double ventas
 	entr/sal:no hay
@@ -288,23 +287,17 @@ public class GestoraTienda
 		double venta=0.;
 		double precio=0.0;
 		
-		try 
+		for(i=0;i<productosVendidos.length;i++) 
 		{
-			for(;i<productosVendidos.length;i++) 
+			Fecha fechaVenta = productosVendidos[i].getFechaVenta();
+			
+			if((fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) ||
+			   (fechaVenta.compareTo(fechaIni)==(-1) && fechaVenta.compareTo(fechaFin)==1) ||
+			   (fechaVenta.compareTo(fechaIni)==0 || fechaVenta.compareTo(fechaFin)==0)) 
 			{
-				Fecha fechaVenta = productosVendidos[i].getFechaVenta();
-				
-				if((fechaVenta.compareTo(fechaIni)==1 && fechaVenta.compareTo(fechaFin)==(-1)) ||
-				   (fechaVenta.compareTo(fechaIni)==(-1) && fechaVenta.compareTo(fechaFin)==1) ||
-				   (fechaVenta.compareTo(fechaIni)==0 || fechaVenta.compareTo(fechaFin)==0)) 
-				{
-					precio=productosVendidos[i].getPrecio()*productosVendidos[i].getCantidad();
-					venta+=precio;
-				}
+				precio=productosVendidos[i].getPrecio()*productosVendidos[i].getCantidad();
+				venta+=precio;
 			}
-		}catch(NullPointerException npe) 
-		{
-			System.out.println(npe+"No hay productos guardados");
 		}
 		return venta;
 	}
@@ -365,11 +358,12 @@ public class GestoraTienda
 		return trabajadorContratado;
 	}*/
 	
-	public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t)
+	public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t) 
 	{
 		boolean contratado=false;
+		int i=0 ;
 		
-		for(int i=0;i<trabajadorContratado.length && contratado==false;i++) 
+		for(i=0;i<trabajadorContratado.length && contratado==false;i++) 
 		{
 			if(trabajadorContratado[i]==null) 
 			{
@@ -377,10 +371,10 @@ public class GestoraTienda
 				contratado=true;
 			}
 		}
-		int i=0;
-		if(i==trabajadorContratado.length && contratado==false) 
+		
+		if(trabajadorContratado.length==i && contratado==false) 
 		{
-			System.out.println("Array lleno");
+			System.out.println("Array lleno,no se puede contratar mas trabajadores");
 		}
 		return trabajadorContratado;
 	}
@@ -416,8 +410,8 @@ public class GestoraTienda
 	//interfaz
 	prototipo: public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni) 
 	comentario:este metodo simula la despedida de un trabajador
-	precondiciones: no hay
-	entradas: array de trabajadores
+	precondiciones: El objeto trabajador tiene que existir
+	entradas: array de trabajadores, dni o nie
 	salidas: logico
 	entr/sal: no hay
 	postcondiciones: AN devolvera true si el trabajador se ha eliminado y false si no.
@@ -427,9 +421,9 @@ public class GestoraTienda
 	//resguardo
 	public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni)
 	{
-		ArrayList <Trabajador> tarbajador=new ArrayList <Trabajador>();
+		booleant res=false;
 		System.out.println("En construccion");
-		return tarbajador;
+		return res;
 	}*/
 	
 	public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
@@ -532,9 +526,9 @@ public class GestoraTienda
 	prototipo: public Incidencia [] AvisaIncidencias(Incidencia incidencia,Incidencia [] clienteDenuncia )
 	comentario:este metodo sirve para avisar qualquier incidencia
 	precondiciones: No hay
-	entradas: un objeto,y un array
-	salidas: un array de objeto Incidencia
-	entr/sal:no hay
+	entradas: un objeto
+	salidas: no hay
+	entr/sal:un array
 	postcondiciones:AN devolvera el array de incidencias
 	*/
 	
@@ -549,8 +543,9 @@ public class GestoraTienda
 	public Incidencia [] AvisaIncidencias(Incidencia incidencia,Incidencia [] clienteDenuncia )
 	{	
 		boolean insertado=false;
+		int i=0; 
 		
-		for(int i=0;i<clienteDenuncia.length && insertado==false;i++) 
+		for(i=0;i<clienteDenuncia.length && insertado==false;i++) 
 		{
 			if(clienteDenuncia[i]==null) 
 			{
@@ -558,7 +553,7 @@ public class GestoraTienda
 				insertado=true;
 			}
 		}
-		if(insertado==false) 
+		if(insertado==false || clienteDenuncia[i]!=null) 
 		{
 			System.out.println("Array lleno. No se puede incertar mas incidencias.");
 		}
@@ -570,7 +565,7 @@ public class GestoraTienda
 	//interfaz
 	prototipo: public boolean EliminarIncidencia(Incidencia [] clienteDenuncia,int idIncidencia) 
 	comentario:este metodo sirve para eliminar las incidencias 
-	precondiciones: no hay
+	precondiciones: array lleno
 	entradas: un entero y un array de incidencia
 	salidas: logico
 	entr/sal:no hay
@@ -589,24 +584,19 @@ public class GestoraTienda
 	{
         boolean resultado = false;
        
-        try 
-    	{
-	        for (int i = 0; i < denuncia.length && resultado==false; i++) 
-	        {
-	    		 if (denuncia[i].getId() == idIncidencia) 
-	             {
-	                 for (int j = i; j < denuncia.length - 1; j++) 
-	                 {
-	                 	denuncia[j] = denuncia[j+1];
-	                 }
-	                 denuncia[denuncia.length - 1] = null;
-	                 resultado = true;
-	             }
-	        }
-    	}catch(NullPointerException npe) 
-    	{
-    		System.out.println("Elemento no encontrado");
-    	}
+        for (int i = 0; i < denuncia.length && resultado==false; i++) 
+        {
+    		 if (denuncia[i].getId() == idIncidencia) 
+             {
+                 for (int j = i; j < denuncia.length - 1; j++) 
+                 {
+                 	denuncia[j] = denuncia[j+1];
+                 }
+                 denuncia[denuncia.length - 1] = null;
+                 resultado = true;
+             }
+        }
+	        
         return resultado;
     }	
 	
@@ -615,7 +605,7 @@ public class GestoraTienda
 	prototipo: public static Producto [] VendeProducto(Producto [] productos,Producto producto,Producto [] arrayVendido)
 	comentario: sirve para vender un producto
 	precondiciones: no hay
-	entradas: un objeto producto
+	entradas: un objeto producto,dos arrays de productos
 	salidas: no hay
 	entr/sal: un array de producto
 	postcondiciones:AN devolvera el array de productos vendidos
@@ -703,6 +693,40 @@ public class GestoraTienda
 		
 		return letra;
 	}
+	
+	/*
+	//interfaz
+	prototipo: public static char ValidarCIF(String cif)
+	comentario:sirve para validar un cif
+	precondiciones: el tamaño de la cadena es de 9,el primer caracter es una letra entre A y Z,
+					los demas digitos son numeros de entre 0 y 9
+	entradas: una cadena
+	salidas: un caracter
+	entr/sal:no hay
+	postcondiciones:AN devolvera la letra correspondiente a los digitos introducidos .
+	*/
+	
+	/*
+	//resguardo
+	public static char ValidarCIF(String dni)
+	{
+		System.out.println("En construccion");
+		return a;
+	}*/
+	/*	
+	public static char ValidarCIF(String cif) 
+	{
+		String caracteres="TRWAGMYFPDXBNJZSQVHLCKE";
+		char letra=' ';
+		int res=0;
+		
+		cif=cif.substring(1, 8);
+		
+		res=Integer.parseInt(cif)%23;
+		letra = caracteres.charAt(res);
+		
+		return letra;
+	}*/
 	
 	/*
 	//interfaz
@@ -811,18 +835,13 @@ public class GestoraTienda
 	public boolean ExisteEncargado(Trabajador [] trabajadorContratado) 
 	{
 		boolean res=false;
-		try 
-	 	{
-			for(int i=0;i<trabajadorContratado.length && res==false;i++) 
-			{
-				if(trabajadorContratado[i].getCARGO()==TipoCargo.ENCARGADO) 
-				{
-					res=true;
-				}
-			}
-		}catch(NullPointerException npe) 
+		
+		for(int i=0;i<trabajadorContratado.length && res==false;i++) 
 		{
-			System.out.println(npe+": Array vacio, No hay ningun trabajador contratado");
+			if(trabajadorContratado[i].getCARGO()==TipoCargo.ENCARGADO) 
+			{
+				res=true;
+			}
 		}
 		
 		return res;
@@ -849,20 +868,88 @@ public class GestoraTienda
 	public boolean ExisteVendedor(Trabajador [] contrataTrabajador) 
 	{
 		boolean res=false;
-		try 
+		
+		for(int i=0;i<contrataTrabajador.length && res==false;i++) 
 		{
-			for(int i=0;i<contrataTrabajador.length && res==false;i++) 
+			if(contrataTrabajador[i].getCARGO()==TipoCargo.VENDEDOR) 
 			{
-				if(contrataTrabajador[i].getCARGO()==TipoCargo.VENDEDOR) 
-				{
-					res=true;
-				}
+				res=true;
 			}
-		}catch(NullPointerException npe) 
-		{
-			System.out.println(npe+": Array vacio. No hay ningun trabajador");
 		}
 		
 		return res;
+	}
+	
+	/*
+	prototipo: public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	comentario: sireve para restar dos fechas
+	precondiciones:La fechaFin > fechaIni
+	entradas: dos fechas
+	salidas: un entero
+	postcondiciones: AN devolvera el resultado
+	*/
+	/*
+	
+	resguardo
+	
+	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	{
+		int res=0;
+		System.out.println("En construccion");
+		return res;
+	}*/
+	
+	public int RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	{
+		int anio=0;
+		int mes=0;
+		int dia=0;
+		Fecha fechaResultante=new Fecha();
+		
+		if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaIni.getAnio()-fechaFin.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaIni.getDia()-fechaFin.getDia();
+		}
+		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaIni.getMes()-fechaFin.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		else 
+		{
+			anio=fechaFin.getAnio()-fechaIni.getAnio();
+			mes=fechaFin.getMes()-fechaIni.getMes();
+			dia=fechaFin.getDia()-fechaIni.getDia();
+		}
+		
+		fechaResultante=new Fecha(dia,mes,anio);
+		return fechaResultante.getDia();
 	}
 }
