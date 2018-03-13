@@ -5,7 +5,7 @@ public class GestoraTienda2
 	/*
 	//interfaz
 	prototipo: public static Trabajador [] ContrataTrabajador(Trabajador [] trabajadorContratado,Trabajador t)
-	comentario: este metodo sirve para simular incerta a un trabajador en el sistema
+	comentario: este metodo sirve para simular la contratacion de un trabajador
 	precondiciones: no hay
 	entradas: un objeto trabajador
 	salidas: no hay
@@ -73,7 +73,7 @@ public class GestoraTienda2
 	//interfaz
 	prototipo: public static boolean DespideTrabajador(Trabajador [] contrataTrabajador,String dni) 
 	comentario:este metodo simula la despedida de un trabajador
-	precondiciones: El objeto trabajador tiene que existir
+	precondiciones: El objeto a eliminar tiene que existir
 	entradas: array de trabajadores, dni o nie
 	salidas: logico
 	entr/sal: no hay
@@ -89,12 +89,13 @@ public class GestoraTienda2
 		return res;
 	}*/
 	
-	public static boolean DespedirTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
+	public static boolean DespedirTrabajador(Trabajador [] contrataTrabajador,String dni) throws NullPointerException
 	{
 		boolean resultado=false;
-		try 
+		int i=0;
+		if(contrataTrabajador[i]!=null) 
 		{
-			for(int i=0;i<contrataTrabajador.length && resultado==false;i++) 
+			for(i=0;i<contrataTrabajador.length && resultado==false;i++) 
 			{
 				if(contrataTrabajador[i].getDni().equals(dni)) 
 				{
@@ -106,16 +107,16 @@ public class GestoraTienda2
 					resultado=true;
 				}
 			}
-		}catch(NullPointerException npe) 
+		}else
 		{
-			System.out.println(npe+": Array vacio");
+			throw new NullPointerException("Array vacio");
 		}
 		return resultado;
 	}
 	
 	/*
 	//interfaz
-	prototipo: public static void ConsultaIncidencias(Incidencia [] denuncia))
+	prototipo: public void ConsultaIncidencias(Incidencia [] denuncia))
 	comentario:este metodo sirve para consultar las incidencias
 	precondiciones: no hay
 	entradas: un array de objeto Incidencia
@@ -126,23 +127,25 @@ public class GestoraTienda2
 	
 	/*
 	//resguardo
-	public static void ConsultaIncidencias(Incidencia [] denuncia))
+	public void ConsultaIncidencias(Incidencia [] denuncia))
 	{
 		System.out.println("En construccion");
 	}*/
 	
-	public void ConsultarIncidencias(Incidencia [] denuncia)
+	public void ConsultarIncidencias(Incidencia [] denuncia) throws NullPointerException
 	{
-		try 
+		int i=0;
+		
+		if(denuncia[i]!=null)
 		{
-			for(int i=0;i<denuncia.length && denuncia[i]!=null;i++) 
+			for(i=0;i<denuncia.length && denuncia[i]!=null;i++) 
 			{
 				System.out.println(denuncia[i]);
 			}
-		}catch(NullPointerException npe) 
+		}else
 		{
 			System.out.println("---------------------------------------");
-			System.out.println("No hay nada en el array");
+			throw new NullPointerException("No hay Incidencias guardadas");
 		}
 		
 	}

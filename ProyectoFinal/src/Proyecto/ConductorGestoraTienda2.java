@@ -52,7 +52,7 @@ public class ConductorGestoraTienda2
 		try 
 		{
 			GestoraTienda2.DespedirTrabajador(contrataTrabajador, dni);
-		} catch (ExcepcionTrabajador e1) 
+		} catch (NullPointerException e1) 
 		{
 			System.out.println(e1);
 		}

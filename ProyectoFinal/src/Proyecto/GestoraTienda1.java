@@ -33,7 +33,7 @@ public class GestoraTienda1
 	//interfaz
 	prototipo: public static void MenuJefe()
 	comentario:sirve para pintar el menu 
-	precondiciones: la opcion esta entre 0 y 5
+	precondiciones: la opcion esta entre 0 y 6
 	entradas:no hay
 	salidas:no hay
 	entr/sal:no hay
@@ -132,17 +132,17 @@ public class GestoraTienda1
 	public static void PintarProductos(Producto [] productosEnTienda) throws NullPointerException
 	{
 		int i=0;
-		if(productosEnTienda[i]==null) 
-		{
-			throw new NullPointerException("No hay productos en La tienda");
-		}
-		else 
+		if(productosEnTienda[i]!=null) 
 		{
 			for(i=0;i<productosEnTienda.length && productosEnTienda[i]!=null;i++)
 			{
 				System.out.println("------------------------------------------------");
 				System.out.println(productosEnTienda[i].toString());
 			}
+		}
+		else 
+		{
+			throw new NullPointerException("No hay productos en La tienda");
 		}
 	}
 	
@@ -165,19 +165,24 @@ public class GestoraTienda1
 		return exsiste;
 	}*/
 	
-	public static boolean ExisteProducto(Producto [] producto,String nombre) throws ExcepcionProducto
+	public static boolean ExisteProducto(Producto [] producto,String nombre) throws NullPointerException
 	{
 		boolean existe=false;
-		try 
+		int i=0;
+		
+		if(producto[i]!=null) 
 		{
-			for(int i=0; i<producto.length && existe==false;i++){
-				if(producto[i].getNombre().equalsIgnoreCase(nombre)==true){
+			for(i=0; i<producto.length && existe==false;i++)
+			{
+				if(producto[i].getNombre().equalsIgnoreCase(nombre)==true)
+				{
 					existe=true;
 				}
 			}
-		}catch(NullPointerException npe) 
+		}
+		else 
 		{
-			System.out.println("No hay productos disponibles");
+			throw new NullPointerException("No hay productos");
 		}
 		
 		return existe;		
@@ -186,12 +191,12 @@ public class GestoraTienda1
 	/*
 	//interfaz
 	prototipo: public static double CalculaVenta (Producto [] productosVendidos,Fecha fechaIni,Fecha fechaFin)
-	comentario:sirve para calcular los gastos de un periodo de una tienda
+	comentario: sirve para calcular los gastos de un periodo de una tienda
 	precondiciones: las fechas introducidas son correctas y el array tiene que tener al menos un producto
 	entradas: un array de productosVendidos,Fecha fechaIni,Fecha fechaFin
 	salidas:double ventas
 	entr/sal:no hay
-	postcondiciones:AN devolvera las ventas de un periodo de fechas.
+	postcondiciones:AN devolvera las ventas de un periodo.
 	*/
 	/*
 	//resguardo
@@ -225,7 +230,7 @@ public class GestoraTienda1
 	/*
 	//interfaz
 	prototipo: public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
-	comentario: sirve para ver si el trabajador exciste
+	comentario: sirve para ver si el trabajador existe
 	precondiciones: no hay
 	entradas:un array de Trabajadores,el dni 
 	salidas: logico
@@ -241,19 +246,24 @@ public class GestoraTienda1
 		return exsiste;
 	}*/
 	
-	public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws ExcepcionTrabajador
+	public static boolean ExisteTrabajador(Trabajador [] contrataTrabajador,String dni) throws NullPointerException
 	{
 		boolean existe=false;
-		try 
+		int i=0;
+		
+		if(contrataTrabajador[i]!=null) 
 		{
-			for(int i=0; i<contrataTrabajador.length && existe==false;i++){
-				if(contrataTrabajador[i].getDni().equalsIgnoreCase(dni)==true){
+			for(i=0; i<contrataTrabajador.length && existe==false;i++)
+			{
+				if(contrataTrabajador[i].getDni().equalsIgnoreCase(dni)==true)
+				{
 					existe=true;
 				}
 			}
-		}catch(NullPointerException npe) 
+		}
+		else
 		{
-			System.out.println("No hay ningun trabajador guardado");
+			throw new NullPointerException("No hay ningun trabajador guardado");
 		}
 		
 		return existe;		

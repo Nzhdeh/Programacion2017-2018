@@ -63,7 +63,7 @@ public class ConductorGestoraTienda1
 		try 
 		{
 			System.out.println(GestoraTienda1.ExisteProducto(producto, nombre));
-		} catch (ExcepcionProducto e) 
+		} catch (NullPointerException e) 
 		{
 			System.out.println(e+": Producto no encontrado");
 		}
@@ -71,12 +71,20 @@ public class ConductorGestoraTienda1
 		try 
 		{
 			System.out.println(GestoraTienda1.ExisteProducto(producto, nombre));
-		} catch (ExcepcionProducto e) 
+		} catch (NullPointerException e) 
 		{
 			System.out.println(e+": Producto no encontrado");
 		}		
-		System.out.println(GestoraTienda1.CalcularVentas(productosVendidos, fechaIni, fechaFin));	
-		System.out.println(GestoraTienda1.ExisteTrabajador(contrataTrabajador, dni));
+		System.out.println(GestoraTienda1.CalcularVentas(productosVendidos, fechaIni, fechaFin));
+		
+		try 
+		{
+			System.out.println(GestoraTienda1.ExisteTrabajador(contrataTrabajador, dni));
+		} catch (NullPointerException e) 
+		{
+			System.out.println(e+": Trabajador no encontrado");
+		}
+		
 		
 	}
 }

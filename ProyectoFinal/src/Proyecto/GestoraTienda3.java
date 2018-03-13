@@ -37,7 +37,7 @@ public class GestoraTienda3
 	//interfaz
 	prototipo: public static char ValidarDNI(String dni)
 	comentario:sirve para validar un dni
-	precondiciones: no hay
+	precondiciones: el ultimo caracter es una letra entre A y Z,los demas digitos son numeros de entre 0 y 9
 	entradas: una cadena
 	salidas: un caracter
 	entr/sal:no hay
@@ -156,18 +156,18 @@ public class GestoraTienda3
 	
 	/*
 	//interfaz
-	prototipo: public boolean ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
+	prototipo: public int ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
 	comentario:sirve para comprobar la existencia de un dni o un nie
 	precondiciones: ninguna
 	entradas: un array,una cadena
-	salidas: un logico
+	salidas: un entero
 	entr/sal:no hay
-	postcondiciones:AN devolvera true si el documento de identidad ya existe y false si no.
+	postcondiciones:AN devolvera 1 si el documento de identidad ya existe y -1 si no.
 	*/
 	
 	/*
 	//resguardo
-	public boolean ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
+	public int ExisteDniNie(Trabajador [] trabajadorContratado,String dni)
 	{
 		System.out.println("En construccion");
 		return true;
@@ -181,21 +181,14 @@ public class GestoraTienda3
 		
 		for(i=0;i<trabajadorContratado.length && trabajadorContratado[i]!=null && encontrado==false;i++) 
 		{
-//			if(trabajadorContratado[i]!=null) 
-//			{
-				if(trabajadorContratado[i].getDni().equals(dni)) 
-				{
-					encontrado = true;
-					res=1;
-				}else 
-				{
-					res=(-1);
-				}
-//			}
-//			else 
-//			{
-//				throw new ExcepcionTrabajador("No hay trabajadores contratados");
-//			}
+			if(trabajadorContratado[i].getDni().equals(dni)) 
+			{
+				encontrado = true;
+				res=1;
+			}else 
+			{
+				res=(-1);
+			}
 		}
 		
 		return res;
@@ -343,7 +336,7 @@ public class GestoraTienda3
 	
 	/*
 	prototipo: public Producto LeerValidarProductoParaVender(Producto [] productosEnTienda) 
-	comentario: sireve para restar dos fechas
+	comentario: sireve para leer productos que queremos vender
 	precondiciones: no hay
 	entradas: un array
 	salidas: un objeto
@@ -442,8 +435,8 @@ public class GestoraTienda3
 	}
 	
 	/*
-	prototipo: public Producto LeerValidarProductoParaVender(Producto [] productosEnTienda) 
-	comentario: sireve para restar dos fechas
+	prototipo: public Producto LeerValidarProductoParaDevolucion(Producto [] arrayVendido) 
+	comentario: sireve para leer el producto que queremos devolver
 	precondiciones: no hay
 	entradas: un array
 	salidas: un objeto
@@ -453,7 +446,7 @@ public class GestoraTienda3
 	
 	resguardo
 	
-	 public Producto LeerValidarProductoParaVender(Producto [] productosEnTienda) 
+	 public Producto LeerValidarProductoParaDevolucion(Producto [] arrayVendido)  
 	{
 		Producto p=null
 		System.out.println("En construccion");
