@@ -5,7 +5,7 @@ public class TestFecha
 	public static void main(String[] args) 
 	{
 		
-			Fecha f1=new Fecha(31,5,1990);
+			Fecha f1=new Fecha(31,2,2016);
 			Fecha f2=new Fecha(15,2,2016);
 			Fecha f=new Fecha();
 			Fecha copia=null;
@@ -63,14 +63,14 @@ public class TestFecha
 			//Prueba ValidarFecha
 			System.out.println("---------------------------------------------------");
 			System.out.println("Validar Fecha:");
-			try 
-			{
-				System.out.println(f1.ValidarFecha());
-			}catch(ExcepcionFecha ef) 
-			{
-				System.out.println(ef);
-			}
+			System.out.println(f1.ValidarFecha());
 			
+			//fin
+			
+			//Prueba LeerValidarFecha() 
+			System.out.println("---------------------------------------------------");
+			System.out.println("Leer y Validar Fecha:");
+			System.out.println(f1.LeerValidarFecha());
 			//fin
 			
 	}

@@ -39,6 +39,9 @@
  */
 package Proyecto;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Trabajador implements Cloneable,Comparable <Trabajador>
 {
 	private String nombre;
@@ -124,18 +127,24 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 
 	public void setDni(String dni) throws ExcepcionTrabajador
 	{
-		if(apellidos==null)
-		{
-			throw new ExcepcionTrabajador("El DNI no puede estar vacio");
-		}else
-		{
+//		if(dni.length()==9)
+//		{
 			this.dni = dni;
-		}
+//		}
+//		else 
+//		{
+//			throw new ExcepcionTrabajador ("El tamanio tiene que ser de 9 digitos");
+//		}
 	}
 	
 	public TipoCargo getCARGO() 
 	{
 		return CARGO;
+	}
+	
+	public void setCARGO(TipoCargo CARGO) 
+	{
+		this.CARGO=CARGO;
 	}
 	
 	
@@ -274,5 +283,213 @@ public class Trabajador implements Cloneable,Comparable <Trabajador>
 			comparar=(-1);
 		}
 		return comparar;
+	}
+	
+	
+	
+	/*
+	prototipo: public Trabajador leerValidarObjetoTrabajador(Trabajador [] trabajadorContratado)    
+	comentarios: este metodo sirve para leer y validar el objeto trabajador
+	precondiciones: no hay
+	entradas: un array
+	salidas: un objeto
+	entr/sal: no hay
+	postcondiciones: AN devolvera el objeto trabajador
+	*/
+	
+	//resguardo
+	/*public Empresa LeerValidarObjetoEmpresa() 
+	{
+		Trabajador t=null;
+		System.out.println("En construccion");
+		return t;
+	}*/
+	
+	public Trabajador leerValidarObjetoTrabajador(Trabajador [] trabajadorContratado) 
+	{
+		Scanner sc=new Scanner (System.in);
+		boolean repetir=false,fechaValida=false;
+		int opcionDni=0;
+		char letra=' ';
+		int existeDocumento=0;
+		GestoraTienda3 gt3=new GestoraTienda3();
+		Trabajador t=new Trabajador();
+		Fecha fechaNacimiento=new Fecha();
+		
+
+		sc.nextLine();//para limpiar el buffer
+		System.out.println("---------------------------------------------");
+		System.out.println("Introduce los datos de la persona a contratar");
+		//leer el nombre
+		System.out.println("Introduce el nombre: ");
+		try 
+		{
+			setNombre(sc.nextLine().toUpperCase());
+		} catch (ExcepcionTrabajador e1) 
+		{
+			System.out.println(e1);
+		}
+		
+		//leer el apellido
+		System.out.println("Introduce el apellido: ");
+		try 
+		{
+			setApellidos(sc.nextLine().toUpperCase());
+		} catch (ExcepcionTrabajador e1)
+		{
+			System.out.println(e1);
+		}
+		
+		//leer y validar el dni y el nie
+		//presentar menuDni y validar la opcion
+		repetir=true;
+		while(repetir) 
+		{
+			do 
+			{
+				System.out.println("Elige una opcion");
+				System.out.println("Pulsa 1 si es DNI");
+				System.out.print("Pulsa 2 si es NIE:");
+				
+				try 
+				{
+					opcionDni=sc.nextInt();
+					repetir=false;
+				}catch(InputMismatchException ioe) 
+				{
+					sc.nextLine();
+					System.out.println("Un numero entero porfa");
+				}
+				
+			}while(opcionDni<0 || opcionDni>2);
+		}
+		
+		switch(opcionDni) //segun opcionDni
+		{
+			case 1:
+				//leer y validar el dni
+				do 
+				{
+					sc.nextLine();
+					System.out.println("------------------------------------------------");
+					System.out.print("Introduce el DNI (Ej. 00000000T): ");
+					try 
+					{
+						setDni(sc.nextLine().toUpperCase());
+					} catch (ExcepcionTrabajador e1) 
+					{
+						System.out.println(e1);
+					}
+					
+					letra=GestoraTienda3.ValidarDNI(dni.substring(0,8));//para enviar los digitos que queramos
+					//comprobar dni repetido
+					try 
+					{
+						existeDocumento=gt3.ExisteDniNie(trabajadorContratado, dni);
+					} catch (ExcepcionTrabajador e) 
+					{
+						System.out.println(e);
+					}
+				}while(letra!=dni.charAt(8) || dni.length()!=9 
+						|| dni.charAt(0)<'0' || dni.charAt(0)>'9'
+						|| dni.charAt(1)<'0' || dni.charAt(1)>'9' 
+						|| dni.charAt(2)<'0' || dni.charAt(2)>'9'
+						|| dni.charAt(3)<'0' || dni.charAt(3)>'9'
+						|| dni.charAt(4)<'0' || dni.charAt(4)>'9'
+						|| dni.charAt(5)<'0' || dni.charAt(5)>'9'
+						|| dni.charAt(6)<'0' || dni.charAt(6)>'9'
+						|| dni.charAt(7)<'0' || dni.charAt(7)>'9' 
+						|| dni.charAt(8)<'A' || dni.charAt(8)>'Z'
+						|| existeDocumento == 1);
+				
+				break;
+				
+			case 2:
+				//leer y validar el nie
+				do 
+				{
+					sc.nextLine();
+					System.out.println("------------------------------------------------");
+					System.out.print("Introduce el NIE (Ej. X0000000T): ");
+					try 
+					{
+						setDni(sc.nextLine().toUpperCase());
+					} catch (ExcepcionTrabajador e1) 
+					{
+						System.out.println(e1);
+					}catch(StringIndexOutOfBoundsException s)
+					{
+						System.out.println(s+": Nueve digitos porfa");
+					}
+					letra=GestoraTienda3.ValidarNIE(dni.substring(0,8));
+					//comprobar nie repetido
+					try 
+					{
+						existeDocumento=gt3.ExisteDniNie(trabajadorContratado, dni);
+					} catch (ExcepcionTrabajador e) 
+					{
+						System.out.println(e);
+					}
+				}while(letra!=dni.charAt(8) || dni.length()!=9  
+						|| dni.charAt(0)!='X' && dni.charAt(0)!='Y' && dni.charAt(0)!='Z'
+						|| dni.charAt(1)<'0' || dni.charAt(1)>'9' 
+						|| dni.charAt(2)<'0' || dni.charAt(2)>'9'
+						|| dni.charAt(3)<'0' || dni.charAt(3)>'9'
+						|| dni.charAt(4)<'0' || dni.charAt(4)>'9'
+						|| dni.charAt(5)<'0' || dni.charAt(5)>'9'
+						|| dni.charAt(6)<'0' || dni.charAt(6)>'9'
+						|| dni.charAt(7)<'0' || dni.charAt(7)>'9'
+						|| dni.charAt(8)<'A' || dni.charAt(8)>'Z'
+						|| existeDocumento == 1);
+
+				break;
+		}//fin segun dni/nie
+		
+		//leer y validar el cargo
+		repetir=true;
+		while(repetir) 
+		{
+			System.out.println("Introduce el Cargo (VENDEDOR O ENCARGADO): ");
+			try 
+			{
+				setCARGO(TipoCargo.valueOf(sc.nextLine().toUpperCase()));//leer el enum
+				repetir=false;
+			}catch(IllegalArgumentException iae) 
+			{
+				sc.nextLine();
+				System.out.println(iae+": VENDEDOR o ENCARGADO porfa");
+			}
+			
+		}
+		
+		//leer y validar el sexo
+		repetir=true;
+		while(repetir) 
+		{
+			System.out.println("Introduce el sexo ('V' o 'M'): ");
+			try 
+			{
+				setSexo(Character.toUpperCase(sc.next().charAt(0)));
+				repetir=false;
+			} catch (ExcepcionTrabajador et) 
+			{
+				sc.nextLine();
+				System.out.println(et);
+			}
+		}
+		
+		//FeerValidarFecha
+		do 
+		{	
+			//leer y validar fecha
+			System.out.println("Introduce la fecha de nacimiento ");
+			fechaNacimiento=fechaNacimiento.LeerValidarFecha();
+			
+			fechaValida=fechaNacimiento.ValidarFecha();
+		}while(fechaValida!=true);
+		
+		t=new Trabajador(getNombre(),getApellidos(),getDni(),fechaNacimiento,getSexo(),getCARGO());
+		
+		return t;
 	}
 }

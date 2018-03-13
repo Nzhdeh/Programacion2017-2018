@@ -119,8 +119,12 @@
  * 			calcularLiquidoTotalAPercibir()
  * 			calcularTotal()
  * 			generarNomina()
+ * 			LeerValidarObjetoNomina(Trabajador [] trabajadorContratado)
  */
 package Proyecto;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Nomina 
 {
@@ -136,13 +140,12 @@ public class Nomina
 	private Fecha fechaPeriodoInicial;
 	private Fecha fechaPeriodoFinal;
 		 
-	//propiedades compartidas:
+	//propiedades constantes:
 	private final double porcentajeContingenciaComun=4.7;
 	private final double porcentajeDesempleo=1.6;
 	private final double porcentajeFormacionProfecional=0.1;
 	private final double porcentajeHorasExtras=4.7;
 	private final double porcentajeIRPF=15.0;
-	private GestoraTienda gt;
 	
 	//propiedades derivadas:
 	private double contingenciaComun;
@@ -160,20 +163,19 @@ public class Nomina
 		double plusTitulo=0.0;
 		double parteProporcinalHorasExtras=0.0;
 		double transporte=0.0;
-		//Fecha fechaNacimientoTrabajador=new Fecha();
-		Trabajador trabajador=new Trabajador();
-		Empresa empresa=new Empresa();
+		
 		Fecha fechaFirma=new Fecha();
 		Fecha fechaPeriodoInicial=new Fecha();
 		Fecha fechaPeriodoFinal=new Fecha();
+		
+		Trabajador trabajador=new Trabajador();
+		Empresa empresa=new Empresa();
 		
 		double porcentajeContingenciaComun=4.7;;
 		double porcentajeDesempleo=1.6;
 		double porcentajeFormacionProfecional=0.1;
 		double porcentajeHorasExtras=4.7;
 		double porcentajeIRPF=15.0;
-		
-		GestoraTienda gt=new GestoraTienda();
 		
 		double antiguedad=0.0; 
 		double contingenciaComun=0.0;
@@ -183,7 +185,7 @@ public class Nomina
 		double IRPF=0.0;
 	}
 	
-
+	
 	//con parametros
 	public Nomina(double salarioBase,double plusTitulo,double parteProporcinalHorasExtras,double transporte,
 				  Fecha fechaFirma,Fecha fechaPeriodoInicial,Fecha fechaPeriodoFinal,Empresa empresa, Trabajador trabajador) 
@@ -614,12 +616,181 @@ public class Nomina
 		base=getRemuneracionMensual()+getProrotaPagasExtraordinarias()+getParteProporcinalHorasExtras();
 		return base;
 	}
+	
+	
+	/**
+	prototipo: public Nomina LeerValidarObjetoNomina(Trabajador [] trabajadorContratado) 
+	comentarios: este metodo sirve para leer y validar el objeto nomina
+	precondiciones: no hay
+	entradas: un array
+	salidas: un objeto
+	entr/sal: no hay
+	postcondiciones: AN devolvera el objeto nomina
+	*/
+	
+	//resguardo
+	/*public Nomina LeerValidarObjetoNomina(Trabajador [] trabajadorContratado) 
+	{
+		Nomina nomina=null;
+		System.out.println("En construccion");
+		return nomina;
+	}*/
+	
+	public Nomina LeerValidarObjetoNomina(Trabajador [] trabajadorContratado) 
+	{
+		Scanner sc=new Scanner (System.in);
+		
+		int i=0;
+		boolean repetir=false,fechaValida=false;
+		
+		Fecha firma=new Fecha();
+		Fecha periodoInicial=new Fecha();
+		Fecha periodoFinal=new Fecha();
+		
+		Empresa empresa=new Empresa();
+		Nomina nomina = new Nomina();
+		
+		//leer y validar el salario base
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el salario base: ");
+			try 
+			{
+				setSalarioBase(sc.nextDouble());
+				repetir=false;
+			} catch (ExcepcionNomina e) 
+			{
+				System.out.println(e);
+			}catch(InputMismatchException ime) 
+			{
+				System.out.println("Un numero porfa");
+				sc.nextLine();
+			}
+		}
+		
+		//leer y validar El Plus Titulo
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce plus Titulo: ");
+			try 
+			{
+				setPlusTitulo(sc.nextDouble());
+				repetir=false;
+			} catch (ExcepcionNomina e) 
+			{
+				System.out.println(e);
+			}catch(InputMismatchException ime) 
+			{
+				System.out.println("Un numero porfa");
+				sc.nextLine();
+			}
+		}
+		
+		//leer y validar parte proporcional horas extras
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Parte Proporcional horas Extras: ");
+			try 
+			{
+				setParteProporcinalHorasExtras(sc.nextDouble());
+				repetir=false;
+			} catch (ExcepcionNomina e) 
+			{
+				System.out.println(e);
+			}catch(InputMismatchException ime) 
+			{
+				System.out.println("Un numero porfa");
+				sc.nextLine();
+			}
+		}
+		
+		//leer y validar el transporte
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el Transporte: ");
+			try 
+			{
+				setTransporte(sc.nextDouble());
+				repetir=false;
+			} catch (ExcepcionNomina e) 
+			{
+				System.out.println(e);
+			}catch(InputMismatchException ime) 
+			{
+				System.out.println("Un numero entero porfa");
+				sc.nextLine();
+			}
+		}
+		
+		//leerValidarObjetoEmpresa
+		empresa=empresa.LeerValidarObjetoEmpresa();
+		
+		//leer y validar la fecha de firma
+		do 
+		{
+			System.out.println("Introduce la fecha de firma");
+			firma=firma.LeerValidarFecha();
+			fechaValida=firma.ValidarFecha();
+			
+			if(fechaValida!=true) 
+			{
+				System.out.println("Dia incorrecto, compruebalo");
+			}
+			
+		}while(fechaValida!=true);
+		
+		do 
+		{
+			//leer y validar la fecha de periodo inicial
+			do 
+			{
+				System.out.println("Introduce la fecha de periodo Inicial");
+				periodoInicial=periodoInicial.LeerValidarFecha();
+				fechaValida=periodoInicial.ValidarFecha();
+				
+				if(fechaValida!=true) 
+				{
+					System.out.println("Dia incorrecto, compruebalo");
+				}
+				
+			}while(fechaValida!=true);
+			
+			//leer y validar la fecha de periodo final
+			do 
+			{
+				System.out.println("Introduce la fecha de periodo Final");
+				periodoFinal=periodoFinal.LeerValidarFecha();
+				fechaValida=periodoFinal.ValidarFecha();
+				
+				if(fechaValida!=true) 
+				{
+					System.out.println("Dia incorrecto, compruebalo");
+				}
+				
+			}while(fechaValida!=true);
+			
+			if(periodoInicial.compareTo(periodoFinal)==1) 
+			{
+				//pintar mensaje
+				System.out.println("El periodo inicial no puede ser posterior al periodo Final");
+			}
+		}while(periodoInicial.compareTo(periodoFinal)==1);
+		
+		nomina=new Nomina(getSalarioBase(),getPlusTitulo(),getParteProporcinalHorasExtras(),getTransporte(),
+						  firma,periodoInicial,periodoFinal,empresa,trabajadorContratado[i]);
+		
+		return nomina;
+	}
 
 	/**
 	prototipo: public void generarNomina()  
 	comentarios: este metodo sirve para generar una nomina
-	precondiciones: no hay
-	entradas: no hay
+	precondiciones: El array tiene que estar lleno
+	entradas: 4 numeros reales, dos objetos
 	salidas: no hay
 	entr/sal: no hay
 	postcondiciones: se pintara en pantalla la nomina
@@ -632,17 +803,17 @@ public class Nomina
 	}*/
 	public void generarNomina() 
 	{
-		Fecha f=new Fecha();
+		GestoraTienda3 gt3=new GestoraTienda3();
 		
 		System.out.println("-----------------------------------------------------------------------------------------");
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
-		System.out.println("|Empresa: "+empresa.getNombreEmpresa()+"			|"+"	|Trabajador: "+getNombreTrabajador()+' '+getApellidosTrabajador()+"		||");
-		System.out.println("|Domicilio: "+empresa.getDomicilioEmpresa()+"		|"+"	|DNI/NIE: "+getDniTrabajador()+"			||");
-		System.out.println("|Cif: "+empresa.getCIFEmpresa()+"				|"+"	|Categoria: "+getCARGOTrabajador()+"			||");
+		System.out.println("|Empresa: "+getNombreEmpresaEmpresa()+"			|"+"	|Trabajador: "+getNombreTrabajador()+' '+getApellidosTrabajador()+"		||");
+		System.out.println("|Domicilio: "+getDomicilioEmpresaEmpresa()+"		|"+"	|DNI/NIE: "+getDniTrabajador()+"			||");
+		System.out.println("|Cif: "+getCIFEmpresaEmpresa()+"				|"+"	|Categoria: "+getCARGOTrabajador()+"			||");
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
-		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+f.RestarFecha(fechaPeriodoFinal, fechaPeriodoInicial)+"	||");
+		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+(gt3.RestarFecha(fechaPeriodoInicial,fechaPeriodoFinal)+1)+"		||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|I. DEVENGOS										||");
 		System.out.println("|		1. Percepciones salariales						||");

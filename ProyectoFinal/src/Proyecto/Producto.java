@@ -27,12 +27,17 @@
  * public double getPeso()
  * public void setPeso()
  * 
- * metodos añadidos: No hay
+ * metodos añadidos: 
+ * 
+ * 		LeerValidarObjetoProducto()
  * 
  * restricciones:No hay
  * 
  */
 package Proyecto;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Producto implements Cloneable, Comparable <Producto>
 {
@@ -228,5 +233,123 @@ public class Producto implements Cloneable, Comparable <Producto>
 		}
 		
 		return comparar;
+	}
+	
+	/*
+	//interfaz
+	prototipo: public Producto LeerValidarObjetoProducto() 
+	comentario:sirve para leer y validar el objeto trabajador
+	precondiciones: no hay
+	entradas:no hay
+	salidas:objeto trabajador
+	entr/sal:no hay
+	postcondiciones:An devolvera el resultado
+	*/
+	/*
+	//resguardo
+	public Producto LeerValidarObjetoProducto() 
+	{
+		Producto producto=null
+		System.out.println("En construccion");
+		return producto;
+	}*/
+	
+	public Producto LeerValidarObjetoProducto() 
+	{
+		Scanner sc=new Scanner (System.in);
+		boolean repetir=false;
+		boolean fechaValida=false;
+		Fecha fechaCompra=new Fecha();
+		Producto producto=new Producto();
+		
+		//leer el nombre del producto
+		sc.nextLine();//para limpiar el buffer
+		System.out.println("--------------------------------------------------");
+		System.out.println("Introduce el nombre del producto: ");
+		try 
+		{
+			setNombre(sc.nextLine().toUpperCase());
+		} catch (ExcepcionProducto e) 
+		{
+			System.out.println(e);
+		}
+		
+		//leer y validar el precio del producto
+		repetir=true;
+		while(repetir) 
+		{
+			System.out.println("Introduce el precio: ");
+			try 
+			{
+				try 
+				{
+					setPrecio(sc.nextDouble());
+				} catch (ExcepcionProducto e) 
+				{
+					System.out.println(e);
+				}
+				repetir = false;
+			}catch(InputMismatchException ioe) 
+			{
+				System.out.println(ioe+": Un numero real porfa");
+				sc.nextLine();
+			}
+		}	
+		//leer y validar la cantidad del producto
+		repetir=true;
+		while(repetir) 
+		{
+			System.out.println("Introduce la cantidad: ");
+			try 
+			{
+				try 
+				{
+					setCantidad(sc.nextInt());
+				} catch (ExcepcionProducto e) 
+				{
+					System.out.println(e);
+				}
+				repetir=false;
+			}catch(InputMismatchException ioe) 
+			{
+				sc.nextLine();
+				System.out.println(ioe+"Un numero porfa");
+			}
+		}
+		
+		//LeerValidarFecha
+		do 
+		{
+			System.out.println("Introduce la fecha de adquisicion ");
+			fechaCompra=fechaCompra.LeerValidarFecha();
+			
+			fechaValida=fechaCompra.ValidarFecha();
+		}while(fechaValida!=true);								
+		
+		//leer y validar el peso del producto
+		repetir=true;
+		while(repetir) 
+		{
+			System.out.println("Introduce el peso: ");
+			try 
+			{
+				try 
+				{
+					setPeso(sc.nextDouble());
+				} catch (ExcepcionProducto e) 
+				{
+					System.out.println(e);
+				}
+				repetir=false;
+			}catch(InputMismatchException ioe) 
+			{
+				sc.nextLine();
+				System.out.println("Un numero porfa");
+			}
+		}
+		
+		producto=new Producto(nombre,precio,fechaCompra,cantidad,peso);
+		return producto;
+		
 	}
 }

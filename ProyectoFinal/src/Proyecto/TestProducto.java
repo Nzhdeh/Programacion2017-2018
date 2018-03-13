@@ -64,6 +64,12 @@ public class TestProducto {
 			System.out.println(copia.compareTo (p1));
 			System.out.println(p1.compareTo (p2));
 			//Fin Prueba compareTop
+			
+			//Prueba compareTo
+			System.out.println("---------------------------------------------------");
+			System.out.println("LeerValidarObjetoProducto:");
+			System.out.println(p1.LeerValidarObjetoProducto());
+			//Fin Prueba compareTop
 
 	}
 

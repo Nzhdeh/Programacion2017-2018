@@ -22,7 +22,10 @@
  *  public void setAnio(int anio)
  * 
  * 
- * metodos añadidos: ValidarFecha
+ * metodos añadidos: 
+ * 
+ * 			ValidarFecha()
+ * 			leerValidarFecha()
  * 
  * restricciones: dia (minimo 1 y maximo 28,29,30,31 dependiendo del mes)
  * 				  mes (entre 1 y 12 ambos inclusive)
@@ -32,6 +35,9 @@
  */
 
 package Proyecto;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Fecha implements Cloneable, Comparable <Fecha>
 {
@@ -209,7 +215,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}*/
 	
-	public boolean ValidarFecha() throws ExcepcionFecha
+	public boolean ValidarFecha()
 	{
 		boolean res=false;
 		
@@ -258,84 +264,94 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 						{
 							res = true;
 						}
+						break;
 					}
 			}
 		}
 		return res;
 	}
 	
-	
 	/*
-	prototipo: public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
-	comentario: sireve para restar dos fechas
+	//interfaz
+	prototipo: public Fecha LeerValidarFecha() 
+	comentario:sirve para leer y validar una fecha
 	precondiciones:no hay
-	entradas: dos fechas
-	salidas: una fecha
-	postcondiciones: AN devolvera el resultado
+	entradas:no hay
+	salidas:una fecha
+	entr/sal:no hay
+	postcondiciones:AN devolvera la fecha
 	*/
 	/*
-	
-	resguardo
-	
-	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	//resguardo
+	public Fecha LeerValidarFecha() 
 	{
-		Fecha fecha=null;
+		Fecha f=null;
 		System.out.println("En construccion");
-		return fecha;
+		return f;
 	}*/
 	
-	public Fecha RestarFecha(Fecha fechaIni,Fecha fechaFin) 
+	public Fecha LeerValidarFecha() 
 	{
+		Scanner sc=new Scanner(System.in);
+		boolean repetir=false;
+		Fecha f=new Fecha();
 		
-		int anio=0;
-		int mes=0;
-		int dia=0;
-		Fecha fechaResultante=new Fecha();
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el dia: ");
+			try 
+			{
+				f.setDia(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero");
+				sc.nextLine();
+			}
+		}
 		
-		if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else if(fechaIni.getAnio()>=fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaIni.getAnio()-fechaFin.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()<fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()>=fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaIni.getDia()-fechaFin.getDia();
-		}
-		else if(fechaIni.getAnio()<fechaFin.getAnio() && fechaIni.getMes()>=fechaFin.getMes() && fechaIni.getDia()<fechaFin.getDia()) 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaIni.getMes()-fechaFin.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		else 
-		{
-			anio=fechaFin.getAnio()-fechaIni.getAnio();
-			mes=fechaFin.getMes()-fechaIni.getMes();
-			dia=fechaFin.getDia()-fechaIni.getDia();
-		}
-		fechaResultante=new Fecha(dia,mes,anio);
 		
-		return fechaResultante;
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el mes: ");
+			try 
+			{
+				f.setMes(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero");
+				sc.nextLine();
+			}
+		}
+		
+		
+		repetir=true;
+		while(repetir)
+		{
+			System.out.println("Introduce el anio: ");
+			try 
+			{
+				f.setAnio(sc.nextInt());
+				repetir = false;
+			}catch (ExcepcionFecha e) 
+			{
+				System.out.println(e);
+			} catch (InputMismatchException e) 
+			{
+				System.out.println(e+": Un numero entero mayor que cero");
+				sc.nextLine();
+			}
+		}
+		
+		return f;
 	}
 }

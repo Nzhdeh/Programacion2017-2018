@@ -5,13 +5,17 @@ public class TestTrabajador
 
 	public static void main(String[] args) //throws ExcepcionTrabajador
 	{
-			
+		GestoraTienda3 gt3=new GestoraTienda3();
+		
 		Fecha fecha1=new Fecha(15,2,1999);
 		Fecha fecha2=new Fecha(10,3,1991);
 		
+		Trabajador tra=new Trabajador();
 		Trabajador t1=new Trabajador("Tomas","Zumarraga","26584475A",fecha1,'V', null);
-		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","X2563352F",fecha2,'V',null);
+		Trabajador t2=new Trabajador("Nzhdeh","Yeghiazaryan","00000000T",fecha2,'V',null);
 		Trabajador copia=null;
+		Trabajador [] t= {new Trabajador(t1),new Trabajador(t2)};
+		//Trabajador [] t= new Trabajador[20];
 			
 		
 		//prueba getters y setters
@@ -84,6 +88,30 @@ public class TestTrabajador
 			System.out.println(t1.compareTo (t2));
 			System.out.println(t2.compareTo (t1));
 			//Fin Prueba compareTo
+			
+			//prueba leerValidarObjetoTrabajador
+			try 
+			{
+				t1.setDni("00000000T");
+			} catch (ExcepcionTrabajador e) {
+				System.out.println(e);
+			}
+			
+			char letra = GestoraTienda3.ValidarDNI(t1.getDni().substring(0,8));
+			System.out.println(letra);
+			
+			int existeDocumento=0;
+			try 
+			{
+				existeDocumento = gt3.ExisteDniNie(t, t1.getDni());
+			} catch (ExcepcionTrabajador e) 
+			{
+				System.out.println(e);
+			}
+			System.out.println(existeDocumento);
+			
+			System.out.println(tra.leerValidarObjetoTrabajador(t));
+			//fin leerValidarObjetoTrabajador
 	}
 
 }

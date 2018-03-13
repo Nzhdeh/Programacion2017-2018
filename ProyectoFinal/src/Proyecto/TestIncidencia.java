@@ -6,6 +6,7 @@ public class TestIncidencia
 	{
 		Incidencia i1=new Incidencia("papa");
 		Incidencia i2=new Incidencia("mama");
+		Incidencia i3=new Incidencia();
 		
 		//prueba getters y setters
 		System.out.println("---------------------------------------------------");
@@ -38,6 +39,11 @@ public class TestIncidencia
 		System.out.println(i1.compareTo (i2));
 		System.out.println(i2.compareTo (i1));
 		//Fin Prueba compareTo
+		
+		//LeerObjetoIncidencias
+		System.out.println("---------------------------------------------------");
+		System.out.println("LeerObjetoIncidencias:");
+		System.out.println(i3.LeerObjetoIncidencias());
 		
 	}
 

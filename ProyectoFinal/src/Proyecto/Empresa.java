@@ -30,8 +30,11 @@
  * public void setCIFEmpresa(String CIFEmpresa)
  * 
  * 
- * metodos añadidos: no hay
+ * metodos añadidos: LeerValidarObjetoEmpresa()
+ * 
  */package Proyecto;
+
+import java.util.Scanner;
 
 public class Empresa 
 {
@@ -102,5 +105,47 @@ public class Empresa
 	public String toString() 
 	{
 		return (nombreEmpresa+", "+CIFEmpresa+", "+domicilioEmpresa);
+	}
+	
+	/**
+	prototipo: public Empresa LeerValidarObjetoEmpresa()   
+	comentarios: este metodo sirve para leer y validar el objeto empresa
+	precondiciones: no hay
+	entradas: no hay
+	salidas: un objeto
+	entr/sal: no hay
+	postcondiciones: AN devolvera el objeto empresa
+	*/
+	
+	//resguardo
+	/*public Empresa LeerValidarObjetoEmpresa() 
+	{
+		Empresa empresa=null;
+		System.out.println("En construccion");
+		return empresa;
+	}*/
+	
+	public Empresa LeerValidarObjetoEmpresa() 
+	{
+		Scanner sc=new Scanner (System.in);
+		Empresa empresa=new Empresa();
+		
+		sc.nextLine();
+		System.out.println("-----------------------------------------------");
+		System.out.println("Introducir el nombre de la empresa: ");
+		setNombreEmpresa(sc.nextLine().toUpperCase());
+		
+		do 
+		{
+			System.out.println("Introduce el CIF de la empresa: ");
+			setCIFEmpresa(sc.nextLine().toUpperCase());
+		}while(getCIFEmpresa().length()!=9);
+		
+		System.out.println("Introduce el domicilio de la empresa");
+		setDomicilioEmpresa(sc.nextLine().toUpperCase());
+		
+		empresa=new Empresa(getNombreEmpresa(),getDomicilioEmpresa(),getCIFEmpresa());
+		
+		return empresa;
 	}
 }

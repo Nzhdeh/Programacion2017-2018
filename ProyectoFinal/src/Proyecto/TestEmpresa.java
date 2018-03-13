@@ -26,6 +26,12 @@ public class TestEmpresa
 		System.out.println("To string bonito:");
 		System.out.println(e2.toStringBonito());
 		*/
+		
+		//LeerValidarObjetoEmpresa
+		System.out.println("---------------------------------------------------");
+		System.out.println("LeerValidarObjetoEmpresa:");
+		System.out.println(e2.LeerValidarObjetoEmpresa());
+				
 	}
 
 }

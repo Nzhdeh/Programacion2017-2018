@@ -24,10 +24,12 @@
  * public String getDescripcion()
  * public void setDescripcion(String descripcion)
  * 
- * metodos añadidos: no hay
+ * metodos añadidos: LeerObjetoIncidencias()
  * 
  * */
 package Proyecto;
+
+import java.util.Scanner;
 
 public class Incidencia implements Comparable <Incidencia>
 {
@@ -35,7 +37,7 @@ public class Incidencia implements Comparable <Incidencia>
 	private String descripcion;
 	
 	//compartida
-	private static int contadorID = 0;
+	private static int contadorID = (-1);
 	
 	
 	//constructores
@@ -108,4 +110,42 @@ public class Incidencia implements Comparable <Incidencia>
 		return comparar;
 	}
 	
+	
+	/**
+	prototipo: public Incidencia LeerObjetoIncidencias()  
+	comentarios: este metodo sirve para leer y validar el objeto incidencia
+	precondiciones: no hay
+	entradas: no hay
+	salidas: un objeto
+	entr/sal: no hay
+	postcondiciones: AN devolvera el objeto incidencia
+	*/
+	
+	//resguardo
+	/*
+	 public Incidencia LeerObjetoIncidencias() 
+	{
+		Incidencia i=null;
+		System.out.println("En construccion");
+		return i;
+	}*/
+	
+	public Incidencia LeerObjetoIncidencias() 
+	{
+		Scanner sc=new Scanner(System.in);
+		Incidencia i=null;
+		
+		sc.nextLine();//para limpiar el buffer
+		
+		//leer el motivo de la incidencia
+		System.out.println("Redacta el motivo de la Incidencia: ");
+		setDescripcion(sc.nextLine().toUpperCase());
+		
+		i=new Incidencia(getDescripcion());
+		
+		return i;
+	}
 }
+
+
+
