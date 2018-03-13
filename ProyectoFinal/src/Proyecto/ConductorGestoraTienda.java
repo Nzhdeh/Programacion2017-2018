@@ -53,7 +53,15 @@ public class ConductorGestoraTienda
 //		GestoraTienda.MenuJefe();
 //		GestoraTienda.MenuEncargado();
 //		GestoraTienda.MenuTrabajador();
-//		GestoraTienda.PintaProductos(producto);
+		
+//		try 
+//		{
+//			GestoraTienda.PintaProductos(producto);
+//		}catch(NullPointerException e) 
+//		{
+//			System.out.println(e);
+//		}
+		
 //		try 
 //		{
 //			System.out.println(GestoraTienda.ExisteProducto(producto, nombre));
@@ -115,6 +123,8 @@ public class ConductorGestoraTienda
 //		{
 //			System.out.println(e+": No valido");
 //		}
+		
+//		System.out.println(GestoraTienda.ValidarCIF("B90214297"));
 		
 //		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923978F"));
 //		System.out.println(gt.ExisteDniNie(contrataTrabajador, "X9923979F"));

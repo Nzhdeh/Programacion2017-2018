@@ -803,7 +803,11 @@ public class Nomina
 	}*/
 	public void generarNomina() 
 	{
+<<<<<<< HEAD
 		GestoraTienda3 gt3=new GestoraTienda3();
+=======
+		GestoraTienda gt=new GestoraTienda();
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 		
 		System.out.println("-----------------------------------------------------------------------------------------");
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
@@ -813,7 +817,11 @@ public class Nomina
 		System.out.println("|----------------------------------------"+"	----------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|---------------------------------------------------------------------------------------||");
+<<<<<<< HEAD
 		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+(gt3.RestarFecha(fechaPeriodoInicial,fechaPeriodoFinal)+1)+"		||");
+=======
+		System.out.println("|Periodo de liquidacion: desde "+fechaPeriodoInicial.toString()+" hasta "+fechaPeriodoFinal.toString()+"		Total dias: "+(gt.RestarFecha(fechaPeriodoInicial,fechaPeriodoFinal)+1)+"		||");
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 		System.out.println("|---------------------------------------------------------------------------------------||");
 		System.out.println("|I. DEVENGOS										||");
 		System.out.println("|		1. Percepciones salariales						||");

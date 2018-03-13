@@ -270,6 +270,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		}
 		return res;
 	}
+<<<<<<< HEAD
 	
 	/*
 	//interfaz
@@ -354,4 +355,6 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		
 		return f;
 	}
+=======
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 }

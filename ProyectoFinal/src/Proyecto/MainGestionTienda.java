@@ -205,7 +205,11 @@ public class MainGestionTienda
 		int cantidad=0;//cantidad de productos
 		String nombre=" ",apellidos=" ",descripcionIncidencia=" ",dni=" ";
 		char letra=' ';//letra del dni/nie
+<<<<<<< HEAD
 		boolean fechaValida=false,existeProducto=false,incidenciaEliminado=false;
+=======
+		boolean existeTrabajador=false,fechaValida=false,existeProducto=false,incidenciaEliminado=false;
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 		boolean repetir,existeDocumento=false;//para ver si el dni o el nie existen
 		boolean existeTrabajador=false, existeEncargado=false,existeVendedor=false,despedido=false;
 		TipoCargo CARGO=null;
@@ -376,6 +380,7 @@ public class MainGestionTienda
 									System.out.println(et);
 								}
 								
+<<<<<<< HEAD
 								
 								if(existeTrabajador==true) 
 								{
@@ -383,6 +388,61 @@ public class MainGestionTienda
 									try 
 									{
 										despedido=GestoraTienda2.DespedirTrabajador(trabajadorContratado, dni);
+=======
+								//leer y validar la fecha de nacimiento
+								do 
+								{	
+									//leer y validar fecha
+									System.out.println("Introduce la fecha de nacimiento ");
+									fechaNacimiento=gt.LeerValidarFecha();
+									
+									//comprobar si la fecha es valida
+									try 
+									{
+										fechaValida=fechaNacimiento.ValidarFecha();
+									}
+									catch(ExcepcionFecha ef) 
+									{
+										System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
+									}
+								}while(fechaValida!=true);
+							
+								t=new Trabajador(nombre,apellidos,dni,fechaNacimiento,t.getSexo(),CARGO);//asignar los datos al objeto
+								
+								//contratar al trabajador
+								contrataTrabajador=GestoraTienda.ContrataTrabajador(trabajadorContratado,t);
+								
+								
+								//mostrar mensaje de apollo
+								System.out.println("Contratado con exito");
+								
+								break;
+										
+							case 3:
+								//despedir a un trabajador
+								
+								//leer el dni del trabajador
+								sc.nextLine();
+								System.out.println("Introduce el dni/nie: ");
+								dni=sc.nextLine().toUpperCase();
+								
+								//comprobamos si el trabajador existe
+								try 
+								{
+									existeTrabajador=GestoraTienda.ExisteTrabajador(trabajadorContratado, dni);
+								} catch (ExcepcionTrabajador et) 
+								{
+									System.out.println(et);
+								}
+								
+								
+								if(existeTrabajador==true) 
+								{
+									//eliminar al trabajador
+									try 
+									{
+										despedido=GestoraTienda.DespideTrabajador(trabajadorContratado, dni);
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 									} catch (ExcepcionTrabajador e)
 									{
 										System.out.println(e);
@@ -416,8 +476,144 @@ public class MainGestionTienda
 									//LeerValidarObjetoNomina
 									nomina=nomina.LeerValidarObjetoNomina(trabajadorContratado);
 									
+<<<<<<< HEAD
 									//generarNomina
 									nomina.generarNomina();
+=======
+									//leer y validar parte proporcional horas extras
+									repetir=true;
+									while(repetir)
+									{
+										System.out.println("Parte Proporcional horas Extras: ");
+										try 
+										{
+											nomina.setParteProporcinalHorasExtras(sc.nextDouble());
+											repetir=false;
+										} catch (ExcepcionNomina e) 
+										{
+											System.out.println(e);
+										}catch(InputMismatchException ime) 
+										{
+											System.out.println("Un numero entero porfa");
+											sc.nextLine();
+										}
+									}
+									
+									//leer y validar el transporte
+									repetir=true;
+									while(repetir)
+									{
+										System.out.println("Introduce el Transporte: ");
+										try 
+										{
+											nomina.setTransporte(sc.nextDouble());
+											repetir=false;
+										} catch (ExcepcionNomina e) 
+										{
+											System.out.println(e);
+										}catch(InputMismatchException ime) 
+										{
+											System.out.println("Un numero entero porfa");
+											sc.nextLine();
+										}
+									}
+									sc.nextLine();
+									//leer nombre de la empresa
+									System.out.println("Introduce el nombre de la empresa: ");
+									empresa.setNombreEmpresa(sc.nextLine());
+									
+									//leer y validar el cif de  la empresa
+									do 
+									{
+										System.out.println("------------------------------------------------");
+										System.out.println("Introduce el CIF de la empresa (T00000000): ");
+										empresa.setCIFEmpresa(sc.nextLine().toUpperCase());
+										//letra=GestoraTienda.ValidarCIF(empresa.getCIFEmpresa().substring(0,8));//para enviar los digitos que queramos
+									}while(empresa.getCIFEmpresa().length()!=9);
+									
+									//leer la direccion de la empresa
+									System.out.println("Introduce la direccion de la empresa: ");
+									empresa.setDomicilioEmpresa(sc.nextLine());
+									
+									//leer y validar la fecha de firma
+									do 
+									{
+										System.out.println("Introduce la fecha de firma");
+										firma=gt.LeerValidarFecha();
+										//comprobar si la fecha de inicio es valida
+										try 
+										{
+											fechaValida=firma.ValidarFecha();
+										} catch (ExcepcionFecha e) 
+										{
+											System.out.println(e);
+										}
+										
+										if(fechaValida!=true) 
+										{
+											System.out.println("Dia incorrecto, compruebalo");
+										}
+										
+									}while(fechaValida!=true);
+									
+									do 
+									{
+										//leer y validar la fecha de periodo inicial
+										do 
+										{
+											System.out.println("Introduce la fecha de periodo Inicial");
+											periodoInicial=gt.LeerValidarFecha();
+											//comprobar si la fecha de inicio es valida
+											try 
+											{
+												fechaValida=periodoInicial.ValidarFecha();
+											} catch (ExcepcionFecha e) 
+											{
+												System.out.println(e);
+											}
+											
+											if(fechaValida!=true) 
+											{
+												System.out.println("Dia incorrecto, compruebalo");
+											}
+											
+										}while(fechaValida!=true);
+										
+										//leer y validar la fecha de periodo final
+										do 
+										{
+											System.out.println("Introduce la fecha de periodo Final");
+											periodoFinal=gt.LeerValidarFecha();
+											//comprobar si la fecha de inicio es valida
+											try 
+											{
+												fechaValida=periodoFinal.ValidarFecha();
+											} catch (ExcepcionFecha e) 
+											{
+												System.out.println(e);
+											}
+											
+											if(fechaValida!=true) 
+											{
+												System.out.println("Dia incorrecto, compruebalo");
+											}
+											
+										}while(fechaValida!=true);
+										
+										if(periodoInicial.compareTo(periodoFinal)==1) 
+										{
+											//pintar mensaje
+											System.out.println("El periodo inicial no puede ser posterior al periodo Final");
+										}
+									}while(periodoInicial.compareTo(periodoFinal)==1);
+									
+									nomina=new Nomina(nomina.getSalarioBase(),nomina.getPlusTitulo(),nomina.getParteProporcinalHorasExtras(),nomina.getTransporte(),
+													  firma,periodoInicial,periodoFinal,empresa,trabajadorContratado[i]);
+									
+									//mostrar nomina
+									nomina.generarNomina();
+								
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 									
 								}
 								else 
@@ -487,7 +683,11 @@ public class MainGestionTienda
 										
 										//LeerValidarObjetoProducto
 										
+<<<<<<< HEAD
 										//productoParaTienda=productoParaTienda.LeerValidarObjetoProducto();
+=======
+										productoParaTienda=new Producto(nombre,precio,fechaCompra,cantidad,peso);
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 										
 										//EncargarProductos
 										productosEnTienda=GestoraTienda2.EncargarProductos(productosEnTienda,productoParaTienda.LeerValidarObjetoProducto());
@@ -505,10 +705,17 @@ public class MainGestionTienda
 										break;
 										
 									case 3:
+<<<<<<< HEAD
 										//PintarProductos
 										try 
 										{
 											GestoraTienda1.PintarProductos(productosEnTienda);
+=======
+										//consultar productos en la tienda
+										try 
+										{
+											GestoraTienda.PintaProductos(productosEnTienda);
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 										}catch(NullPointerException e) 
 										{
 											System.out.println(e);
@@ -610,6 +817,7 @@ public class MainGestionTienda
 								{
 									case 1:
 										//vender productos
+<<<<<<< HEAD
 										
 										//PintarProductos
 										GestoraTienda1.PintarProductos(productosEnTienda);
@@ -628,6 +836,65 @@ public class MainGestionTienda
 										try 
 										{
 											existeProducto=GestoraTienda1.ExisteProducto(productosEnTienda, nombre);
+=======
+										//pintar los productos disponibles
+										GestoraTienda.PintaProductos(productosEnTienda);
+										
+										//leer el nombre del producto
+										sc.nextLine();//para limpiar el buffer
+										System.out.println("--------------------------------------------------");
+										System.out.println("Introduce el nombre: ");
+										nombre=sc.nextLine();
+										
+										//leer y validar la cantidad 
+										repetir=true;
+										while(repetir) 
+										{
+											System.out.println("Introduce la cantidad: ");
+											try 
+											{
+												cantidad=sc.nextInt();
+												repetir=false;
+											}catch(InputMismatchException ioe) 
+											{
+												sc.nextLine();
+												System.out.println("Un numero entero porfa");
+											}
+										}
+										
+										//leer y validar la fecha de venta
+										do {
+											System.out.println("Introduce la fecha de venta ");
+											fechaVenta=gt.LeerValidarFecha();
+											//fechaVenta=new Fecha(dia,mes,anio);
+											
+											//comprobar si la fecha es valida
+											try 
+											{
+												fechaValida=fechaVenta.ValidarFecha();
+											}
+											catch(ExcepcionFecha ef) 
+											{
+												System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
+											}
+										}while(fechaValida!=true);
+										
+										i=0;
+										if(productosEnTienda[i]!=null) 
+										{
+											//asignar el peso
+											peso=productosEnTienda[i].getPeso();	
+											//asignar el precio
+											precio=productosEnTienda[i].getPrecio();
+										}
+										
+										productoAVender=new Producto(nombre,precio,fechaVenta,cantidad,peso);
+										
+										//comprobar si el producto existe
+										try 
+										{
+											existeProducto=GestoraTienda.ExisteProducto(productosEnTienda, nombre);
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 										} catch (ExcepcionProducto ep)
 										{
 											System.out.println(ep);
@@ -636,16 +903,27 @@ public class MainGestionTienda
 										
 										if(existeProducto==true && productosEnTienda[i].getCantidad()>productoAVender.getCantidad()) 
 										{
+<<<<<<< HEAD
 											//VenderProducto
 											try 
 											{
 												arrayVendido=GestoraTienda2.VenderProducto(productosEnTienda,productoAVender,arrayVendido);
+=======
+											//realizar la venta
+											try 
+											{
+												arrayVendido=GestoraTienda.VendeProducto(productosEnTienda,productoAVender,arrayVendido);
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 											} catch (ExcepcionProducto ep)
 											{
 												System.out.println(ep);
 											}
 											
+<<<<<<< HEAD
 											
+=======
+											//mostrar mensaje de apollo
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 											System.out.println("La venta se ha realizado con exito");
 										}
 										else 
@@ -656,6 +934,7 @@ public class MainGestionTienda
 										break;
 												
 									case 2:
+<<<<<<< HEAD
 										//hacer una devolucion
 										//PintarProductos
 										GestoraTienda1.PintarProductos(arrayVendido);
@@ -675,12 +954,74 @@ public class MainGestionTienda
 										if(existeProducto==true && arrayVendido[i].getCantidad()>productoDevolucion.getCantidad()) 
 										{
 											//DevolverProducto
+=======
+										if(arrayVendido[i]!=null) 
+										{
+											//hacer una devolucion
+											//pintar los productos vendidos
+											GestoraTienda.PintaProductos(arrayVendido);
+											
+											//leer el nombre de producto
+											sc.nextLine();//para limpiar el buffer
+											System.out.println("--------------------------------------------------");
+											System.out.println("Introduce el nombre: ");
+											nombre=sc.nextLine();
+											
+											//leer y validar la cantidad 
+											repetir=true;
+											while(repetir) 
+											{
+												do 
+												{
+													System.out.println("Introduce la cantidad: ");
+													try 
+													{
+														cantidad=sc.nextInt();
+														repetir=false;
+													}catch(InputMismatchException ioe) 
+													{
+														sc.nextLine();
+														System.out.println("Un numero entero porfa");
+													}
+												}while(cantidad<1 || cantidad>arrayVendido[i].getCantidad());
+											}
+											
+											//leer y validar la fecha de devolucion
+											do {
+												System.out.println("Introduce la fecha de devolucion ");
+												
+												fechaDevolucion=gt.LeerValidarFecha();
+												//fechaDevolucion=new Fecha(dia,mes,anio);
+												
+												//comprobar si la fecha es valida
+												try 
+												{
+													fechaValida=fechaDevolucion.ValidarFecha();
+												}
+												catch(ExcepcionFecha ef) 
+												{
+													System.out.println(ef+"Fecha no valida,vuelve a intentarlo");
+												}
+											}while(fechaValida!=true);
+											
+											i=0;
+											if(arrayVendido[i]!=null) 
+											{
+												peso=arrayVendido[i].getPeso();//asignar peso
+												precio=arrayVendido[i].getPrecio();//asignar precio
+											}
+											
+											productoDevolucion=new Producto(nombre,precio,fechaDevolucion,cantidad,peso);
+			
+											//comprobar si el producto existe
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 											try 
 											{
 												GestoraTienda3.DevolverProducto(arrayVendido,productoDevolucion,productosEnTienda);/****************/
 											} catch (ExcepcionProducto ep) 
 											{
 												System.out.println(ep);
+<<<<<<< HEAD
 											}
 											
 											//mostrar mensaje de apollo
@@ -692,6 +1033,34 @@ public class MainGestionTienda
 										}	
 										
 										break;
+=======
+											}								
+											
+											if(existeProducto==true) 
+											{
+												//realizar la devolucion
+												try 
+												{
+													GestoraTienda.DevuelveProducto(arrayVendido,productoDevolucion,productosEnTienda);/****************/
+												} catch (ExcepcionProducto ep) 
+												{
+													System.out.println(ep);
+												}
+												
+												//mostrar mensaje de apollo
+												System.out.println("La devolucion se ha realizado con exito");
+											}
+											else 
+											{
+												System.out.println("Este producto no es de esta tienda");
+											}	
+										}else 
+										{
+											System.out.println("No hay productos vendidos");
+										}
+											
+											break;
+>>>>>>> 0abe9745a03d8aa1eb2b1b83675fed38b7322663
 									}
 								}//fin segun trabajador
 		
