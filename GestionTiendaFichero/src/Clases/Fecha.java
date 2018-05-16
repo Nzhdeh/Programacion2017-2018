@@ -36,12 +36,17 @@
 
 package Clases;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Excepciones.ExcepcionFecha;
+import Interfaces.InterfFecha;
 
-public class Fecha implements Cloneable, Comparable <Fecha>
+public class Fecha implements Serializable, InterfFecha, Cloneable, Comparable <Fecha>
 {
 	private int dia;
 	private int mes;
@@ -74,11 +79,13 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 	}
 	
 	//getters y setters
+	@Override
 	public int getDia()
 	{
 		return dia;
 	}
 	
+	@Override
 	public void setDia(int dia) throws ExcepcionFecha
 	{
 		
@@ -92,11 +99,13 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		
 	}
 	
+	@Override
 	public int getMes()
 	{
 		return mes;
 	}
 	
+	@Override
 	public void setMes(int mes) throws ExcepcionFecha
 	{
 		if(mes<1 || mes >12)		
@@ -108,11 +117,13 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		}
 	}
 	
+	@Override
 	public int getAnio() 
 	{
 		return anio;
 	}
 	
+	@Override
 	public void setAnio(int anio) throws ExcepcionFecha
 	{
 		if(anio<1582) 
@@ -217,6 +228,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return res;
 	}*/
 	
+	@Override
 	public boolean ValidarFecha()
 	{
 		boolean res=false;
@@ -292,9 +304,12 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 		return f;
 	}*/
 	
+	@Override
 	public Fecha LeerValidarFecha() 
 	{
-		Scanner sc=new Scanner(System.in);
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader (isr);
+		
 		boolean repetir=false;
 		Fecha f=new Fecha();
 		
@@ -304,7 +319,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			System.out.println("Introduce el dia: ");
 			try 
 			{
-				f.setDia(sc.nextInt());
+				f.setDia(Integer.parseInt (br.readLine()));
 				repetir = false;
 			}catch (ExcepcionFecha e) 
 			{
@@ -312,7 +327,17 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero");
-				sc.nextLine();
+				try 
+				{
+					br.readLine();
+				} catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
+			}
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
 			}
 		}
 		
@@ -323,7 +348,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			System.out.println("Introduce el mes: ");
 			try 
 			{
-				f.setMes(sc.nextInt());
+				f.setMes(Integer.parseInt (br.readLine()));
 				repetir = false;
 			}catch (ExcepcionFecha e) 
 			{
@@ -331,7 +356,17 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero");
-				sc.nextLine();
+				try 
+				{
+					br.readLine();
+				} catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
+			}
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
 			}
 		}
 		
@@ -342,7 +377,7 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			System.out.println("Introduce el anio: ");
 			try 
 			{
-				f.setAnio(sc.nextInt());
+				f.setAnio(Integer.parseInt (br.readLine()));
 				repetir = false;
 			}catch (ExcepcionFecha e) 
 			{
@@ -350,7 +385,17 @@ public class Fecha implements Cloneable, Comparable <Fecha>
 			} catch (InputMismatchException e) 
 			{
 				System.out.println(e+": Un numero entero mayor que cero");
-				sc.nextLine();
+				try 
+				{
+					br.readLine();
+				} catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
+			}
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
 			}
 		}
 		

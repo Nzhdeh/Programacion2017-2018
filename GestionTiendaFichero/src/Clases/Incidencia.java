@@ -34,12 +34,17 @@ package Clases;
 
 import java.io.*;
 import java.util.Scanner;
+import Interfaces.InterfIncidencia;
 
-public class Incidencia implements Serializable, Comparable <Incidencia>
+public class Incidencia implements InterfIncidencia, Serializable, Comparable <Incidencia>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int id;
 	private String descripcion;
-	private String estado;
+	//private String estado;
 	
 	//compartida
 	private static int contadorID = 0;
@@ -52,7 +57,7 @@ public class Incidencia implements Serializable, Comparable <Incidencia>
 		contadorID=0;
 		id=contadorID;
 		descripcion=" ";
-		estado="activo";
+		//estado="activo";
 	}
 	
 	//con parametros
@@ -61,7 +66,7 @@ public class Incidencia implements Serializable, Comparable <Incidencia>
 		contadorID++;
 		id=contadorID;
 		this.descripcion=descripcion;
-		this.estado="activo";
+		//this.estado="activo";
 	}
 	
 	//de copia
@@ -69,40 +74,40 @@ public class Incidencia implements Serializable, Comparable <Incidencia>
 	{
 		this.id=incidencia.getId();
 		this.descripcion=incidencia.getDescripcion();
-		this.estado=incidencia.getEstado();
+		//this.estado=incidencia.getEstado();
 	}
 	
 	//getters y setters
-
+	@Override
 	public String getDescripcion() 
 	{
 		return descripcion;
 	}
-
+	@Override
 	public void setDescripcion(String descripcion) 
 	{
 		this.descripcion = descripcion;
 	}
-
+	@Override
 	public int getId() 
 	{
 		return id;
 	}
-	
-	public String getEstado() 
-	{
-		return estado;
-	}
-
-	public void setEstado(String estado) 
-	{
-		this.estado = estado;
-	}
-
-	public String toString() 
-	{
-		return (id+"-"+descripcion+", "+estado);
-	}
+//	@Override
+//	public String getEstado() 
+//	{
+//		return estado;
+//	}
+//	@Override
+//	public void setEstado(String estado) 
+//	{
+//		this.estado = estado;
+//	}
+//	@Override
+//	public String toString() 
+//	{
+//		return (id+"-"+descripcion+", "+estado);
+//	}
 	
 	public int hashCode() 
 	{
@@ -148,81 +153,26 @@ public class Incidencia implements Serializable, Comparable <Incidencia>
 		return i;
 	}*/
 	
-	public void LeerObjetoIncidencias(String ficheroTxt) 
+	@Override
+	public Incidencia LeerObjetoIncidencias() 
 	{
-		Scanner sc=new Scanner(System.in);
-		Incidencia i=null;
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader (isr);
 		
-		//sc.nextLine();//para limpiar el buffer
+		Incidencia i=null;
 		
 		//leer el motivo de la incidencia
-		System.out.println("Redacta el motivo de la Incidencia: ");
-		setDescripcion(sc.nextLine().toUpperCase());
+		try 
+		{
+			System.out.println("Redacta el motivo de la Incidencia: ");
+			setDescripcion(br.readLine().toUpperCase());
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
 		
 		i=new Incidencia(getDescripcion());
 		
-		try 
-		{
-			fos = new FileOutputStream(ficheroTxt, true);
-			oos = new ObjectOutputStream(fos);
-		
-			oos.writeObject(i.toString());
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		} finally 
-		{
-			try 
-			{
-				if (oos != null) 
-				{
-					oos.close();
-				}				
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		
-		//return i;
-	}
-	
-	/****************************************************************/
-	
-	public void LeerObjetoIncidenciaParaBorrar() 
-	{
-		//Anexar fichero
-		File ftexto = new File("src\\ejercicioHospital\\Incidencias.txt");
-		
-		FileOutputStream textoFOS =null;
-		ObjectOutputStream textoOOS =null;
-		try 
-		{
-			//Crear fichero
-			ftexto.createNewFile();			
-			//Abrir fichero para escribir
-			textoFOS = new FileOutputStream(ftexto);	
-			textoOOS = new ObjectOutputStream(textoFOS);
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		} finally{
-			if (textoOOS!=null) 
-			{
-				try 
-				{
-					//Cerrar fichero
-					textoOOS.close();
-				} catch (IOException e) 
-				{
-					
-					e.printStackTrace();
-				}
-			}			
-		}
+		return i;
 	}
 }

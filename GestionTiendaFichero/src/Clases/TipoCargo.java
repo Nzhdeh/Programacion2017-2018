@@ -1,6 +1,6 @@
 package Clases;
 
-public class TipoCargo 
+public enum TipoCargo 
 {
-
+	ENCARGADO , VENDEDOR;
 }
