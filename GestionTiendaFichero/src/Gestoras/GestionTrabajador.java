@@ -459,7 +459,7 @@ public class GestionTrabajador
 			{
 				if(aux instanceof Trabajador) 
 				{
-					if(((Trabajador) aux).getCARGO()==TipoCargo.VENDEDOR) 
+					if(((Trabajador) aux).getCARGO()==TipoCargo.VENDEDOR && ((Trabajador) aux).getSexo()!='*') 
 					{
 						encontrado=true;
 					}
@@ -542,7 +542,7 @@ public class GestionTrabajador
 			{
 				if(aux instanceof Trabajador) 
 				{
-					if(((Trabajador) aux).getCARGO()==TipoCargo.ENCARGADO)
+					if(((Trabajador) aux).getCARGO()==TipoCargo.ENCARGADO && ((Trabajador) aux).getSexo()!='*')
 					encontrado=true;
 				}
 				aux=ois.readObject();
@@ -625,7 +625,7 @@ public class GestionTrabajador
 				if(aux instanceof Trabajador) 
 				{
 					t=(Trabajador)aux;
-					if(t.getDni().equals(dni))
+					if(t.getDni().equals(dni) && ((Trabajador) aux).getSexo()!='*')
 					encontrado=true;
 				}
 				aux=ois.readObject();
