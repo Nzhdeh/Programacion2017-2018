@@ -94,7 +94,7 @@ public class GestionTrabajador
 	        }
 	        catch (Exception e2)
 	        {
-	            e2.printStackTrace();
+	            //e2.printStackTrace();
 	        }
 	        finally 
 	        {
